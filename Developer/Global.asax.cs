@@ -1,9 +1,11 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Data.Entity;
 using System.Linq;
 using System.Web;
 using System.Web.Mvc;
 using System.Web.Routing;
+using Developer.Models.EntityModels;
 
 namespace Developer
 {
@@ -13,6 +15,8 @@ namespace Developer
         {
             AreaRegistration.RegisterAllAreas();
             RouteConfig.RegisterRoutes(RouteTable.Routes);
+            Bootstrapper.Initialise();
+            Database.SetInitializer(new DropCreateDatabaseAlways<ApplicationContext>());
         }
     }
 }

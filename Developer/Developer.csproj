@@ -148,9 +148,11 @@
     <Compile Include="Migrations\201411131331339_init.Designer.cs">
       <DependentUpon>201411131331339_init.cs</DependentUpon>
     </Compile>
-    <Compile Include="Models\EntityModels\Base.cs" />
     <Compile Include="Models\EntityModels\ApplicationContext.cs" />
     <Compile Include="Models\EntityModels\Ad.cs" />
+    <Compile Include="Models\EntityModels\Base.cs">
+      <SubType>Code</SubType>
+    </Compile>
     <Compile Include="Models\EntityModels\DbConfiguration.cs" />
     <Compile Include="Models\EntityModels\Flat.cs" />
     <Compile Include="Models\EntityModels\House.cs" />

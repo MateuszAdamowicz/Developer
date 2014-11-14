@@ -1,4 +1,5 @@
-﻿<!DOCTYPE html>
+﻿@using System.Web.Optimization
+<!DOCTYPE html>
 <html>
 <head>
     <meta charset="utf-8" />
@@ -8,7 +9,7 @@
     <link href="~/Content/bootstrap.min.css" rel="stylesheet" type="text/css" />
     <script src="~/Scripts/modernizr-2.6.2.js"></script>
 </head>
-<body>
+<body data-ng-app="main" data-ng-controller="RootController">
     <div class="row">
     </div>
     <div class="container body-content">
@@ -52,7 +53,7 @@
                                     <p>
                                         Lorem ipsum dolor sit amet, consectetur adipiscing elit. Duis non justo quis mi imperdiet ultrices. Morbi sed consectetur risus. Nulla faucibus et ipsum ac aliquet. Integer id facilisis risus, dictum pharetra arcu. In hac habitasse platea dictumst. Cras libero ex, sollicitudin eu semper eget, aliquet in justo. Aliquam vel nibh at est tempus efficitur. Sed urna tellus, scelerisque in felis non, semper tempus nulla. Vivamus porttitor risus non diam molestie mattis. Aliquam quis vestibulum mauris, quis feugiat eros. Nullam gravida, leo vel efficitur consequat, massa purus facilisis enim, vitae semper urna massa at mauris. Nullam ac ex nisl.
                                     </p>
-                                    </p>
+                                    
                                 </div>
                             </div>
 
@@ -119,5 +120,8 @@
 
     <script src="~/Scripts/jquery-1.10.2.min.js"></script>
     <script src="~/Scripts/bootstrap.min.js"></script>
+    @Scripts.Render("~/bundles/angular")
+    @Scripts.Render("~/bundles/app")
+    @RenderSection("scripts", required: false)
 </body>
 </html>

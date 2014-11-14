@@ -22,6 +22,18 @@ namespace Developer.Controllers
 
             var x = _context.Workers.ToArray();
             var y = _context.Flats.ToArray();
+            return View();        
+        }
+        public ActionResult House()
+        {
+            return View();
+        }
+        public ActionResult Flat()
+        {
+            return View();
+        }
+        public ActionResult Land()
+        {
             return View();
         }
     }

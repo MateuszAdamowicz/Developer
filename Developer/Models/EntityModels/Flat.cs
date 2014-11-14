@@ -1,4 +1,6 @@
-﻿namespace Developer.Models.EntityModels.Interfaces
+﻿using Developer.Models.EntityModels.Interfaces;
+
+namespace Developer.Models.EntityModels
 {
     public class Flat :Ad, IFlat
     {

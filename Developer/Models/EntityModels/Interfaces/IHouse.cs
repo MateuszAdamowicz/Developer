@@ -13,7 +13,7 @@ namespace Developer.Models.EntityModels.Interfaces
         string Rent { get; set; }
         string Ownership { get; set; }
         string PricePerMeter { get; set; }
-        string ToLet { get; set; }
+        bool ToLet { get; set; }
         string Title { get; set; }
         string Description { get; set; }
         string Details { get; set; }
@@ -22,5 +22,7 @@ namespace Developer.Models.EntityModels.Interfaces
         Worker Worker { get; set; }
         int Id { get; set; }
         DateTime? CreatedAt { get; set; }
+        bool Visible { get; set; }
+        bool Deleted { get; set; }
     }
 }

@@ -11,6 +11,6 @@
         public string Rent  { get; set; }
         public string Ownership { get; set; }
         public string PricePerMeter { get; set; }
-        public string ToLet { get; set; }
+        public bool ToLet { get; set; }
     }
 }

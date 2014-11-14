@@ -1,12 +1,10 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Web;
+﻿using Microsoft.Practices.Unity;
+using System.Web.Http;
 using Developer.Models.EntityModels;
 using Developer.Models.EntityModels.Interfaces;
-using Microsoft.Practices.Unity;
+using Unity.WebApi;
 
-namespace Developer.App_Start
+namespace Developer
 {
     public class UnityConfig
     {

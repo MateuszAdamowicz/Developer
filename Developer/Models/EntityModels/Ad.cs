@@ -8,5 +8,7 @@
         public string City { get; set; }
         public string Price { get; set; }
         public Worker Worker { get; set; }
+        public bool Visible { get; set; }
+        public bool Deleted { get; set; }
     }
 }

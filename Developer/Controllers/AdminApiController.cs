@@ -18,18 +18,17 @@ namespace Developer.Controllers
             _context = context;
         }
 
-        public List<Worker> GetWorkers()
+        public Worker GetWorkers()
         {
-            return new List<Worker>()
+
+            return new Worker()
             {
-                new Worker()
-                {
-                    Id = 2,
-                    FirstName = "Mateusz",
-                    LastName = "Adamowicz",
-                    Email = "madamowicz@pgs-soft.com"
-                }
+                Id = 2,
+                FirstName = "Mateusz",
+                LastName = "Adamowicz",
+                Email = "madamowicz@pgs-soft.com"
             };
-        } 
+
+        }
     }
 }

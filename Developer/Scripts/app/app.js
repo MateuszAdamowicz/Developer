@@ -6,8 +6,7 @@ appRoot
         $routeProvider
             .when('/land', { templateUrl: '/home/land', controller: 'LandController' })
             .when('/flat', { templateUrl: '/home/flat', controller: 'FlatController' })
-            .when('/house', { templateUrl: '/home/house', controller: 'HouseController'})
-            .otherwise({ redirectTo: '/home' });
+            .when('/house', { templateUrl: '/home/house', controller: 'HouseController'});
     }])
     .controller('RootController', ['$scope', '$route', '$routeParams', '$location', function ($scope, $route, $routeParams, $location) {
         $scope.$on('$routeChangeSuccess', function (e, current, previous) {

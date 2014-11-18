@@ -144,6 +144,7 @@
     <Content Include="Content\bootstrap_old.min.css" />
     <Content Include="Content\bootstrap.css" />
     <Content Include="Content\img\the-palace-of-culture.jpg" />
+    <Content Include="Content\ng-grid.css" />
     <Content Include="Content\Site.css" />
     <Content Include="fonts\glyphicons-halflings-regular.svg" />
     <Content Include="Global.asax" />
@@ -932,6 +933,7 @@
     <Compile Include="Bootstrapper.cs" />
     <Compile Include="Controllers\AdminApiController.cs" />
     <Compile Include="Controllers\AdminController.cs" />
+    <Compile Include="Controllers\DeveloperDataController.cs" />
     <Compile Include="Controllers\HomeController.cs" />
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>

@@ -3,7 +3,7 @@
 @{
     Layout = null;
 }
-<div class="col-md-4">
+@*<div class="col-md-4">
     <small>Miejscowość:</small>
     <div class="dropdown">
         <button class="btn btn-default dropdown-toggle1" type="button"  data-toggle="dropdown" aria-expanded="true">
@@ -15,6 +15,17 @@
             <li><a href="#">Sprzedaż</a></li>
         </ul>
     </div>
+</div>*@
+<div class="col-md-4">
+    <span  class="nullable">
+    <select data-ng-model="selectedItem" data-ng-options="item as item.City for item in usersList">
+    <option value="">Wszystkie</option>
+    </select>
+    </span><br/>
+    <div data-ng-init="filterCity(select_item:selectedItem)"></div>
+    @*<button class="btn btn-success" data-toggle="button" data-ng-click="filterCity()">Filter:Warszawa</button>
+    <br/>
+    <br/>*@
 </div>
 <div class="col-md-4">
     <small>Powierzchnia użytkowa:</small>

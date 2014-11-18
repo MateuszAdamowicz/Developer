@@ -27,7 +27,7 @@ appRoot.controller('LandController', function ($scope, $location, $resource) {
         enableColumnResize: false,
         columnDefs: [
             { field: 'City', displayName: 'Miasto', width: '50%' },
-            { field: 'Heating', displayName: 'Ogrzewanie', width: '50%' }
+            { field: 'Area', displayName: 'Powierzchnia', width: '50%' }
         ]
     };
 

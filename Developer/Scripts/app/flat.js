@@ -4,7 +4,7 @@
 
 appRoot.controller('FlatController', function ($scope, $location, $resource) {
 
-    var userResource = $resource('/api/developerdata/getflats', {}, {});
+    var userResource = $resource('/api/offertsapi/getflats', {}, {});
     $scope.usersList = [];
 
     userResource.query(function (data) {

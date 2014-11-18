@@ -4,7 +4,7 @@
 
 appRoot.controller('LandController', function ($scope, $location, $resource) {
 
-    var userResource = $resource('/api/developerdata/getlands', {}, {});
+    var userResource = $resource('/api/offertsapi/getlands', {}, {});
     $scope.usersList = [];
 
     userResource.query(function (data) {

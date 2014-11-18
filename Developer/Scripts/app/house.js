@@ -1,6 +1,6 @@
 ﻿appRoot.controller('HouseController', function ($scope, $location, $resource) {
 
-    var userResource = $resource('/api/developerdata/gethouses', {}, {});
+    var userResource = $resource('/api/offertsapi/gethouses', {}, {});
     $scope.usersList = [];
 
     userResource.query(function (data) {

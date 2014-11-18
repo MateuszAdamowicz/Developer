@@ -18,47 +18,21 @@ namespace Developer.Controllers
             _context = context;
         }
 
-        List<House> houseData = new List<House>()
-        {
-            new House{Id=1, City="Szczecin",Heating="Gazowe"},
-            new House{Id=2, City="Wrocław",Heating="Piec"},
-            new House{Id=3, City="Warszawa",Heating="Gazowe"},
-            new House{Id=4, City="Kraków",Heating="Elektryczne"},
-            new House{Id=5, City="Poznań",Heating="Gazowe"},
-            new House{Id=6, City="Poznań",Heating="Gazowe"}
-        };
-
-        List<Flat> flatData = new List<Flat>()
-        {
-            new Flat{Id=1, City="Szczecin",Heating="Gazowe"},
-            new Flat{Id=2, City="Wrocław",Heating="Piec"},
-            new Flat{Id=3, City="Warszawa",Heating="Gazowe"},
-            new Flat{Id=4, City="Kraków",Heating="Elektryczne"},
-            new Flat{Id=5, City="Poznań",Heating="Gazowe"},
-            new Flat{Id=6, City="Poznań",Heating="Gazowe"}
-        };
-
-        List<Land> landData = new List<Land>()
-        {
-            new Land{Id=1, City="Szczecin",Area="100"},
-            new Land{Id=2, City="Wrocław",Area="123"},
-            new Land{Id=3, City="Warszawa",Area="101"},
-            new Land{Id=4, City="Kraków",Area="101"},
-            new Land{Id=5, City="Poznań",Area="101"},
-            new Land{Id=6, City="Poznań",Area="110"}
-        };
         public IEnumerable<House> GetHouses()
         {
+            List<House> houseData = _context.Houses.ToList();
             return houseData;
         }
 
         public IEnumerable<Flat> GetFlats()
         {
+            List<Flat> flatData = _context.Flats.ToList();
             return flatData;
         }
 
         public IEnumerable<Land> GetLands()
         {
+            List<Land> landData = _context.Lands.ToList();
             return landData;
         }
         public House Put(House user)

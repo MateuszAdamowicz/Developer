@@ -14,7 +14,7 @@
         });
     });
 
-    $scope.selectedItem = null;
+    $scope.selectedItem = $scope.usersList[0];
 
     $scope.selectedOfferts = [];
 

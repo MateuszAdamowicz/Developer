@@ -8,6 +8,7 @@ using System.Web.Mvc;
 using System.Web.Routing;
 using System.Web.Optimization;
 using Developer.App_Start;
+using Developer.Migrations;
 using Developer.Models.EntityModels;
 
 namespace Developer
@@ -20,7 +21,7 @@ namespace Developer
             WebApiConfig.Register(GlobalConfiguration.Configuration);
             RouteConfig.RegisterRoutes(RouteTable.Routes);
             Bootstrapper.Initialise();
-            Database.SetInitializer(new DropCreateDatabaseAlways<ApplicationContext>());
+            Database.SetInitializer(new DbInitializer());
             MapperConfig.Register();
             BundleConfig.RegisterBundles(BundleTable.Bundles);
         }

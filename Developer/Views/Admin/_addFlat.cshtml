@@ -1,5 +1,6 @@
-﻿@model Developer.Models.ViewModels.AdminAdvertToAdd
-@using (Html.BeginForm("Add", "Admin", FormMethod.Post, new { enctype = "multipart/form-data" }))
+﻿@using Developer.Models.EntityModels
+@model Developer.Models.ViewModels.AdminFlat
+@using (Html.BeginForm("AddFlat", "Admin", FormMethod.Post, new { enctype = "multipart/form-data" }))
 {
     Html.AntiForgeryToken();
     <div class="form-group-sm">
@@ -8,73 +9,73 @@
                 <div class="row">
                     <div class="col-md-6">
                         <small><b>Tytuł:</b></small>
-                        @Html.EditorFor(model => model.Flat.Title, new { htmlAttributes = new { @class = "form-control", @style = "max-width: none" } })
+                        @Html.EditorFor(model => model.Title, new { htmlAttributes = new { @class = "form-control", @style = "max-width: none" } })
                     </div>
                     <div class="col-md-6">
                         <small><b>Cena:</b></small>
-                        @Html.EditorFor(model => model.Flat.Price, new { htmlAttributes = new { @class = "form-control" } })
+                        @Html.EditorFor(model => model.Price, new { htmlAttributes = new { @class = "form-control" } })
                     </div>
                 </div>
                 <div class="row">
                     <div class="col-md-6">
                         <small>Miasto:</small>
-                        @Html.EditorFor(model => model.Flat.City, new { htmlAttributes = new { @class = "form-control" } })
+                        @Html.EditorFor(model => model.City, new { htmlAttributes = new { @class = "form-control" } })
                     </div>
                     <div class="col-md-6">
                         <small>Lokalizacja:</small>
-                        @Html.EditorFor(model => model.Flat.Location, new { htmlAttributes = new { @class = "form-control" } })
+                        @Html.EditorFor(model => model.Location, new { htmlAttributes = new { @class = "form-control" } })
                     </div>
                 </div>
                 <div class="row">
                     <div class="col-md-6">
                         <small>Powierzchnia:</small>
-                        @Html.EditorFor(model => model.Flat.Area, new { htmlAttributes = new { @class = "form-control" } })
+                        @Html.EditorFor(model => model.Area, new { htmlAttributes = new { @class = "form-control" } })
                     </div>
                     <div class="col-md-6">
                         <small>Kondygnacja:</small>
-                        @Html.EditorFor(model => model.Flat.Storey, new { htmlAttributes = new { @class = "form-control" } })
+                        @Html.EditorFor(model => model.Storey, new { htmlAttributes = new { @class = "form-control" } })
                     </div>
                 </div>
                 <div class="row">
                     <div class="col-md-6">
                         <small>Stan techniczny:</small>
-                        @Html.EditorFor(model => model.Flat.TechnicalCondition, new { htmlAttributes = new { @class = "form-control" } })
+                        @Html.EditorFor(model => model.TechnicalCondition, new { htmlAttributes = new { @class = "form-control" } })
                     </div>
                     <div class="col-md-6">
                         <small>Liczba pokoi:</small>
-                        @Html.EditorFor(model => model.Flat.Rooms, new { htmlAttributes = new { @class = "form-control" } })
+                        @Html.EditorFor(model => model.Rooms, new { htmlAttributes = new { @class = "form-control" } })
                     </div>
                 </div>
                 <div class="row">
                     <div class="col-md-6">
                         <small>Ogrzewanie:</small>
-                        @Html.EditorFor(model => model.Flat.Heating, new { htmlAttributes = new { @class = "form-control" } })
+                        @Html.EditorFor(model => model.Heating, new { htmlAttributes = new { @class = "form-control" } })
                     </div>
                     <div class="col-md-6">
                         <small>Czynsz:</small>
-                        @Html.EditorFor(model => model.Flat.Rent, new { htmlAttributes = new { @class = "form-control" } })
+                        @Html.EditorFor(model => model.Rent, new { htmlAttributes = new { @class = "form-control" } })
                     </div>
                 </div>
                 <div class="row">
                     <div class="col-md-6">
                         <small>Forma własności:</small>
-                        @Html.EditorFor(model => model.Flat.Ownership, new { htmlAttributes = new { @class = "form-control" } })
+                        @Html.EditorFor(model => model.Ownership, new { htmlAttributes = new { @class = "form-control" } })
                     </div>
                     <div class="col-md-6">
                         <small>Cena za m<sup>2</sup>:</small>
-                        @Html.EditorFor(model => model.Flat.PricePerMeter, new { htmlAttributes = new { @class = "form-control" } })
+                        @Html.EditorFor(model => model.PricePerMeter, new { htmlAttributes = new { @class = "form-control" } })
                     </div>
                 </div>
                 <div class="row">
                     <div class="col-md-12">
                         <small>Opis:</small>
-                        @Html.EditorFor(model => model.Flat.Description, new { htmlAttributes = new { @class = "form-control", @style = "resize: none; max-width: none; height:200px" } })
+                        @Html.EditorFor(model => model.Description, new { htmlAttributes = new { @class = "form-control", @style = "resize: none; max-width: none; height:200px" } })
                     </div>
                 </div>
                 <div class="row">
                     <div class="col-md-12">
                         <small>Szczegóły:</small>
-                        @Html.EditorFor(model => model.Flat.Details, new { htmlAttributes = new { @class = "form-control", @style = "resize: none; max-width: none; height:200px" } })
+                        @Html.EditorFor(model => model.Details, new { htmlAttributes = new { @class = "form-control", @style = "resize: none; max-width: none; height:200px" } })
                     </div>
                 </div>
             </div>
@@ -82,19 +83,19 @@
                 <div class="row">
                     <div class="col-md-12">
                         <small>Typ ogłoszenia:</small>
-                        @Html.DropDownListFor(model => model.Flat.ToLet, new SelectList(new Dictionary<string, bool>() { { "Sprzedaż", false }, { "Wynajem", true } }, "value", "key"), new { @class = "form-control", @style = "max-width:none" })
+                        @Html.DropDownListFor(model => model.ToLet, new SelectList(new Dictionary<string, bool>() { { "Sprzedaż", false }, { "Wynajem", true } }, "value", "key"), new { @class = "form-control", @style = "max-width:none" })
                     </div>
                 </div>
                 <div class="row">
                     <div class="col-md-12">
                         <small>Osoba prowadząca:</small>
-                        @Html.DropDownListFor(model => model.Flat.Worker, new SelectList(Model.Workers, "Id", "FullName"), new { @class = "form-control", @id = "workers", @style = "max-width:none" })
+                        @Html.DropDownListFor(model => model.Worker, new SelectList((List<Worker>)ViewData["Workers"], "Id", "FullName"), new { @class = "form-control", @id = "workers", @style = "max-width:none" })
                     </div>
                 </div>
                 <div class="row">
                     <div class="col-md-12">
                         <small>Zdjęcia:</small>
-                        <input type="file" multiple class="form-control" id="Flat_Files" name="Flat.Files"/>
+                        <input type="file" multiple class="form-control" id="Files" name="Files"/>
                     </div>
                 </div>
                 <input type="hidden" id="AdType" name="AdType" value="Flat" />

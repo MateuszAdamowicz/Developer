@@ -1,4 +1,7 @@
-﻿namespace Developer.Models.EntityModels.Interfaces
+﻿using System;
+using System.Collections.Generic;
+
+namespace Developer.Models.EntityModels.Interfaces
 {
     public class Ad: Base, IAd
     {
@@ -10,5 +13,6 @@
         public Worker Worker { get; set; }
         public bool Visible { get; set; }
         public bool Deleted { get; set; }
+        public IEnumerable<String> Pictures { get; set; }
     }
 }

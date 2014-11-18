@@ -18,11 +18,12 @@
 </div>*@
 <div class="col-md-4">
     <span  class="nullable">
-    <select data-ng-model="selectedItem" data-ng-options="item as item.City for item in usersList">
+    <select data-ng-model="selectedItem" data-ng-options="item as item.City for item in usersList"data-ng-change="filterCity({{selectedItem.City}})">
     <option value="">Wszystkie</option>
     </select>
     </span><br/>
-    <div data-ng-init="filterCity(select_item:selectedItem)"></div>
+    Currently selected: {{selectedItem.City}}
+    <div data-ng-change="filterCity({{selectedItem.City}})"></div>
     @*<button class="btn btn-success" data-toggle="button" data-ng-click="filterCity()">Filter:Warszawa</button>
     <br/>
     <br/>*@

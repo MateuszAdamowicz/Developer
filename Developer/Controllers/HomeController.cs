@@ -20,8 +20,8 @@ namespace Developer.Controllers
         public ActionResult Index()
         {
 
-            //var x = _context.Workers.ToArray();
-            //var y = _context.Flats.ToArray();
+            var x = _context.Workers.ToArray();
+            var y = _context.Flats.ToArray();
             return View();        
         }
         public ActionResult House()

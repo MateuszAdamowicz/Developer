@@ -1,6 +1,8 @@
-﻿namespace Developer
+﻿using System.Web.Http;
+
+namespace Developer
 {
-    using System.Web.Http;
+
 
     class WebApiConfig
     {
@@ -8,6 +10,7 @@
         {
             configuration.Routes.MapHttpRoute("API Default", "api/{controller}/{action}/{id}",
                 new { id = RouteParameter.Optional });
+
         }
     }
 }

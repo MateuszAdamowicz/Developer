@@ -1,17 +1,18 @@
-﻿@{
+﻿@using System.Web.Optimization
+@{
     ViewBag.Title = "View";
 }
 <script src="~/Scripts/jquery-1.10.2.js"></script>
 <script src="~/Scripts/bootstrap.js"></script>
 
-<div class="row" style="margin-right: 15px">
+<div class="row" style="margin-right: 15px" data-ng-app="main" data-ng-controller="RootController">
     <div class="col-md-12 custom-left-panel" style="margin-left: 15px">
         <h4>Wyszukaj ofertę</h4>
         <div class="row">
             <div class="col-md-6" style="border-right: 1px solid black">
                 <small>Rodzaj nieruchomości: </small>
-                <div class="dropdown">
-                    <button class="btn btn-default dropdown-toggle" type="button" id="dropdownMenu1" data-toggle="dropdown" aria-expanded="true">
+                                <div class="dropdown">
+                    <button class="btn btn-default dropdown-toggle" type="button"  data-toggle="dropdown" aria-expanded="true">
                         Wybierz rodzaj
                 <span class="caret"></span>
                     </button>
@@ -21,51 +22,24 @@
                         <li data-ng-class="{active : activeViewPath==='/land'}"><a href='#/land'>Działki</a></li>
                     </ul>
                 </div>
-                @*           <select class="form-control input-sm">
-                    <option>Lorem Ipsum</option>
-                    <option>Dolor sit amet</option>
-                    <option>Integer Id facillisis</option>
-                </select>*@
             </div>
             <div class="col-md-6">
                 <small>Typ oferty :</small>
                 <div class="dropdown">
-                    <button class="btn btn-default dropdown-toggle" type="button" id="dropdownMenu2" data-toggle="dropdown" aria-expanded="true">
+                    <button class="btn btn-default dropdown-toggle" type="button" data-toggle="dropdown" aria-expanded="true">
                         Wybierz rodzaj
                 <span class="caret"></span>
                     </button>
                     <ul class="dropdown-menu" role="menu" aria-labelledby="dropdownMenu2">
-                        <li ><a href="#">Wynajem</a></li>
+                        <li><a href="#">Wynajem</a></li>
                         <li><a href="#">Sprzedaż</a></li>
                     </ul>
                 </div>
-                @*                <select class="form-control input-sm">
-                    <option>Lorem Ipsum</option>
-                    <option>Dolor sit amet</option>
-                    <option>Integer Id facillisis</option>
-                </select>*@
             </div>
         </div>
         <div class="row" style="margin-top: 25px">
             <div data-ng-view=""></div>
-            @*            <div class="col-md-6" style="border-right: 1px solid black">
-                <small>Miejscowość :</small>
-                <select class="form-control input-sm">
-                    <option>Lorem Ipsum</option>
-                    <option>Dolor sit amet</option>
-                    <option>Integer Id facillisis</option>
-                </select>
-            </div>
-            <div class="col-md-6">
-                <small>Powierzchnia użytkowa : </small>
-                <select class="form-control input-sm">
-                    <option>Lorem Ipsum</option>
-                    <option>Dolor sit amet</option>
-                    <option>Integer Id facillisis</option>
-                </select>
-            </div>*@
         </div>
-
     </div>
 </div>
 
@@ -121,7 +95,4 @@
     </div>
 </div>
 
-<script language="javascript">
-    $('.dropdown-toggle').dropdown();
-    $(".carousel").carousel();
-</script>
+

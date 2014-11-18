@@ -936,6 +936,7 @@
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
+    <Compile Include="Models\ViewModels\AdType.cs" />
     <Compile Include="Models\EntityModels\ApplicationContext.cs" />
     <Compile Include="Models\EntityModels\Ad.cs" />
     <Compile Include="Models\EntityModels\Base.cs">
@@ -981,6 +982,9 @@
     <Content Include="Views\Home\Land.cshtml">
       <SubType>Code</SubType>
     </Content>
+    <None Include="Views\Admin\_AddFlat.cshtml" />
+    <None Include="Views\Admin\_AddHouse.cshtml" />
+    <None Include="Views\Admin\_AddLand.cshtml" />
     <None Include="Web.Debug.config">
       <DependentUpon>Web.config</DependentUpon>
     </None>

@@ -19,5 +19,18 @@ namespace Developer.Controllers
         {
             return View(new AdminAdvertToAdd());
         }
+
+        [HttpPost]
+        public ActionResult Add(AdminAdvertToAdd adminAdvertToAdd)
+        {
+            if (ModelState.IsValid)
+            {
+                return View();
+            }
+            else
+            {
+                return View(adminAdvertToAdd);
+            }
+        }
     }
 }

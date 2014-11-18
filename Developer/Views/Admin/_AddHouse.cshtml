@@ -1,0 +1,110 @@
+﻿@model Developer.Models.ViewModels.AdminAdvertToAdd
+@using (Html.BeginForm("Add", "Admin", FormMethod.Post, new { enctype = "multipart/form-data" }))
+{
+    Html.AntiForgeryToken();
+    <div class="form-group-sm">
+        <div class="row">
+            <div class="col-md-8">
+                <div class="row">
+                    <div class="col-md-6">
+                        <small><b>Tytuł:</b></small>
+                        @Html.EditorFor(model => model.House.Title, new { htmlAttributes = new { @class = "form-control", @style = "max-width: none" } })
+                    </div>
+                    <div class="col-md-6">
+                        <small><b>Cena:</b></small>
+                        @Html.EditorFor(model => model.House.Price, new { htmlAttributes = new { @class = "form-control" } })
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="col-md-6">
+                        <small>Miasto:</small>
+                        @Html.EditorFor(model => model.House.City, new { htmlAttributes = new { @class = "form-control" } })
+                    </div>
+                    <div class="col-md-6">
+                        <small>Lokalizacja:</small>
+                        @Html.EditorFor(model => model.House.Location, new { htmlAttributes = new { @class = "form-control" } })
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="col-md-6">
+                        <small>Powierzchnia całkowita:</small>
+                        @Html.EditorFor(model => model.House.LandArea, new { htmlAttributes = new { @class = "form-control" } })
+                    </div>
+                    <div class="col-md-6">
+                        <small>Powierzchnia użytkowa:</small>
+                        @Html.EditorFor(model => model.House.UsableArea, new { htmlAttributes = new { @class = "form-control" } })
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="col-md-6">
+                        <small>Stan techniczny:</small>
+                        @Html.EditorFor(model => model.House.TechnicalCondition, new { htmlAttributes = new { @class = "form-control" } })
+                    </div>
+                    <div class="col-md-6">
+                        <small>Liczba pokoi:</small>
+                        @Html.EditorFor(model => model.House.Rooms, new { htmlAttributes = new { @class = "form-control" } })
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="col-md-6">
+                        <small>Ogrzewanie:</small>
+                        @Html.EditorFor(model => model.House.Heating, new { htmlAttributes = new { @class = "form-control" } })
+                    </div>
+                    <div class="col-md-6">
+                        <small>Czynsz:</small>
+                        @Html.EditorFor(model => model.House.Rent, new { htmlAttributes = new { @class = "form-control" } })
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="col-md-6">
+                        <small>Forma własności:</small>
+                        @Html.EditorFor(model => model.House.Ownership, new { htmlAttributes = new { @class = "form-control" } })
+                    </div>
+                    <div class="col-md-6">
+                        <small>Cena za m<sup>2</sup>:</small>
+                        @Html.EditorFor(model => model.House.PricePerMeter, new { htmlAttributes = new { @class = "form-control" } })
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="col-md-12">
+                        <small>Opis:</small>
+                        @Html.EditorFor(model => model.House.Description, new { htmlAttributes = new { @class = "form-control", @style = "resize: none; max-width: none; height:200px" } })
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="col-md-12">
+                        <small>Szczegóły:</small>
+                        @Html.EditorFor(model => model.House.Details, new { htmlAttributes = new { @class = "form-control", @style = "resize: none; max-width: none; height:200px" } })
+                    </div>
+                </div>
+            </div>
+            <div class="col-md-4">
+                <div class="row">
+                    <div class="col-md-12">
+                        <small>Typ ogłoszenia:</small>
+                        @Html.DropDownListFor(model => model.House.ToLet, new SelectList(new Dictionary<string, bool>() { { "Sprzedaż", false }, { "Wynajem", true } }, "value", "key"), new { @class = "form-control", @style = "max-width:none" })
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="col-md-12">
+                        <small>Osoba prowadząca:</small>
+                        @Html.DropDownListFor(model => model.House.Worker, new SelectList(Model.Workers, "Id", "FullName"), new { @class = "form-control", @id = "workers", @style = "max-width:none" })
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="col-md-12">
+                        <small>Zdjęcia:</small>
+                        <input type="file" multiple class="form-control" id="House_Files" name="House.Files"/>
+                    </div>
+                </div>
+                <input type="hidden" id="AdType" name="AdType" value="House" />
+                <div class="row">
+                    <div class="col-md-12" style="text-align: center; margin-top: 10px">
+                        <button type="submit" class="btn btn-xs btn-success" style="width: 150px">Zapisz</button>
+                    </div>
+                </div>
+            </div>
+
+        </div>
+    </div>
+}

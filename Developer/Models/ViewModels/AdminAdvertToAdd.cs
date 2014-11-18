@@ -18,5 +18,6 @@ namespace Developer.Models.ViewModels
         public AdminLand Land { get; set; }
         public AdminHouse House { get; set; }
         public IEnumerable<Worker> Workers { get; set; }
+        public AdType AdType { get; set; }
     }
 }

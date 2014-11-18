@@ -1,4 +1,7 @@
-﻿using Developer.Models.EntityModels;
+﻿using System.Collections.Generic;
+using System.ComponentModel.DataAnnotations;
+using System.Web;
+using Developer.Models.EntityModels;
 
 namespace Developer.Models.ViewModels
 {
@@ -15,10 +18,12 @@ namespace Developer.Models.ViewModels
         public string PricePerMeter { get; set; }
         public bool ToLet { get; set; }
         public string Title { get; set; }
+        [DataType(DataType.MultilineText)]
         public string Description { get; set; }
         public string Details { get; set; }
         public string City { get; set; }
         public string Price { get; set; }
-        public Worker Worker { get; set; }
+        public int Worker { get; set; }
+        public IEnumerable<HttpPostedFileBase> Files { get; set; }
     }
 }

@@ -30,5 +30,10 @@ namespace Developer.Controllers
             };
 
         }
+
+        public String Lol()
+        {
+            return "lol";
+        }
     }
 }

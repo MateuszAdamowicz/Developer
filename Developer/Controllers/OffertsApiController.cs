@@ -9,11 +9,11 @@ using Developer.Models.EntityModels;
 
 namespace Developer.Controllers
 {
-    public class DeveloperDataController : ApiController
+    public class OffertsApiController : ApiController
     {
         private readonly IApplicationContext _context;
 
-        public DeveloperDataController(IApplicationContext context)
+        public OffertsApiController(IApplicationContext context)
         {
             _context = context;
         }

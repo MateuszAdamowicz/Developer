@@ -978,7 +978,6 @@
     <Content Include="fonts\glyphicons-halflings-regular.eot" />
     <Content Include="Views\Admin\Index.cshtml" />
     <Content Include="Scripts\version.json" />
-    <None Include="Views\Admin\Add.cshtml" />
     <Content Include="Views\Home\Flat.cshtml">
       <SubType>Code</SubType>
     </Content>
@@ -988,6 +987,7 @@
     <Content Include="Views\Home\Land.cshtml">
       <SubType>Code</SubType>
     </Content>
+    <Content Include="Views\Admin\Add.cshtml" />
     <None Include="Views\Admin\_AddFlat.cshtml" />
     <None Include="Views\Admin\_AddHouse.cshtml" />
     <None Include="Views\Admin\_AddLand.cshtml" />

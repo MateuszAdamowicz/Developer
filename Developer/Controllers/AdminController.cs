@@ -41,7 +41,7 @@ namespace Developer.Controllers
             if (ModelState.IsValid)
             {
                 var result = _addAdvertService.AddFlat(adminFlat);
-
+                return RedirectToAction("Show", "Home", new {id = result.Data, adType = AdType.Flat});
             }
 
             return RedirectToAction("AddAdvert");
@@ -53,6 +53,7 @@ namespace Developer.Controllers
             if (ModelState.IsValid)
             {
                 var result = _addAdvertService.AddHouse(adminHouse);
+                return RedirectToAction("Show", "Home", new {id = result.Data, adType = AdType.House});
             }
             return RedirectToAction("AddAdvert");
         }

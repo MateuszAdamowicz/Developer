@@ -5,6 +5,7 @@ using System.Linq;
 using System.Web;
 using System.Web.Mvc;
 using AutoMapper;
+using Developer.Controllers;
 using Developer.Models.ApplicationModels;
 using Developer.Models.EntityModels;
 using Developer.Models.EntityModels.Interfaces;
@@ -23,7 +24,7 @@ namespace Developer.Services.Admin
             _photoService = photoService;
         }
 
-        public Result AddFlat(AdminFlat adminFlat)
+        public Result<int> AddFlat(AdminFlat adminFlat)
         {
             var flat = Mapper.Map<Flat>(adminFlat);
             var worker = Enumerable.First(_context.Workers.Where(x => x.Id == adminFlat.Worker));
@@ -39,10 +40,10 @@ namespace Developer.Services.Admin
 
             _context.SaveChanges();
 
-            return new Result(true,null,"");
+            return new Result<int>(true,null,"",flat.Id);
         }
 
-        public Result AddLand(AdminLand adminLand)
+        public Result<int> AddLand(AdminLand adminLand)
         {
             var land = Mapper.Map<Land>(adminLand);
             var worker = Enumerable.First(_context.Workers.Where(x => x.Id == adminLand.Worker));
@@ -58,10 +59,10 @@ namespace Developer.Services.Admin
 
             _context.SaveChanges();
 
-            return new Result(true, null, "");
+            return new Result<int>(true, null, "", land.Id);
         }
 
-        public Result AddHouse(AdminHouse adminHouse)
+        public Result<int> AddHouse(AdminHouse adminHouse)
         {
             var house = Mapper.Map<House>(adminHouse);
             var worker = Enumerable.First(_context.Workers.Where(x => x.Id == adminHouse.Worker));
@@ -77,9 +78,7 @@ namespace Developer.Services.Admin
 
             _context.SaveChanges();
 
-            _context.SaveChanges();
-
-            return new Result(true, null, "");
+            return new Result<int>(true, null, "", house.Id);
         }
     }
 }

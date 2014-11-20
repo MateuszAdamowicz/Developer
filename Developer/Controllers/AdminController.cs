@@ -47,6 +47,7 @@ namespace Developer.Controllers
             return RedirectToAction("AddAdvert");
         }
 
+        [HttpPost]
         public ActionResult AddHouse(AdminHouse adminHouse)
         {
             if (ModelState.IsValid)
@@ -56,6 +57,7 @@ namespace Developer.Controllers
             return RedirectToAction("AddAdvert");
         }
 
+        [HttpPost]
         public ActionResult AddLand(AdminLand adminLand)
         {
             if (ModelState.IsValid)

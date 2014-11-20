@@ -1002,6 +1002,7 @@
     <Compile Include="Models\ViewModels\AdminFlat.cs" />
     <Compile Include="Models\ViewModels\AdminHouse.cs" />
     <Compile Include="Models\ViewModels\AdminLand.cs" />
+    <Compile Include="Models\ViewModels\ShowAdvert.cs" />
     <Compile Include="Models\ViewModels\ShowFlat.cs" />
     <Compile Include="Models\ViewModels\ShowHouse.cs" />
     <Compile Include="Models\ViewModels\ShowLand.cs" />
@@ -1042,6 +1043,10 @@
     <None Include="Views\Admin\_AddHouse.cshtml" />
     <None Include="Views\Admin\_AddLand.cshtml" />
     <Content Include="Views\Home\Show.cshtml" />
+    <None Include="Views\Home\NotFound.cshtml" />
+    <None Include="Views\Home\_ShowFlat.cshtml" />
+    <None Include="Views\Home\_ShowHouse.cshtml" />
+    <None Include="Views\Home\_ShowLand.cshtml" />
     <None Include="Web.Debug.config">
       <DependentUpon>Web.config</DependentUpon>
     </None>

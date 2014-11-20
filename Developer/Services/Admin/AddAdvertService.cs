@@ -48,6 +48,12 @@ namespace Developer.Services.Admin
             var worker = Enumerable.First(_context.Workers.Where(x => x.Id == adminLand.Worker));
 
             land.Worker = worker;
+            land.Pictures = _photoService.AddAdvertPhotos(adminLand.Files);
+            foreach (var photo in land.Pictures)
+            {
+                photo.AdType = AdType.Land;
+            }
+
             var result = _context.Lands.Add(land);
 
             _context.SaveChanges();
@@ -61,7 +67,15 @@ namespace Developer.Services.Admin
             var worker = Enumerable.First(_context.Workers.Where(x => x.Id == adminHouse.Worker));
 
             house.Worker = worker;
+            house.Pictures = _photoService.AddAdvertPhotos(adminHouse.Files);
+            foreach (var photo in house.Pictures)
+            {
+                photo.AdType = AdType.House;
+            }
+
             var result = _context.Houses.Add(house);
+
+            _context.SaveChanges();
 
             _context.SaveChanges();
 

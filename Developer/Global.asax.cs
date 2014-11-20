@@ -21,7 +21,8 @@ namespace Developer
             WebApiConfig.Register(GlobalConfiguration.Configuration);
             RouteConfig.RegisterRoutes(RouteTable.Routes);
             Bootstrapper.Initialise();
-            Database.SetInitializer(new DbInitializer());
+            //Database.SetInitializer(new DbInitializer());
+            Database.SetInitializer(new MigrateDatabaseToLatestVersion<ApplicationContext, Configuration>());
             MapperConfig.Register();
             BundleConfig.RegisterBundles(BundleTable.Bundles);
         }

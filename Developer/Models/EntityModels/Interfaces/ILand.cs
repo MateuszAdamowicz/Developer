@@ -13,7 +13,7 @@ namespace Developer.Models.EntityModels
         string Price { get; set; }
         Worker Worker { get; set; }
         int Id { get; set; }
-        DateTime? CreatedAt { get; set; }
+        DateTime CreatedAt { get; set; }
         bool Visible { get; set; }
         bool Deleted { get; set; }
     }

@@ -36,5 +36,11 @@ namespace Developer.Controllers
         {
             return View();
         }
+
+        public ActionResult Show(int id)
+        {
+            var flat = Enumerable.First(_context.Flats.Where(x => x.Id == id));
+            return View(flat);
+        }
     }
 }

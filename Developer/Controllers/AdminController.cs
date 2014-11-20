@@ -13,11 +13,13 @@ namespace Developer.Controllers
     public class AdminController : Controller
     {
         private readonly IApplicationContext _applicationContext;
+        private readonly IAddAdvertService _addAdvertService;
 
         // GET: Admin
-        public AdminController(IApplicationContext applicationContext)
+        public AdminController(IApplicationContext applicationContext, IAddAdvertService addAdvertService)
         {
             _applicationContext = applicationContext;
+            _addAdvertService = addAdvertService;
         }
 
         public ActionResult Index()
@@ -28,10 +30,7 @@ namespace Developer.Controllers
         public ActionResult Add()
         {
             ViewData["Workers"]= _applicationContext.Workers.ToList();
-            return View(new AdminAdvertToAdd()
-            {
-                Workers = _applicationContext.Workers.ToList()
-            });
+            return View(new AdminAdvertToAdd());
         }
 
         [HttpPost]
@@ -39,8 +38,7 @@ namespace Developer.Controllers
         {
             if (ModelState.IsValid)
             {
-                var serwis = new AddAdvertService(_applicationContext);
-                var result = serwis.AddFlat(adminFlat);
+                var result = _addAdvertService.AddFlat(adminFlat);
 
             }
 
@@ -49,12 +47,20 @@ namespace Developer.Controllers
 
         public ActionResult AddHouse(AdminHouse adminHouse)
         {
-            throw new NotImplementedException();
+            if (ModelState.IsValid)
+            {
+                var result = _addAdvertService.AddHouse(adminHouse);
+            }
+            return RedirectToAction("Add");
         }
 
         public ActionResult AddLand(AdminLand adminLand)
         {
-            throw new NotImplementedException();
+            if (ModelState.IsValid)
+            {
+                var result = _addAdvertService.AddLand(adminLand);
+            }
+            return RedirectToAction("Add");
         }
     }
 }

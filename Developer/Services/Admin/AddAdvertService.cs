@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.IO;
+using System.Linq;
 using System.Web;
 using System.Web.Mvc;
 using AutoMapper;
@@ -11,7 +12,7 @@ using Developer.Models.ViewModels;
 
 namespace Developer.Services.Admin
 {
-    public class AddAdvertService
+    public class AddAdvertService : IAddAdvertService
     {
         private readonly IApplicationContext _context;
 
@@ -23,7 +24,9 @@ namespace Developer.Services.Admin
         public Result AddFlat(AdminFlat adminFlat)
         {
             var flat = Mapper.Map<Flat>(adminFlat);
+            var worker = Enumerable.First(_context.Workers.Where(x => x.Id == adminFlat.Worker));
 
+            flat.Worker = worker;
             flat.Pictures = SavePictures(adminFlat.Files);
 
             var result = _context.Flats.Add(flat);
@@ -36,7 +39,9 @@ namespace Developer.Services.Admin
         public Result AddLand(AdminLand adminLand)
         {
             var land = Mapper.Map<Land>(adminLand);
+            var worker = Enumerable.First(_context.Workers.Where(x => x.Id == adminLand.Worker));
 
+            land.Worker = worker;
             var result = _context.Lands.Add(land);
 
             _context.SaveChanges();
@@ -47,7 +52,9 @@ namespace Developer.Services.Admin
         public Result AddHouse(AdminHouse adminHouse)
         {
             var house = Mapper.Map<House>(adminHouse);
+            var worker = Enumerable.First(_context.Workers.Where(x => x.Id == adminHouse.Worker));
 
+            house.Worker = worker;
             var result = _context.Houses.Add(house);
 
             _context.SaveChanges();
@@ -59,11 +66,11 @@ namespace Developer.Services.Admin
         {
             var pictures = new List<String>();
 
-            if (files != null)
+            if (files != null && files.Any())
             {
                 foreach (var file in files)
                 {
-                    if (file.ContentLength > 0)
+                    if (file != null && file.ContentLength > 0)
                     {
                         var fileName = String.Format("{0}_{1}", DateTime.Now.ToString("FFFFFFF"), file.FileName);
                         var path = HttpContext.Current.Server.MapPath("~/Content/Photos/");

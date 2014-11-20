@@ -946,8 +946,40 @@
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
+    <Compile Include="Helpers\OwnHelpers.cs" />
+    <Compile Include="Migrations\201411190758254_update.cs" />
+    <Compile Include="Migrations\201411190758254_update.Designer.cs">
+      <DependentUpon>201411190758254_update.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\201411191002132_update1.cs" />
+    <Compile Include="Migrations\201411191002132_update1.Designer.cs">
+      <DependentUpon>201411191002132_update1.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\201411191145546_update2.cs" />
+    <Compile Include="Migrations\201411191145546_update2.Designer.cs">
+      <DependentUpon>201411191145546_update2.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\201411191237507_update3.cs" />
+    <Compile Include="Migrations\201411191237507_update3.Designer.cs">
+      <DependentUpon>201411191237507_update3.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\201411191248083_update4.cs" />
+    <Compile Include="Migrations\201411191248083_update4.Designer.cs">
+      <DependentUpon>201411191248083_update4.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\201411191431052_update5.cs" />
+    <Compile Include="Migrations\201411191431052_update5.Designer.cs">
+      <DependentUpon>201411191431052_update5.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\201411200940234_update6.cs" />
+    <Compile Include="Migrations\201411200940234_update6.Designer.cs">
+      <DependentUpon>201411200940234_update6.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Migrations\DbInitializer.cs" />
     <Compile Include="Models\ApplicationModels\Result.cs" />
+    <Compile Include="Models\EntityModels\Photo.cs" />
+    <Compile Include="Models\ViewModels\AdminWorker.cs" />
     <Compile Include="Models\ViewModels\AdType.cs" />
     <Compile Include="Models\EntityModels\ApplicationContext.cs" />
     <Compile Include="Models\EntityModels\Ad.cs" />
@@ -970,9 +1002,17 @@
     <Compile Include="Models\ViewModels\AdminFlat.cs" />
     <Compile Include="Models\ViewModels\AdminHouse.cs" />
     <Compile Include="Models\ViewModels\AdminLand.cs" />
+    <Compile Include="Models\ViewModels\ShowFlat.cs" />
+    <Compile Include="Models\ViewModels\ShowHouse.cs" />
+    <Compile Include="Models\ViewModels\ShowLand.cs" />
+    <Compile Include="Models\ViewModels\ShowWorker.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Services\Admin\AddAdvertService.cs" />
     <Compile Include="Services\Admin\IAddAdvertService.cs" />
+    <Compile Include="Services\Admin\IPhotoService.cs" />
+    <Compile Include="Services\Admin\IWorkerService.cs" />
+    <Compile Include="Services\Admin\PhotoService.cs" />
+    <Compile Include="Services\Admin\WorkerService.cs" />
   </ItemGroup>
   <ItemGroup>
     <Content Include="Views\web.config" />
@@ -994,7 +1034,10 @@
     <Content Include="Views\Home\Land.cshtml">
       <SubType>Code</SubType>
     </Content>
-    <Content Include="Views\Admin\Add.cshtml" />
+    <Content Include="Views\Admin\AddAdvert.cshtml" />
+    <Content Include="Views\Admin\Workers.cshtml" />
+    <Content Include="Views\Admin\AddWorker.cshtml" />
+    <Content Include="Views\Admin\EditWorker.cshtml" />
     <None Include="Views\Admin\_AddFlat.cshtml" />
     <None Include="Views\Admin\_AddHouse.cshtml" />
     <None Include="Views\Admin\_AddLand.cshtml" />
@@ -1008,7 +1051,30 @@
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
-    <Folder Include="Content\Photos\" />
+    <Folder Include="Content\Photos\Workers\" />
+  </ItemGroup>
+  <ItemGroup>
+    <EmbeddedResource Include="Migrations\201411190758254_update.resx">
+      <DependentUpon>201411190758254_update.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201411191002132_update1.resx">
+      <DependentUpon>201411191002132_update1.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201411191145546_update2.resx">
+      <DependentUpon>201411191145546_update2.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201411191237507_update3.resx">
+      <DependentUpon>201411191237507_update3.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201411191248083_update4.resx">
+      <DependentUpon>201411191248083_update4.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201411191431052_update5.resx">
+      <DependentUpon>201411191431052_update5.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201411200940234_update6.resx">
+      <DependentUpon>201411200940234_update6.cs</DependentUpon>
+    </EmbeddedResource>
   </ItemGroup>
   <PropertyGroup>
     <VisualStudioVersion Condition="'$(VisualStudioVersion)' == ''">10.0</VisualStudioVersion>

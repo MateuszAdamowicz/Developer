@@ -5,6 +5,7 @@ using System.Web;
 using System.Web.Mvc;
 using Developer.Models.EntityModels;
 using Developer.Models.EntityModels.Interfaces;
+using Developer.Models.ViewModels;
 
 namespace Developer.Controllers
 {
@@ -19,9 +20,6 @@ namespace Developer.Controllers
 
         public ActionResult Index()
         {
-
-            var x = _context.Workers.ToArray();
-            var y = _context.Flats.ToArray();
             return View();        
         }
         public ActionResult House()
@@ -40,7 +38,8 @@ namespace Developer.Controllers
         public ActionResult Show(int id)
         {
             var flat = Enumerable.First(_context.Flats.Where(x => x.Id == id));
-            return View(flat);
+            var showFlat = AutoMapper.Mapper.Map<ShowFlat>(flat);
+            return View(showFlat);
         }
     }
 }

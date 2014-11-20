@@ -15,10 +15,12 @@ namespace Developer.Services.Admin
     public class AddAdvertService : IAddAdvertService
     {
         private readonly IApplicationContext _context;
+        private readonly IPhotoService _photoService;
 
-        public AddAdvertService(IApplicationContext context)
+        public AddAdvertService(IApplicationContext context, IPhotoService photoService)
         {
             _context = context;
+            _photoService = photoService;
         }
 
         public Result AddFlat(AdminFlat adminFlat)
@@ -27,7 +29,11 @@ namespace Developer.Services.Admin
             var worker = Enumerable.First(_context.Workers.Where(x => x.Id == adminFlat.Worker));
 
             flat.Worker = worker;
-            flat.Pictures = SavePictures(adminFlat.Files);
+            flat.Pictures = _photoService.AddAdvertPhotos(adminFlat.Files);
+            foreach (var photo in flat.Pictures)
+            {
+                photo.AdType = AdType.Flat;
+            }
 
             var result = _context.Flats.Add(flat);
 
@@ -60,27 +66,6 @@ namespace Developer.Services.Admin
             _context.SaveChanges();
 
             return new Result(true, null, "");
-        }
-
-        public IEnumerable<String> SavePictures(IEnumerable<HttpPostedFileBase> files)
-        {
-            var pictures = new List<String>();
-
-            if (files != null && files.Any())
-            {
-                foreach (var file in files)
-                {
-                    if (file != null && file.ContentLength > 0)
-                    {
-                        var fileName = String.Format("{0}_{1}", DateTime.Now.ToString("FFFFFFF"), file.FileName);
-                        var path = HttpContext.Current.Server.MapPath("~/Content/Photos/");
-                        file.SaveAs(path+fileName);
-                        pictures.Add(fileName);
-                    }
-                }
-            }
-
-            return pictures;
         }
     }
 }

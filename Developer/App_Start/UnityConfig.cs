@@ -13,6 +13,9 @@ namespace Developer
         {
             container.RegisterType<IApplicationContext, ApplicationContext>(new HierarchicalLifetimeManager());
             container.RegisterType<IAddAdvertService, AddAdvertService>();
+            container.RegisterType<IPhotoService, PhotoService>();
+            container.RegisterType<IWorkerService, WorkerService>();
+
         }
     }
 }

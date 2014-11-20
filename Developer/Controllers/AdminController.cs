@@ -14,12 +14,14 @@ namespace Developer.Controllers
     {
         private readonly IApplicationContext _applicationContext;
         private readonly IAddAdvertService _addAdvertService;
+        private readonly IWorkerService _workerService;
 
         // GET: Admin
-        public AdminController(IApplicationContext applicationContext, IAddAdvertService addAdvertService)
+        public AdminController(IApplicationContext applicationContext, IAddAdvertService addAdvertService, IWorkerService workerService)
         {
             _applicationContext = applicationContext;
             _addAdvertService = addAdvertService;
+            _workerService = workerService;
         }
 
         public ActionResult Index()
@@ -27,7 +29,7 @@ namespace Developer.Controllers
             return View();
         }
         [HttpGet]
-        public ActionResult Add()
+        public ActionResult AddAdvert()
         {
             ViewData["Workers"]= _applicationContext.Workers.ToList();
             return View(new AdminAdvertToAdd());
@@ -42,7 +44,7 @@ namespace Developer.Controllers
 
             }
 
-            return RedirectToAction("Add");
+            return RedirectToAction("AddAdvert");
         }
 
         public ActionResult AddHouse(AdminHouse adminHouse)
@@ -51,7 +53,7 @@ namespace Developer.Controllers
             {
                 var result = _addAdvertService.AddHouse(adminHouse);
             }
-            return RedirectToAction("Add");
+            return RedirectToAction("AddAdvert");
         }
 
         public ActionResult AddLand(AdminLand adminLand)
@@ -60,7 +62,59 @@ namespace Developer.Controllers
             {
                 var result = _addAdvertService.AddLand(adminLand);
             }
-            return RedirectToAction("Add");
+            return RedirectToAction("AddAdvert");
+        }
+
+        public ActionResult Workers()
+        {
+            return View(_applicationContext.Workers.ToList());
+        }
+
+
+
+        public ActionResult AddWorker()
+        {
+            return View(new AdminWorker());
+        }
+
+        [HttpPost]
+        public ActionResult AddWorker(AdminWorker adminWorker)
+        {
+            if (ModelState.IsValid)
+            {
+                var result = _workerService.AddWorker(adminWorker);
+
+                if (result.Success == true)
+                {
+                    return RedirectToAction("Workers");
+                }
+                return View(adminWorker);
+            }
+            return View(adminWorker);
+        }
+
+        public ActionResult EditWorker(int id)
+        {
+            var worker = Enumerable.FirstOrDefault(_applicationContext.Workers.Where(obj => obj.Id == id));
+
+            var adminWorker = AutoMapper.Mapper.Map<AdminWorker>(worker);
+
+            return View(adminWorker);
+        }
+
+        [HttpPost]
+        public ActionResult EditWorker(AdminWorker adminWorker, int id)
+        {
+            if (ModelState.IsValid)
+            {
+                var result = _workerService.EditWorker(adminWorker, id);
+                if (result.Success == true)
+                {
+                    return RedirectToAction("Workers");
+                }
+                return View(adminWorker);
+            }
+            return ViewBag(adminWorker);
         }
     }
 }

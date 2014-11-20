@@ -10,9 +10,9 @@ namespace Developer.Models.EntityModels.Interfaces
         public string Details { get; set; }
         public string City { get; set; }
         public string Price { get; set; }
-        public Worker Worker { get; set; }
+        public virtual Worker Worker { get; set; }
         public bool Visible { get; set; }
         public bool Deleted { get; set; }
-        public IEnumerable<String> Pictures { get; set; }
+        public virtual List<Photo> Pictures { get; set; }
     }
 }

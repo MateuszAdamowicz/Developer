@@ -8,6 +8,7 @@ namespace Developer.Models.EntityModels.Interfaces
         IDbSet<Flat> Flats { get; set; }
         IDbSet<House> Houses { get; set; }
         IDbSet<Land> Lands { get; set; }
+        IDbSet<Photo> Photos { get; set; } 
         new void SaveChanges();
     }
 }

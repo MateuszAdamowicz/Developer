@@ -11,6 +11,7 @@ namespace Developer.Models.EntityModels
         public IDbSet<Flat> Flats { get; set; }
         public IDbSet<House> Houses { get; set; }
         public IDbSet<Land> Lands { get; set; }
+        public IDbSet<Photo> Photos { get; set; }
         
 
         public ApplicationContext() : base()

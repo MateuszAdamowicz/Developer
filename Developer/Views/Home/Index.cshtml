@@ -87,47 +87,46 @@
         </div>
     </div>
     @* LIST FLATS*@
-    <ul style="padding-left: 0px;">
+    <ul style="padding-left: 0px;"  ng-show="myProperty.value =='flat'">
         <li ng-repeat="flat in flatList|filter:myflatCity.City">
-        <div class="col-md-12 custom-left-panel" style="margin-left: 15px" ng-show="myProperty.value =='flat'">
-         
+        <div class="col-md-12 custom-left-panel" style="margin-left: 15px; padding-left: 0px;">         
                 <div class="col-md-2">
-                    <img src="/Content/Photos/"+"{{flat.Picture.Link}}" style="width: 100%"/>
+                    <img ng-src="/Content/Photos/{{flat.Picture.Link}}" style="width: 100%"/>
                 </div>
-            <div class="col-md-10">
-                {{flat.City}} {{flat.Description}} {{flat.Price}}
+            <div class="col-md-10" style="word-wrap: break-word">
+                {{flat.Title}}<br>
+                {{flat.Price}},&nbsp{{flat.City}},&nbsp{{flat.Rooms}}<br>
+                {{flat.Description}} 
             </div>
-         </div>
-    </li>    
+        </div>
+        </li>    
    </ul>
         @* LIST HOUSES*@
-@*    <ul style="padding-left: 0px;">
+    <ul style="padding-left: 0px;" ng-show="myProperty.value =='house'">
         <li ng-repeat="house in houseList|filter:myhouseCity.City">
-        <div class="col-md-12 custom-left-panel" style="margin-left: 15px" ng-show="myProperty.value =='house'">
-         
+        <div class="col-md-12 custom-left-panel" style="margin-left: 15px; padding-left: 0px;">        
                 <div class="col-md-2">
-                    <img src="/Content/Photos/"+"{{house.Picture.Link}}" style="width: 100%"/>
+                    <img ng-src="/Content/Photos/{{house.Picture.Link}}" style="width: 100%"/>
                 </div>
             <div class="col-md-10">
                 {{house.City}} {{house.Description}} {{house.Price}}
             </div>
          </div>
         </li>    
-   </ul>*@
-        @* LIST HOUSES*@
-@*    <ul style="padding-left: 0px;">
+   </ul>
+        @* LIST LAND*@
+    <ul style="padding-left: 0px;" ng-show="myProperty.value =='land'">
         <li ng-repeat="land in landList|filter:mylandCity.City">
-        <div class="col-md-12 custom-left-panel" style="margin-left: 15px" ng-show="myProperty.value =='land'">
-         
+        <div class="col-md-12 custom-left-panel" style="margin-left: 15px; padding-left: 0px;" >         
                 <div class="col-md-2">
-                    <img src="/Content/Photos/"+"{{land.Picture.Link}}" style="width: 100%"/>
+                    <img ng-src="/Content/Photos/{{land.Picture.Link}}" style="width: 100%"/>
                 </div>
             <div class="col-md-10">
                 {{land.City}} {{land.Description}} {{land.Price}}
             </div>
          </div>
         </li>    
-   </ul>*@
+   </ul>
 </div>
 <div class="row" style="margin-right: 15px">
     <div class="col-md-12 custom-left-panel" style="margin-left: 15px">

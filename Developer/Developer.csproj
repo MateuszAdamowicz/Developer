@@ -70,6 +70,9 @@
       <SpecificVersion>False</SpecificVersion>
       <HintPath>..\packages\Newtonsoft.Json.6.0.4\lib\net45\Newtonsoft.Json.dll</HintPath>
     </Reference>
+    <Reference Include="RazorEngine">
+      <HintPath>..\packages\RazorEngine.3.4.1\lib\net45\RazorEngine.dll</HintPath>
+    </Reference>
     <Reference Include="System.Net.Http" />
     <Reference Include="System.Net.Http.Formatting, Version=5.2.2.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
       <SpecificVersion>False</SpecificVersion>
@@ -945,6 +948,7 @@
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Migrations\DbInitializer.cs" />
     <Compile Include="Models\ApplicationModels\Result.cs" />
+    <Compile Include="Models\ContactEmail.cs" />
     <Compile Include="Models\EntityModels\Photo.cs" />
     <Compile Include="Models\ViewModels\AdminWorker.cs" />
     <Compile Include="Models\ViewModels\AdType.cs" />
@@ -984,6 +988,8 @@
     <Compile Include="Services\Admin\IWorkerService.cs" />
     <Compile Include="Services\Admin\PhotoService.cs" />
     <Compile Include="Services\Admin\WorkerService.cs" />
+    <Compile Include="Services\Home\EmailService\EmailService.cs" />
+    <Compile Include="Services\Home\EmailService\IEmailService.cs" />
   </ItemGroup>
   <ItemGroup>
     <Content Include="Views\web.config" />
@@ -1009,11 +1015,13 @@
     <Content Include="Views\Admin\Workers.cshtml" />
     <Content Include="Views\Admin\AddWorker.cshtml" />
     <Content Include="Views\Admin\EditWorker.cshtml" />
+    <None Include="Services\Home\EmailService\Templates\QuestionEmailTemplate.cshtml" />
     <None Include="Views\Admin\_AddFlat.cshtml" />
     <None Include="Views\Admin\_AddHouse.cshtml" />
     <None Include="Views\Admin\_AddLand.cshtml" />
     <Content Include="Views\Home\Show.cshtml" />
     <None Include="Views\Home\NotFound.cshtml" />
+    <None Include="Views\Home\_ContactForm.cshtml" />
     <None Include="Views\Home\_ShowFlat.cshtml" />
     <None Include="Views\Home\_ShowHouse.cshtml" />
     <None Include="Views\Home\_ShowLand.cshtml" />

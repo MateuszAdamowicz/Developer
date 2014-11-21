@@ -7,20 +7,25 @@ using Developer.Models;
 using Developer.Models.EntityModels;
 using Developer.Models.EntityModels.Interfaces;
 using Developer.Models.ViewModels;
+using Developer.Services.Home;
 
 namespace Developer.Controllers
 {
     public class HomeController : Controller
     {
         private readonly IApplicationContext _context;
+        private readonly IEmailService _emailService;
         // GET: Home
-        public HomeController(IApplicationContext context)
+        public HomeController(IApplicationContext context, IEmailService emailService)
         {
             _context = context;
+            _emailService = emailService;
         }
 
         public ActionResult SendEmail(ContactEmail contactEmail)
         {
+            var result = _emailService.SendQuestion(contactEmail);
+
             return View("Index");
         }
 

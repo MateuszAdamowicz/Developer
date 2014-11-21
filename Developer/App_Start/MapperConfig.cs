@@ -28,6 +28,12 @@ namespace Developer.App_Start
             Mapper.CreateMap<Worker, AdminWorker>()
                 .ForMember(dest => dest.OldPhoto, opts => opts.MapFrom(src => src.HasPhoto ? src.Photo : String.Empty))
                 .ForMember(dest => dest.Photo, opts => opts.UseValue(null));
+            Mapper.CreateMap<Flat, ShowListFlat>()
+                .ForMember(dest => dest.Picture, opts => opts.MapFrom(src => src.Pictures.FirstOrDefault()));
+            Mapper.CreateMap<House, ShowListHouse>()
+                .ForMember(dest => dest.Picture, opts => opts.MapFrom(src => src.Pictures.FirstOrDefault()));
+            Mapper.CreateMap<Land, ShowListLand>()
+                .ForMember(dest => dest.Picture, opts => opts.MapFrom(src => src.Pictures.FirstOrDefault()));
         }
     }
 }

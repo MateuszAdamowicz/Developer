@@ -5,44 +5,130 @@
 <script src="~/Scripts/jquery-1.10.2.js"></script>
 <script src="~/Scripts/bootstrap.js"></script>
 
-<div class="row" style="margin-right: 15px" data-ng-app="main" data-ng-controller="RootController">
+<div class="row" style="margin-right: 15px" data-ng-app="searcher" data-ng-controller="SearcherController">
     <div class="col-md-12 custom-left-panel" style="margin-left: 15px">
         <h4>Wyszukaj ofertę</h4>
         <div class="row">
             <div class="col-md-6" style="border-right: 1px solid black">
                 <small>Rodzaj nieruchomości: </small>
-                                <div class="dropdown">
-                    <button class="btn btn-default dropdown-toggle" type="button"  data-toggle="dropdown" aria-expanded="true">
-                        Wybierz rodzaj
-                <span class="caret"></span>
-                    </button>
-                    <ul class="dropdown-menu" role="menu" aria-labelledby="dropdownMenu1">
-                        <li data-ng-class="{active : activeViewPath==='/house'}"><a href='#/house'>Domy</a></li>
-                        <li data-ng-class="{active : activeViewPath==='/flat'}"><a href='#/flat'>Mieszkania</a></li>
-                        <li data-ng-class="{active : activeViewPath==='/land'}"><a href='#/land'>Działki</a></li>
-                    </ul>
-                </div>
+                <select class="form-control input-sm" ng-model="myProperty" ng-options="property.name for property in properties">
+                    <option style="display: none" value="">Wybierz rodzaj</option>
+                </select>
             </div>
             <div class="col-md-6">
                 <small>Typ oferty :</small>
-                <div class="dropdown">
-                    <button class="btn btn-default dropdown-toggle" type="button" data-toggle="dropdown" aria-expanded="true">
-                        Wybierz rodzaj
-                <span class="caret"></span>
-                    </button>
-                    <ul class="dropdown-menu" role="menu" aria-labelledby="dropdownMenu2">
-                        <li><a href="#">Wynajem</a></li>
-                        <li><a href="#">Sprzedaż</a></li>
-                    </ul>
-                </div>
+                <select class="form-control input-sm" ng-model="myoffertType" ng-options="offert.name for offert in offertType">
+                    <option style="display: none" value="">Wybierz rodzaj</option>
+                </select>
             </div>
         </div>
-        <div class="row" style="margin-top: 25px">
-            <div data-ng-view=""></div>
+        @* HOUSES *@
+        <div class="row" style="margin-top: 25px" ng-show="myProperty.value =='house'">
+            <div class="col-md-4">
+                <small>Miejscowość:</small>
+                <select class="form-control input-sm" ng-model="myhouseCity" ng-options="city.City for city in houseList">
+                    <option value="">Wszystkie</option>
+                </select>
+            </div>
+            <div class="col-md-4">
+                <small>Powierzchnia użytkowa:</small>
+                <select class="form-control input-sm" ng-model="myoffertType" ng-options="offert.name for offert in offertType">
+                    <option style="display: none" value="">Wybierz rodzaj</option>
+                </select>
+            </div>
+            <div class="col-md-4">
+                <small>Cena:</small>
+                <select class="form-control input-sm" ng-model="myoffertType" ng-options="offert.name for offert in offertType">
+                    <option style="display: none" value="">Wybierz rodzaj</option>
+                </select>
+            </div>
+        </div>
+        @* FLATS *@
+        <div class="row" style="margin-top: 25px" ng-show="myProperty.value =='flat'">
+            <div class="col-md-4">
+                <small>Miejscowość:</small>
+                <select class="form-control input-sm" ng-model="myflatCity" ng-options="city.City for city in flatList">
+                    <option value="">Wszystkie</option>
+                </select>
+            </div>
+            <div class="col-md-4">
+                <small>Ilość pokoi:</small>
+                <select class="form-control input-sm" ng-model="myoffertType" ng-options="offert.name for offert in offertType">
+                    <option style="display: none" value="">Wybierz rodzaj</option>
+                </select>
+            </div>
+            <div class="col-md-4">
+                <small>Cena:</small>
+                <select class="form-control input-sm" ng-model="myoffertType" ng-options="offert.name for offert in offertType">
+                    <option style="display: none" value="">Wybierz rodzaj</option>
+                </select>
+            </div>
+        </div>
+        @* LANDS *@
+        <div class="row" style="margin-top: 25px" ng-show="myProperty.value =='land'">
+            <div class="col-md-4">
+                <small>Miejscowość:</small>
+                <select class="form-control input-sm" ng-model="mylandCity" ng-options="city.City for city in landList">
+                     <option value="">Wszystkie</option>
+                </select>
+            </div>
+            <div class="col-md-4">
+                <small>Powierzchnia:</small>
+                <select class="form-control input-sm" ng-model="myoffertType" ng-options="offert.name for offert in offertType">
+                    <option style="display: none" value="">Wybierz rodzaj</option>
+                </select>
+            </div>
+            <div class="col-md-4">
+                <small>Cena:</small>
+                <select class="form-control input-sm" ng-model="myoffertType" ng-options="offert.name for offert in offertType">
+                    <option style="display: none" value="">Wybierz rodzaj</option>
+                </select>
+            </div>
         </div>
     </div>
+    @* LIST FLATS*@
+    <ul style="padding-left: 0px;">
+        <li ng-repeat="flat in flatList|filter:myflatCity.City">
+        <div class="col-md-12 custom-left-panel" style="margin-left: 15px" ng-show="myProperty.value =='flat'">
+         
+                <div class="col-md-2">
+                    <img src="/Content/Photos/"+"{{flat.Picture.Link}}" style="width: 100%"/>
+                </div>
+            <div class="col-md-10">
+                {{flat.City}} {{flat.Description}} {{flat.Price}}
+            </div>
+         </div>
+    </li>    
+   </ul>
+        @* LIST HOUSES*@
+@*    <ul style="padding-left: 0px;">
+        <li ng-repeat="house in houseList|filter:myhouseCity.City">
+        <div class="col-md-12 custom-left-panel" style="margin-left: 15px" ng-show="myProperty.value =='house'">
+         
+                <div class="col-md-2">
+                    <img src="/Content/Photos/"+"{{house.Picture.Link}}" style="width: 100%"/>
+                </div>
+            <div class="col-md-10">
+                {{house.City}} {{house.Description}} {{house.Price}}
+            </div>
+         </div>
+        </li>    
+   </ul>*@
+        @* LIST HOUSES*@
+@*    <ul style="padding-left: 0px;">
+        <li ng-repeat="land in landList|filter:mylandCity.City">
+        <div class="col-md-12 custom-left-panel" style="margin-left: 15px" ng-show="myProperty.value =='land'">
+         
+                <div class="col-md-2">
+                    <img src="/Content/Photos/"+"{{land.Picture.Link}}" style="width: 100%"/>
+                </div>
+            <div class="col-md-10">
+                {{land.City}} {{land.Description}} {{land.Price}}
+            </div>
+         </div>
+        </li>    
+   </ul>*@
 </div>
-
 <div class="row" style="margin-right: 15px">
     <div class="col-md-12 custom-left-panel" style="margin-left: 15px">
         <h4>Najnowsze oferty</h4>

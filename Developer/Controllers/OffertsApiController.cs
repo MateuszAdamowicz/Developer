@@ -6,6 +6,7 @@ using System.Net;
 using System.Net.Http;
 using System.Web.Http;
 using Developer.Models.EntityModels;
+using Developer.Models.ViewModels;
 
 namespace Developer.Controllers
 {
@@ -18,23 +19,27 @@ namespace Developer.Controllers
             _context = context;
         }
 
-        public IEnumerable<House> GetHouses()
+        public IEnumerable<ShowListHouse> GetHouses()
         {
-            List<House> houseData = _context.Houses.ToList();
-            return houseData;
+            List<House> houseData = _context.Houses.Where(x => x.Visible == false).ToList();//To change for true when implemented
+            List<ShowListHouse> listHouse = AutoMapper.Mapper.Map<List<ShowListHouse>>(houseData);
+            return listHouse;
         }
 
-        public IEnumerable<Flat> GetFlats()
+        public IEnumerable<ShowListFlat> GetFlats()
         {
-            List<Flat> flatData = _context.Flats.ToList();
-            return flatData;
+            List<Flat> flatData = _context.Flats.Where(x => x.Visible == false).ToList(); //To change for true whe implemented
+            List<ShowListFlat> listFlat= AutoMapper.Mapper.Map<List<ShowListFlat>>(flatData);
+            return listFlat;
         }
 
-        public IEnumerable<Land> GetLands()
+        public IEnumerable<ShowListLand> GetLands()
         {
-            List<Land> landData = _context.Lands.ToList();
-            return landData;
+            List<Land> landData = _context.Lands.Where(x => x.Visible == false).ToList();//To change for true when implemented
+            List<ShowListLand> listLand = AutoMapper.Mapper.Map<List<ShowListLand>>(landData);
+            return listLand;
         }
+
         public House Put(House user)
         {
             //Update the user

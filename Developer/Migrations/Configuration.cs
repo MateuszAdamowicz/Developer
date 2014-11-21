@@ -55,31 +55,6 @@ namespace Developer.Migrations
                 Pictures = new List<Photo>()
             };
 
-
-
-
-            var house1 = new House()
-            {
-                City = "Szczecin",
-                Heating = "Gazowe"
-            };
-            var house2 = new House()
-            {
-                City = "Wroc³aw",
-                Heating = "Piec"
-            };
-
-            var land1 = new Land()
-            {
-                City = "Szczecin",
-                Area = "100"
-            };
-            var land2 = new Land()
-            {
-                City = "Wroc³aw",
-                Area = "110"
-            };
-
             context.Workers.AddOrUpdate(p => p.LastName, worker1);
             context.Workers.AddOrUpdate(p => p.LastName, worker2);
             flat3.Worker = worker1;

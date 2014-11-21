@@ -89,14 +89,27 @@
     @* LIST FLATS*@
     <ul style="padding-left: 0px;"  ng-show="myProperty.value =='flat'">
         <li ng-repeat="flat in flatList|filter:myflatCity.City">
-        <div class="col-md-12 custom-left-panel" style="margin-left: 15px; padding-left: 0px;">         
-                <div class="col-md-2">
+        <div class="col-md-12 custom-left-panel" style="margin-left: 15px; padding-left: 0px; border: 2px solid rgb(255, 227, 176); background-color:rgb(255, 245, 227)">         
+                <div class="col-md-3">
                     <img ng-src="/Content/Photos/{{flat.Picture.Link}}" style="width: 100%"/>
                 </div>
-            <div class="col-md-10">
-                <b>{{flat.Title}}</b><br>
-                <b>{{flat.Price}}</b>,&nbsp{{flat.City}},&nbsp{{flat.Rooms}}<br>
-                <small>{{flat.Description}}</small> 
+            <div class="col-md-9">
+                <div class="row">
+                    <div class="col-md-12" style="border-bottom: 2px solid rgb(255, 227, 176); padding-left: 0px; padding-right: 0px; margin-bottom:5px">
+                        <div class="pull-left" style="font-weight: bold">{{flat.Title}}</div>
+                        <div class="pull-right" style="font-weight: bolder; font-size:larger">{{flat.Price}}</div>
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="col-md-12">
+                        {{flat.City}}, <small>{{flat.Rooms}}</small>
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="col-md-12">
+                        <p style="font-size: small; text-align: justify; height: 60px; overflow:hidden">{{flat.Description}}</p>
+                    </div>
+                </div>
             </div>
         </div>
         </li>    
@@ -104,27 +117,57 @@
         @* LIST HOUSES*@
     <ul style="padding-left: 0px;" ng-show="myProperty.value =='house'">
         <li ng-repeat="house in houseList|filter:myhouseCity.City">
-        <div class="col-md-12 custom-left-panel" style="margin-left: 15px; padding-left: 0px;">        
-                <div class="col-md-2">
-                    <img ng-src="/Content/Photos/{{house.Picture.Link}}" style="width: 100%"/>
+            <div class="col-md-12 custom-left-panel" style="margin-left: 15px; padding-left: 0px; border: 2px solid rgb(255, 227, 176); background-color:rgb(255, 245, 227)">
+                <div class="col-md-3">
+                    <img ng-src="/Content/Photos/{{house.Picture.Link}}" style="width: 100%" />
                 </div>
-            <div class="col-md-10">
-                {{house.City}} {{house.Description}} {{house.Price}}
+                <div class="col-md-9">
+                    <div class="row">
+                        <div class="col-md-12" style="border-bottom: 2px solid rgb(255, 227, 176); padding-left: 0px; padding-right: 0px; margin-bottom:5px">
+                            <div class="pull-left" style="font-weight: bold">{{flat.Title}}</div>
+                            <div class="pull-right" style="font-weight: bolder; font-size:larger">{{flat.Price}}</div>
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="col-md-12">
+                            {{flat.City}}, <small>{{flat.UsableArea}}</small>
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="col-md-12">
+                            <p style="font-size: small; text-align: justify; height: 60px; overflow:hidden">{{flat.Description}}</p>
+                        </div>
+                    </div>
+                </div>
             </div>
-         </div>
         </li>    
    </ul>
         @* LIST LAND*@
     <ul style="padding-left: 0px;" ng-show="myProperty.value =='land'">
         <li ng-repeat="land in landList|filter:mylandCity.City">
-        <div class="col-md-12 custom-left-panel" style="margin-left: 15px; padding-left: 0px;" >         
-                <div class="col-md-2">
-                    <img ng-src="/Content/Photos/{{land.Picture.Link}}" style="width: 100%"/>
+            <div class="col-md-12 custom-left-panel" style="margin-left: 15px; padding-left: 0px; border: 2px solid rgb(255, 227, 176); background-color:rgb(255, 245, 227)">
+                <div class="col-md-3">
+                    <img ng-src="/Content/Photos/{{land.Picture.Link}}" style="width: 100%" />
                 </div>
-            <div class="col-md-10">
-                {{land.City}} {{land.Description}} {{land.Price}}
+                <div class="col-md-9">
+                    <div class="row">
+                        <div class="col-md-12" style="border-bottom: 2px solid rgb(255, 227, 176); padding-left: 0px; padding-right: 0px; margin-bottom:5px">
+                            <div class="pull-left" style="font-weight: bold">{{flat.Title}}</div>
+                            <div class="pull-right" style="font-weight: bolder; font-size:larger">{{flat.Price}}</div>
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="col-md-12">
+                            {{flat.City}}, <small>{{flat.Area}}</small>
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="col-md-12">
+                            <p style="font-size: small; text-align: justify; height: 60px; overflow:hidden">{{flat.Description}}</p>
+                        </div>
+                    </div>
+                </div>
             </div>
-         </div>
         </li>    
    </ul>
 </div>

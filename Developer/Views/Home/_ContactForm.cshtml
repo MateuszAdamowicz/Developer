@@ -1,0 +1,53 @@
+﻿@model Developer.Models.ContactEmail
+
+@using (Html.BeginForm("SendEmail", "Home"))
+{
+    @Html.AntiForgeryToken()
+    <div class="form-group-sm">
+        <div class="row" style="margin-bottom:5px">
+            <div class="col-md-4">
+                <sup><b style="font-size: 14px; color:red">*</b></sup><small>Imię i Nazwisko:</small>
+            </div>
+            <div class="col-md-8">
+                @Html.EditorFor(model => model.FullName, new { htmlAttributes = new { @class = "form-control", @style = "max-width: none" } })
+            </div>
+        </div>
+
+        <div class="row" style="margin-bottom:5px">
+            <div class="col-md-4">
+                <sup><b style="font-size: 14px; color: red">*</b></sup><small>E-mail:</small>
+            </div>
+            <div class="col-md-8">
+                @Html.EditorFor(model => model.Email, new { htmlAttributes = new { @class = "form-control", @style = "max-width: none" } })
+            </div>
+        </div>
+
+        <div class="row" style="margin-bottom: 5px">
+            <div class="col-md-4">
+                <small>Telefon:</small>
+            </div>
+            <div class="col-md-8">
+                @Html.EditorFor(model => model.PhoneNumber, new {htmlAttributes = new {@class = "form-control", @style = "max-width: none"}})
+            </div>
+        </div>
+        <div class="row" style="margin-bottom: 5px">
+            <div class="col-md-4">
+                <sup><b style="font-size: 14px; color: red">*</b></sup><small>Wiadomość:</small>
+            </div>
+            <div class="col-md-8">
+                @Html.TextAreaFor(model => model.Body, new {@class = "form-control", @style = "max-width: none; height:100px"})
+            </div>
+        </div>
+        <div class="row">
+            <input type="hidden" name="OfferLink" value="@Request.RawUrl"/>
+        </div>
+        <div class="row">
+            <div class="col-md-8 pull-right" style="color:red">
+                <small>Pola oznaczone gwiazdką są wymagane!</small>
+            </div>
+            <div class="col-md-8 pull-right" style="text-align: center">
+                <button type="submit" class="btn btn-sm btn-primary" style="width: 100%">Wyślij</button>
+            </div>
+        </div>
+    </div>
+}

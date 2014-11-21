@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Web;
 using System.Web.Mvc;
+using Developer.Models;
 using Developer.Models.EntityModels;
 using Developer.Models.EntityModels.Interfaces;
 using Developer.Models.ViewModels;
@@ -16,6 +17,11 @@ namespace Developer.Controllers
         public HomeController(IApplicationContext context)
         {
             _context = context;
+        }
+
+        public ActionResult SendEmail(ContactEmail contactEmail)
+        {
+            return View("Index");
         }
 
         public ActionResult Index()

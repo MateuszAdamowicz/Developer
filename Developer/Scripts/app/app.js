@@ -30,6 +30,30 @@ searcher.controller('SearcherController',function ($scope, $location, $resource)
             $scope.flatList.push(userData);
         });
     });
+
+    var houseResource = $resource('/api/offertsapi/gethouses', {}, {});
+    $scope.houseList = [];
+
+    houseResource.query(function (data) {
+        $scope.houseList = [];
+        angular.forEach(data, function (userData) {
+            $scope.houseList.push(userData);
+        });
+    });
+
+    var landResource = $resource('/api/offertsapi/getlands', {}, {});
+    $scope.landList = [];
+
+    landResource.query(function (data) {
+        $scope.landList = [];
+        angular.forEach(data, function (userData) {
+            $scope.landList.push(userData);
+        });
+    });
+
+    $scope.myhouseCity = null;
+
+    $scope.mylandCity = null;
     
     $scope.myflatCity = null;
 
@@ -47,28 +71,4 @@ searcher.controller('SearcherController',function ($scope, $location, $resource)
     ];
     $scope.myoffertType = null;
 
-
-    var houseResource = $resource('/api/offertsapi/gethouses', {}, {});
-    $scope.houseList = [];
-
-    houseResource.query(function (data) {
-        $scope.houseList = [];
-        angular.forEach(data, function (userData) {
-            $scope.houseList.push(userData);
-        });
-    });
-
-    $scope.myhouseCity = null;
-
-    var landResource = $resource('/api/offertsapi/getlands', {}, {});
-    $scope.landList = [];
-
-    landResource.query(function (data) {
-        $scope.landList = [];
-        angular.forEach(data, function (userData) {
-            $scope.landList.push(userData);
-        });
-    });
-
-    $scope.mylandCity = null;
 });

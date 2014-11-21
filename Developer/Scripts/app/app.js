@@ -17,6 +17,19 @@
 
 var searcher = angular.module('searcher', ['ngRoute', 'ngGrid', 'ngResource']);
 
+searcher.filter('unique', function () {
+    return function (input, key) {
+        var unique = {};
+        var uniqueList = [];
+        for (var i = 0; i < input.length; i++) {
+            if (typeof unique[input[i][key]] == "undefined") {
+                unique[input[i][key]] = "";
+                uniqueList.push(input[i]);
+            }
+        }
+        return uniqueList;
+    };
+});
 
 searcher.controller('SearcherController',function ($scope, $location, $resource) {
 
@@ -51,11 +64,14 @@ searcher.controller('SearcherController',function ($scope, $location, $resource)
         });
     });
 
+
     $scope.myhouseCity = null;
+    $scope.myhouseRoom = null;
 
     $scope.mylandCity = null;
     
     $scope.myflatCity = null;
+    $scope.myflatRoom = null;
 
     $scope.properties = [
         { name: 'Domy', value: 'house' },
@@ -65,8 +81,8 @@ searcher.controller('SearcherController',function ($scope, $location, $resource)
     $scope.myProperty = null;
 
     $scope.offertType = [
-    { name: 'Wynajem' },
-    { name: 'Sprzedaż' },
+    { name: 'Wynajem' ,value:'true'},
+    { name: 'Sprzedaż',value:'false'}
 
     ];
     $scope.myoffertType = null;

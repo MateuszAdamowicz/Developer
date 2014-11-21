@@ -15,7 +15,7 @@
                     <option style="display: none" value="">Wybierz rodzaj</option>
                 </select>
             </div>
-            <div class="col-md-6">
+            <div class="col-md-6"ng-hide ="myProperty.value =='land'">
                 <small>Typ oferty :</small>
                 <select class="form-control input-sm" ng-model="myoffertType" ng-options="offert.name for offert in offertType">
                     <option style="display: none" value="">Wybierz rodzaj</option>
@@ -31,9 +31,9 @@
                 </select>
             </div>
             <div class="col-md-4">
-                <small>Powierzchnia użytkowa:</small>
-                <select class="form-control input-sm" ng-model="myoffertType" ng-options="offert.name for offert in offertType">
-                    <option style="display: none" value="">Wybierz rodzaj</option>
+                <small>Ilość pokoi:</small>
+                <select class="form-control input-sm" ng-model="myhouseRoom" ng-options="room.Rooms for room in houseList">
+                    <option value="">Każda ilość</option>
                 </select>
             </div>
             <div class="col-md-4">
@@ -47,14 +47,14 @@
         <div class="row" style="margin-top: 25px" ng-show="myProperty.value =='flat'">
             <div class="col-md-4">
                 <small>Miejscowość:</small>
-                <select class="form-control input-sm" ng-model="myflatCity" ng-options="city.City for city in flatList">
+                <select class="form-control input-sm" ng-model="myflatCity" ng-options="city.id as city.City for city in flatList|unique:'City'">
                     <option value="">Wszystkie</option>
                 </select>
             </div>
             <div class="col-md-4">
                 <small>Ilość pokoi:</small>
-                <select class="form-control input-sm" ng-model="myoffertType" ng-options="offert.name for offert in offertType">
-                    <option style="display: none" value="">Wybierz rodzaj</option>
+                <select class="form-control input-sm" ng-model="myflatRoom" ng-options="room.Rooms for room in flatList|unique:'Rooms'">
+                    <option value="">Każda ilość</option>
                 </select>
             </div>
             <div class="col-md-4">
@@ -88,7 +88,7 @@
     </div>
     @* LIST FLATS*@
     <ul style="padding-left: 0px;"  ng-show="myProperty.value =='flat'">
-        <li ng-repeat="flat in flatList|filter:myflatCity.City">
+        <li ng-repeat="flat in flatList|filter:{City:myflatCity.City}|filter:{ToLet:myoffertType.value}|filter:{Rooms:myflatRoom.Rooms}">
         <div class="col-md-12 custom-left-panel" style="margin-left: 15px; padding-left: 0px; border: 2px solid rgb(255, 227, 176); background-color:rgb(255, 245, 227)">         
                 <div class="col-md-3">
                     <img ng-src="/Content/Photos/{{flat.Picture.Link}}" style="width: 100%"/>
@@ -116,7 +116,7 @@
    </ul>
         @* LIST HOUSES*@
     <ul style="padding-left: 0px;" ng-show="myProperty.value =='house'">
-        <li ng-repeat="house in houseList|filter:myhouseCity.City">
+        <li ng-repeat="house in houseList|filter:{City:myhouseCity.City}|filter:{ToLet:myofferType.value}|filter:{Rooms:myhouseRoom.Rooms}">
             <div class="col-md-12 custom-left-panel" style="margin-left: 15px; padding-left: 0px; border: 2px solid rgb(255, 227, 176); background-color:rgb(255, 245, 227)">
                 <div class="col-md-3">
                     <img ng-src="/Content/Photos/{{house.Picture.Link}}" style="width: 100%" />

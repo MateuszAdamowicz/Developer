@@ -35,11 +35,47 @@ namespace Developer.Controllers
             return View();
         }
 
-        public ActionResult Show(int id)
+        public ActionResult Show(int id, AdType adType)
         {
-            var flat = Enumerable.First(_context.Flats.Where(x => x.Id == id));
-            var showFlat = AutoMapper.Mapper.Map<ShowFlat>(flat);
-            return View(showFlat);
+            var showAdvert = new ShowAdvert {AdType = adType};
+
+            if (adType == AdType.Flat)
+            {
+                var flat = Enumerable.FirstOrDefault(_context.Flats.Where(x => x.Id == id));
+                if (flat == null)
+                {
+                    return RedirectToAction("NotFound");
+                } 
+                var showFlat = AutoMapper.Mapper.Map<ShowFlat>(flat);
+                showAdvert.Flat = showFlat;
+            }
+            else if (adType == AdType.House)
+            {
+                var house = Enumerable.FirstOrDefault(_context.Houses.Where(x => x.Id == id));
+                if (house == null)
+                {
+                    return RedirectToAction("NotFound");
+                } 
+                var showHouse = AutoMapper.Mapper.Map<ShowHouse>(house);
+                showAdvert.House = showHouse;
+            }
+            else if (adType == AdType.Land)
+            {
+                var land = Enumerable.FirstOrDefault(_context.Lands.Where(x => x.Id == id));
+                if (land == null)
+                {
+                    return RedirectToAction("NotFound");
+                } 
+                var showLand = AutoMapper.Mapper.Map<ShowLand>(land);
+                showAdvert.Land = showLand;
+            }
+
+            return View(showAdvert);
+        }
+
+        public ActionResult NotFound()
+        {
+            return View();
         }
     }
 }

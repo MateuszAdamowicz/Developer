@@ -24,7 +24,7 @@ namespace Developer.Models.ViewModels
         public string Price { get; set; }
         public bool Visible { get; set; }
         public bool Deleted { get; set; }
-        public IEnumerable<String> Pictures { get; set; }
+        public virtual List<Photo> Pictures { get; set; }
         public DateTime CreatedAt { get; set; }
     }
 }

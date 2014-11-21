@@ -4,7 +4,7 @@ using Developer.Models.EntityModels;
 
 namespace Developer.Migrations
 {
-    public class DbInitializer : DropCreateDatabaseAlways<ApplicationContext>
+    public class DbInitializer : DropCreateDatabaseIfModelChanges<ApplicationContext>
     {
         protected override void Seed(ApplicationContext context)
         {
@@ -85,7 +85,6 @@ namespace Developer.Migrations
             context.Houses.Add(house1);
             context.Houses.Add(house2);
             flat3.Worker = worker1;
-            //flat3.Pictures = new List<Photo>() { photo };
             for (int i = 0; i < 13; i++)
             {
                 flat3.Pictures.Add(new Photo()

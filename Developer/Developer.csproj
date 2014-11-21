@@ -942,34 +942,6 @@
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
     <Compile Include="Helpers\OwnHelpers.cs" />
-    <Compile Include="Migrations\201411190758254_update.cs" />
-    <Compile Include="Migrations\201411190758254_update.Designer.cs">
-      <DependentUpon>201411190758254_update.cs</DependentUpon>
-    </Compile>
-    <Compile Include="Migrations\201411191002132_update1.cs" />
-    <Compile Include="Migrations\201411191002132_update1.Designer.cs">
-      <DependentUpon>201411191002132_update1.cs</DependentUpon>
-    </Compile>
-    <Compile Include="Migrations\201411191145546_update2.cs" />
-    <Compile Include="Migrations\201411191145546_update2.Designer.cs">
-      <DependentUpon>201411191145546_update2.cs</DependentUpon>
-    </Compile>
-    <Compile Include="Migrations\201411191237507_update3.cs" />
-    <Compile Include="Migrations\201411191237507_update3.Designer.cs">
-      <DependentUpon>201411191237507_update3.cs</DependentUpon>
-    </Compile>
-    <Compile Include="Migrations\201411191248083_update4.cs" />
-    <Compile Include="Migrations\201411191248083_update4.Designer.cs">
-      <DependentUpon>201411191248083_update4.cs</DependentUpon>
-    </Compile>
-    <Compile Include="Migrations\201411191431052_update5.cs" />
-    <Compile Include="Migrations\201411191431052_update5.Designer.cs">
-      <DependentUpon>201411191431052_update5.cs</DependentUpon>
-    </Compile>
-    <Compile Include="Migrations\201411200940234_update6.cs" />
-    <Compile Include="Migrations\201411200940234_update6.Designer.cs">
-      <DependentUpon>201411200940234_update6.cs</DependentUpon>
-    </Compile>
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Migrations\DbInitializer.cs" />
     <Compile Include="Models\ApplicationModels\Result.cs" />
@@ -997,6 +969,7 @@
     <Compile Include="Models\ViewModels\AdminFlat.cs" />
     <Compile Include="Models\ViewModels\AdminHouse.cs" />
     <Compile Include="Models\ViewModels\AdminLand.cs" />
+    <Compile Include="Models\ViewModels\ShowAdvert.cs" />
     <Compile Include="Models\ViewModels\ShowFlat.cs" />
     <Compile Include="Models\ViewModels\ShowHouse.cs" />
     <Compile Include="Models\ViewModels\ShowLand.cs" />
@@ -1040,6 +1013,10 @@
     <None Include="Views\Admin\_AddHouse.cshtml" />
     <None Include="Views\Admin\_AddLand.cshtml" />
     <Content Include="Views\Home\Show.cshtml" />
+    <None Include="Views\Home\NotFound.cshtml" />
+    <None Include="Views\Home\_ShowFlat.cshtml" />
+    <None Include="Views\Home\_ShowHouse.cshtml" />
+    <None Include="Views\Home\_ShowLand.cshtml" />
     <None Include="Web.Debug.config">
       <DependentUpon>Web.config</DependentUpon>
     </None>
@@ -1053,29 +1030,6 @@
     <Folder Include="Views\ShowListFlat\" />
     <Folder Include="Views\ShowListHouse\" />
     <Folder Include="Views\ShowListLand\" />
-  </ItemGroup>
-  <ItemGroup>
-    <EmbeddedResource Include="Migrations\201411190758254_update.resx">
-      <DependentUpon>201411190758254_update.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="Migrations\201411191002132_update1.resx">
-      <DependentUpon>201411191002132_update1.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="Migrations\201411191145546_update2.resx">
-      <DependentUpon>201411191145546_update2.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="Migrations\201411191237507_update3.resx">
-      <DependentUpon>201411191237507_update3.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="Migrations\201411191248083_update4.resx">
-      <DependentUpon>201411191248083_update4.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="Migrations\201411191431052_update5.resx">
-      <DependentUpon>201411191431052_update5.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="Migrations\201411200940234_update6.resx">
-      <DependentUpon>201411200940234_update6.cs</DependentUpon>
-    </EmbeddedResource>
   </ItemGroup>
   <PropertyGroup>
     <VisualStudioVersion Condition="'$(VisualStudioVersion)' == ''">10.0</VisualStudioVersion>

@@ -3,7 +3,7 @@ using System.Collections.Generic;
 
 namespace Developer.Models.EntityModels.Interfaces
 {
-    public class Ad: Base, IAd
+    public class Ad : Base, IAd
     {
         public string Title { get; set; }
         public string Description { get; set; }

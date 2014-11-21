@@ -173,9 +173,6 @@
     <Content Include="Scripts\angular.js" />
     <Content Include="Scripts\angular.min.js" />
     <Content Include="Scripts\app\app.js" />
-    <Content Include="Scripts\app\flat.js" />
-    <Content Include="Scripts\app\house.js" />
-    <Content Include="Scripts\app\land.js" />
     <Content Include="Scripts\bootstrap.js" />
     <Content Include="Scripts\bootstrap.min.js" />
     <Content Include="Scripts\errors.json" />
@@ -1003,6 +1000,9 @@
     <Compile Include="Models\ViewModels\ShowFlat.cs" />
     <Compile Include="Models\ViewModels\ShowHouse.cs" />
     <Compile Include="Models\ViewModels\ShowLand.cs" />
+    <Compile Include="Models\ViewModels\ShowListFlat.cs" />
+    <Compile Include="Models\ViewModels\ShowListHouse.cs" />
+    <Compile Include="Models\ViewModels\ShowListLand.cs" />
     <Compile Include="Models\ViewModels\ShowWorker.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Services\Admin\AddAdvertService.cs" />
@@ -1050,6 +1050,9 @@
   <ItemGroup>
     <Folder Include="App_Data\" />
     <Folder Include="Content\Photos\Workers\" />
+    <Folder Include="Views\ShowListFlat\" />
+    <Folder Include="Views\ShowListHouse\" />
+    <Folder Include="Views\ShowListLand\" />
   </ItemGroup>
   <ItemGroup>
     <EmbeddedResource Include="Migrations\201411190758254_update.resx">

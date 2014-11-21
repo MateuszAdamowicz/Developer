@@ -17,12 +17,12 @@ namespace Developer
                         "~/Scripts/angular-route.js"));
 
             bundles.Add(new ScriptBundle("~/bundles/app").Include(
-                        "~/Scripts/app/app.js",
-                        "~/Scripts/app/services.js",
-                        "~/Scripts/app/directives.js",
-                        "~/Scripts/app/house.js",
-                        "~/Scripts/app/flat.js",
-                        "~/Scripts/app/land.js"
+                        "~/Scripts/app/app.js"
+                        //"~/Scripts/app/services.js",
+                        //"~/Scripts/app/directives.js",
+                        //"~/Scripts/app/house.js",
+                        //"~/Scripts/app/flat.js",
+                        //"~/Scripts/app/land.js"
                         ));
          }
     }

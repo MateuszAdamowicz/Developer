@@ -91,7 +91,8 @@
         <li ng-repeat="flat in flatList|filter:{City:myflatCity.City}|filter:{ToLet:myoffertType.value}|filter:{Rooms:myflatRoom.Rooms}">
         <div class="col-md-12 custom-left-panel" style="margin-left: 15px; padding-left: 0px; border: 2px solid rgb(255, 227, 176); background-color:rgb(255, 245, 227)">         
                 <div class="col-md-3">
-                    <img ng-src="/Content/Photos/{{flat.Picture.Link}}" style="width: 100%"/>
+                    <img ng-show="flat.Picture != null" ng-src="/Content/Photos/{{flat.Picture.Link}}" style="width: 100%"/>
+                    <img ng-show="flat.Picture == null" ng-src="/Content/Photos/NoImageAvailable.jpg" style="width: 100%">
                 </div>
             <div class="col-md-9">
                 <div class="row">
@@ -119,7 +120,8 @@
         <li ng-repeat="house in houseList|filter:{City:myhouseCity.City}|filter:{ToLet:myofferType.value}|filter:{Rooms:myhouseRoom.Rooms}">
             <div class="col-md-12 custom-left-panel" style="margin-left: 15px; padding-left: 0px; border: 2px solid rgb(255, 227, 176); background-color:rgb(255, 245, 227)">
                 <div class="col-md-3">
-                    <img ng-src="/Content/Photos/{{house.Picture.Link}}" style="width: 100%" />
+                    <img ng-show="house.Picture != null" ng-src="/Content/Photos/{{house.Picture.Link}}" style="width: 100%"/>
+                    <img ng-show="house.Picture == null" ng-src="/Content/Photos/NoImageAvailable.jpg" style="width: 100%">
                 </div>
                 <div class="col-md-9">
                     <div class="row">
@@ -147,7 +149,8 @@
         <li ng-repeat="land in landList|filter:mylandCity.City">
             <div class="col-md-12 custom-left-panel" style="margin-left: 15px; padding-left: 0px; border: 2px solid rgb(255, 227, 176); background-color:rgb(255, 245, 227)">
                 <div class="col-md-3">
-                    <img ng-src="/Content/Photos/{{land.Picture.Link}}" style="width: 100%" />
+                    <img ng-show="land.Picture != null" ng-src="/Content/Photos/{{land.Picture.Link}}" style="width: 100%"/>
+                    <img ng-show="land.Picture.Link == null" ng-src="/Content/Photos/NoImageAvailable.jpg" style="width: 100%">
                 </div>
                 <div class="col-md-9">
                     <div class="row">

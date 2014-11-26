@@ -31,17 +31,18 @@ searcher.filter('unique', function () {
     };
 });
 
-searcher.controller('SearcherController',function ($scope, $location, $resource) {
+searcher.controller('SearcherController', function ($scope, $resource, $filter) {
 
 
     var flatResource = $resource('/api/offertsapi/getflats', {}, {});
     $scope.flatList = [];
-
+    $scope.uniqueflatList = [];
     flatResource.query(function (data) {
         $scope.flatList = [];
         angular.forEach(data, function (userData) {
             $scope.flatList.push(userData);
         });
+      //  $scope.uniqueflatList = $filter('unique')($scope.flatList, 'City');
     });
 
     var houseResource = $resource('/api/offertsapi/gethouses', {}, {});
@@ -71,6 +72,7 @@ searcher.controller('SearcherController',function ($scope, $location, $resource)
     $scope.mylandCity = null;
     
     $scope.myflatCity = null;
+  //  $scope.myflatCity2 = null;
     $scope.myflatRoom = null;
 
     $scope.properties = [
@@ -83,7 +85,6 @@ searcher.controller('SearcherController',function ($scope, $location, $resource)
     $scope.offertType = [
     { name: 'Wynajem' ,value:'true'},
     { name: 'Sprzedaż',value:'false'}
-
     ];
     $scope.myoffertType = null;
 

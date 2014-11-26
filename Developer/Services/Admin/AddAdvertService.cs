@@ -34,6 +34,7 @@ namespace Developer.Services.Admin
             foreach (var photo in flat.Pictures)
             {
                 photo.AdType = AdType.Flat;
+                photo.Flat = flat;
             }
 
             var result = _context.Flats.Add(flat);
@@ -53,6 +54,7 @@ namespace Developer.Services.Admin
             foreach (var photo in land.Pictures)
             {
                 photo.AdType = AdType.Land;
+                photo.Land = land;
             }
 
             var result = _context.Lands.Add(land);
@@ -72,6 +74,7 @@ namespace Developer.Services.Admin
             foreach (var photo in house.Pictures)
             {
                 photo.AdType = AdType.House;
+                photo.House = house;
             }
 
             var result = _context.Houses.Add(house);

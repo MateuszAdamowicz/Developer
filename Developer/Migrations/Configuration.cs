@@ -8,7 +8,7 @@ namespace Developer.Migrations
     using System.Data.Entity.Migrations;
     using System.Linq;
 
-    internal sealed class Configuration : DbMigrationsConfiguration<Models.EntityModels.ApplicationContext>
+    internal sealed class Configuration : DbMigrationsConfiguration<ApplicationContext>
     {
         public Configuration()
         {
@@ -16,7 +16,7 @@ namespace Developer.Migrations
             AutomaticMigrationDataLossAllowed = true;
         }
 
-        protected override void Seed(Models.EntityModels.ApplicationContext context)
+        protected override void Seed(ApplicationContext context)
         {
 
             var worker1 = new Worker()
@@ -63,7 +63,8 @@ namespace Developer.Migrations
                 flat3.Pictures.Add(new Photo()
                 {
                     AdType = AdType.Flat,
-                    Link = "728803_1.jpg"
+                    Link = "728803_1.jpg",
+                    Flat = flat3
                 });
             }
             context.Flats.AddOrUpdate(p => p.Title, flat3);

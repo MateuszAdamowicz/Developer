@@ -945,6 +945,10 @@
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
     <Compile Include="Helpers\OwnHelpers.cs" />
+    <Compile Include="Migrations\201411260711067_init.cs" />
+    <Compile Include="Migrations\201411260711067_init.Designer.cs">
+      <DependentUpon>201411260711067_init.cs</DependentUpon>
+    </Compile>
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Migrations\DbInitializer.cs" />
     <Compile Include="Models\ApplicationModels\Result.cs" />
@@ -1020,7 +1024,11 @@
     <Content Include="Views\Admin\AddWorker.cshtml" />
     <Content Include="Views\Admin\EditWorker.cshtml" />
     <None Include="Services\Home\EmailService\Templates\QuestionEmailTemplate.cshtml" />
+    <None Include="Views\Admin\AdList.cshtml" />
     <None Include="Views\Admin\AdminMenu.cshtml" />
+    <None Include="Views\Admin\EditFlat.cshtml" />
+    <None Include="Views\Admin\EditHouse.cshtml" />
+    <None Include="Views\Admin\EditLand.cshtml" />
     <None Include="Views\Admin\Photos.cshtml" />
     <None Include="Views\Admin\_AddFlat.cshtml" />
     <None Include="Views\Admin\_AddHouse.cshtml" />
@@ -1044,6 +1052,11 @@
     <Folder Include="Views\ShowListFlat\" />
     <Folder Include="Views\ShowListHouse\" />
     <Folder Include="Views\ShowListLand\" />
+  </ItemGroup>
+  <ItemGroup>
+    <EmbeddedResource Include="Migrations\201411260711067_init.resx">
+      <DependentUpon>201411260711067_init.cs</DependentUpon>
+    </EmbeddedResource>
   </ItemGroup>
   <PropertyGroup>
     <VisualStudioVersion Condition="'$(VisualStudioVersion)' == ''">10.0</VisualStudioVersion>

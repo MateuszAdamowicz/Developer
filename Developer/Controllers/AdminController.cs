@@ -170,5 +170,53 @@ namespace Developer.Controllers
         {
             return View(_applicationContext.Photos.ToList());
         }
+
+        [HttpGet]
+        public ActionResult AdList()
+        {
+            var flats = AutoMapper.Mapper.Map<List<AdminAdvertToShow>>(_applicationContext.Flats);
+            var houses = AutoMapper.Mapper.Map<List<AdminAdvertToShow>>(_applicationContext.Houses);
+            var lands = AutoMapper.Mapper.Map<List<AdminAdvertToShow>>(_applicationContext.Lands);
+
+            return View(flats.Concat(houses).Concat(lands));
+        }
+
+        public ActionResult EditAd(int id, AdType adtype)
+        {
+            if (adtype == AdType.Flat)
+            {
+                return RedirectToAction("EditFlat", new {id = id});
+            }
+            else if (adtype == AdType.House)
+            {
+                return RedirectToAction("EditHouse", new {id = id});
+            }
+            else
+            {
+                return RedirectToAction("EditLand", new {id = id});
+            }
+        }
+
+        public ActionResult EditFlat(int id)
+        {
+            var flat = Enumerable.FirstOrDefault(_applicationContext.Flats.Where(obj => obj.Id == id));
+            ViewData["Workers"] = _applicationContext.Workers.ToList();
+
+            return View(flat);
+        }
+
+        public ActionResult EditHouse(int id)
+        {
+            var house = Enumerable.FirstOrDefault(_applicationContext.Houses.Where(obj => obj.Id == id));
+
+            return View(house);
+        }
+
+        public ActionResult EditLand(int id)
+        {
+            var land = Enumerable.FirstOrDefault(_applicationContext.Lands.Where(obj => obj.Id == id));
+
+            return View(land);
+        }
     }
 }

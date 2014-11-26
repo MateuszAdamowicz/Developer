@@ -9,6 +9,6 @@ namespace Developer.Models.ViewModels
         public string City { get; set; }
         public bool Visible { get; set; }
         public Worker Worker { get; set; }
-        public string AdType { get; set; }
+        public AdType AdType { get; set; }
     }
 }

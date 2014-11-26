@@ -116,7 +116,7 @@
                                     <div class="col-md-4">
                                         @if (Model.Worker.HasPhoto)
                                         {
-                                            <img src="/Content/Photos/Workers/@Model.Worker.Photo" style="width: 100%"/>
+                                            <img src="/Content/Photos/Workers/@Model.Worker.Photo" style="width: 100%; cursor:pointer" class="small-pict" />
                                         }
                                     </div>
                                     <div class="col-md-8">
@@ -139,3 +139,11 @@
     </div>
 </div>
 
+<script src="/Scripts/jquery-1.10.2.js"></script>
+
+<script language="javascript">
+    $(".small-pict").on("click", function () {
+        var link = $(this).prop("src");
+        $(".custom-head-photo").prop("src", link);
+    });
+</script>

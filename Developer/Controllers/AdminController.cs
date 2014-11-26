@@ -31,8 +31,19 @@ namespace Developer.Controllers
         [HttpGet]
         public ActionResult AddAdvert()
         {
-            ViewData["Workers"]= _applicationContext.Workers.ToList();
+            if (!TempData.ContainsKey("AdType"))
+            {
+                TempData["AdType"] = 0;
+            }
+            ViewData["Workers"] = _applicationContext.Workers.ToList();
             return View(new AdminAdvertToAdd());
+        }
+
+        [HttpGet]
+        public ActionResult AddFlat()
+        {
+            TempData["AdType"] = 0;
+            return RedirectToAction("AddAdvert");
         }
 
         [HttpPost]
@@ -41,9 +52,17 @@ namespace Developer.Controllers
             if (ModelState.IsValid)
             {
                 var result = _addAdvertService.AddFlat(adminFlat);
-                return RedirectToAction("Show", "Home", new {id = result.Data, adType = AdType.Flat});
+                return RedirectToAction("Show", "Home", new { id = result.Data, adType = AdType.Flat });
             }
+            ViewData["Workers"] = _applicationContext.Workers.ToList();
+            TempData["AdType"] = 0;
+            return View("AddAdvert", new AdminAdvertToAdd() { Flat = adminFlat });
+        }
 
+        [HttpGet]
+        public ActionResult AddHouse()
+        {
+            TempData["AdType"] = 1;
             return RedirectToAction("AddAdvert");
         }
 
@@ -53,11 +72,19 @@ namespace Developer.Controllers
             if (ModelState.IsValid)
             {
                 var result = _addAdvertService.AddHouse(adminHouse);
-                return RedirectToAction("Show", "Home", new {id = result.Data, adType = AdType.House});
+                return RedirectToAction("Show", "Home", new { id = result.Data, adType = AdType.House });
             }
-            return RedirectToAction("AddAdvert");
+            ViewData["Workers"] = _applicationContext.Workers.ToList();
+            TempData["AdType"] = 1;
+            return View("AddAdvert", new AdminAdvertToAdd() { House = adminHouse });
         }
 
+        [HttpGet]
+        public ActionResult AddLand()
+        {
+            TempData["AdType"] = 2;
+            return RedirectToAction("AddAdvert");
+        }
         [HttpPost]
         public ActionResult AddLand(AdminLand adminLand)
         {
@@ -65,12 +92,16 @@ namespace Developer.Controllers
             {
                 var result = _addAdvertService.AddLand(adminLand);
             }
-            return RedirectToAction("AddAdvert");
+            ViewData["Workers"] = _applicationContext.Workers.ToList();
+            TempData["AdType"] = 2;
+            return View("AddAdvert", new AdminAdvertToAdd() { Land = adminLand });
         }
 
         public ActionResult Workers()
         {
-            return View(_applicationContext.Workers.ToList());
+            var workers = _applicationContext.Workers.ToList();
+            var workersVm = new WorkersViewModel() { Workers = workers };
+            return View(workersVm);
         }
 
 
@@ -89,7 +120,14 @@ namespace Developer.Controllers
 
                 if (result.Success == true)
                 {
-                    return RedirectToAction("Workers");
+                    var workers = _applicationContext.Workers.ToList();
+                    var response = new Response()
+                    {
+                        Message = "Dodano nowego pracownika!",
+                        Success = true
+                    };
+                    var workersVm = new WorkersViewModel() {Workers = workers, Response = response};
+                    return View("Workers", workersVm);
                 }
                 return View(adminWorker);
             }
@@ -113,11 +151,72 @@ namespace Developer.Controllers
                 var result = _workerService.EditWorker(adminWorker, id);
                 if (result.Success == true)
                 {
-                    return RedirectToAction("Workers");
+                    var workers = _applicationContext.Workers.ToList();
+                    var response = new Response()
+                    {
+                        Message = "Pomyślnie edytowano pracownika!",
+                        Success = true
+                    };
+                    var workersVm = new WorkersViewModel() {Workers = workers, Response = response};
+                    return View("Workers", workersVm);
                 }
                 return View(adminWorker);
             }
-            return ViewBag(adminWorker);
+            return View(adminWorker);
+        }
+
+        [HttpGet]
+        public ActionResult Photos()
+        {
+            return View(_applicationContext.Photos.ToList());
+        }
+
+        [HttpGet]
+        public ActionResult AdList()
+        {
+            var flats = AutoMapper.Mapper.Map<List<AdminAdvertToShow>>(_applicationContext.Flats);
+            var houses = AutoMapper.Mapper.Map<List<AdminAdvertToShow>>(_applicationContext.Houses);
+            var lands = AutoMapper.Mapper.Map<List<AdminAdvertToShow>>(_applicationContext.Lands);
+
+            return View(flats.Concat(houses).Concat(lands));
+        }
+
+        public ActionResult EditAd(int id, AdType adtype)
+        {
+            if (adtype == AdType.Flat)
+            {
+                return RedirectToAction("EditFlat", new {id = id});
+            }
+            else if (adtype == AdType.House)
+            {
+                return RedirectToAction("EditHouse", new {id = id});
+            }
+            else
+            {
+                return RedirectToAction("EditLand", new {id = id});
+            }
+        }
+
+        public ActionResult EditFlat(int id)
+        {
+            var flat = Enumerable.FirstOrDefault(_applicationContext.Flats.Where(obj => obj.Id == id));
+            ViewData["Workers"] = _applicationContext.Workers.ToList();
+
+            return View(flat);
+        }
+
+        public ActionResult EditHouse(int id)
+        {
+            var house = Enumerable.FirstOrDefault(_applicationContext.Houses.Where(obj => obj.Id == id));
+
+            return View(house);
+        }
+
+        public ActionResult EditLand(int id)
+        {
+            var land = Enumerable.FirstOrDefault(_applicationContext.Lands.Where(obj => obj.Id == id));
+
+            return View(land);
         }
     }
 }

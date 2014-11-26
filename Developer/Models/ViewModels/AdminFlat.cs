@@ -18,11 +18,16 @@ namespace Developer.Models.ViewModels
         public string Ownership { get; set; }
         public string PricePerMeter { get; set; }
         public bool ToLet { get; set; }
+        [Required]
         public string Title { get; set; }
         [DataType(DataType.MultilineText)]
+        [Required]
         public string Description { get; set; }
+        [DataType(DataType.MultilineText)]
         public string Details { get; set; }
+        [Required]
         public string City { get; set; }
+        [Required]
         public string Price { get; set; }
         public int Worker { get; set; }
         public IEnumerable<HttpPostedFileBase> Files { get; set; }

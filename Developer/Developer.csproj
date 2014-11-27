@@ -982,6 +982,7 @@
     <Compile Include="Models\ViewModels\EditFlat.cs" />
     <Compile Include="Models\ViewModels\EditHouse.cs" />
     <Compile Include="Models\ViewModels\EditLand.cs" />
+    <Compile Include="Models\ViewModels\ShowListPhoto.cs" />
     <Compile Include="Models\ViewModels\Response.cs">
       <SubType>Code</SubType>
     </Compile>

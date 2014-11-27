@@ -11,11 +11,11 @@
         <div class="row">
             <div class="col-md-6" style="border-right: 1px solid black">
                 <small>Rodzaj nieruchomości: </small>
-                <select class="form-control input-sm" ng-model="myProperty" ng-options="property.name for property in properties">
+                <select class="form-control input-sm" ng-model="myProperty" ng-options="property.name for property in properties" ng-change="loadResources(myProperty.value)">
                     <option style="display: none" value="">Wybierz rodzaj</option>
                 </select>
             </div>
-            <div class="col-md-6"ng-hide ="myProperty.value =='land'">
+            <div class="col-md-6" ng-hide="myProperty.value =='land'">
                 <small>Typ oferty :</small>
                 <select class="form-control input-sm" ng-model="myoffertType" ng-options="offert.name for offert in offertType">
                     <option style="display: none" value="">Wybierz rodzaj</option>
@@ -32,147 +32,171 @@
             </div>
             <div class="col-md-4">
                 <small>Ilość pokoi:</small>
-                <select class="form-control input-sm" ng-model="myhouseRoom" ng-options="room.Rooms for room in houseList">
-                    <option value="">Każda ilość</option>
+                <select class="form-control input-sm" ng-model="myhouseUsableArea" ng-options="usablearea.UsableArea for usablearea in houseList">
+                    <option value="">Wszystkie powierzchnie</option>
                 </select>
             </div>
             <div class="col-md-4">
                 <small>Cena:</small>
-                <select class="form-control input-sm" ng-model="myoffertType" ng-options="offert.name for offert in offertType">
-                    <option style="display: none" value="">Wybierz rodzaj</option>
+                <select class="form-control input-sm" ng-model="myhousePrice" ng-options="price.Price for price in houseList|unique:'Price'">
+                    <option value="">Każda cena</option>
                 </select>
+            </div>
+            <div class="row" style="margin-left: 15px;">
+                <button class="btn btn-sm btn-default" style="margin-top: 15px;" ng-click="clearFilters(myProperty.value)">Wyczyść filtry</button>
             </div>
         </div>
         @* FLATS *@
         <div class="row" style="margin-top: 25px" ng-show="myProperty.value =='flat'">
             <div class="col-md-4">
                 <small>Miejscowość:</small>
-                <select class="form-control input-sm" ng-model="myflatCity" ng-options="city.id as city.City for city in flatList|unique:'City'">
+                <select class="form-control input-sm" ng-model="myflatCity" ng-options="city.City for city in flatList|unique:'City'|filter:{ToLet:myoffertType.value}|filter:{Rooms:myflatRoom.Rooms}|filter:{Price:myflatPrice.Price}">
                     <option value="">Wszystkie</option>
                 </select>
             </div>
             <div class="col-md-4">
                 <small>Ilość pokoi:</small>
-                <select class="form-control input-sm" ng-model="myflatRoom" ng-options="room.Rooms for room in flatList|unique:'Rooms'">
+                <select class="form-control input-sm" ng-model="myflatRoom" ng-options="room.Rooms for room in flatList|unique:'Rooms'|filter:{City:myflatCity.City}|filter:{ToLet:myoffertType.value}|filter:{Price:myflatPrice.Price}">
                     <option value="">Każda ilość</option>
                 </select>
             </div>
             <div class="col-md-4">
                 <small>Cena:</small>
-                <select class="form-control input-sm" ng-model="myoffertType" ng-options="offert.name for offert in offertType">
-                    <option style="display: none" value="">Wybierz rodzaj</option>
+                <select class="form-control input-sm" ng-model="myflatPrice" ng-options="price.Price for price in flatList|unique:'Price'|filter:{City:myflatCity.City}|filter:{ToLet:myoffertType.value}|filter:{Rooms:myflatRoom.Rooms}">
+                    <option value="">Każda cena</option>
                 </select>
+            </div>
+            <div class="row" style="margin-left: 15px;">
+                <button class="btn btn-sm btn-default" style="margin-top: 15px;"ng-click="clearFilters(myProperty.value)">Wyczyść filtry</button>
             </div>
         </div>
         @* LANDS *@
         <div class="row" style="margin-top: 25px" ng-show="myProperty.value =='land'">
             <div class="col-md-4">
                 <small>Miejscowość:</small>
-                <select class="form-control input-sm" ng-model="mylandCity" ng-options="city.City for city in landList">
-                     <option value="">Wszystkie</option>
+                <select class="form-control input-sm" ng-model="mylandCity" ng-options="city.City for city in landList|unique:'City'|filter:{Area:mylandArea.Area}|filter:{Price:mylandPrice.Price}">
+                    <option value="">Wszystkie</option>
                 </select>
             </div>
             <div class="col-md-4">
                 <small>Powierzchnia:</small>
-                <select class="form-control input-sm" ng-model="myoffertType" ng-options="offert.name for offert in offertType">
-                    <option style="display: none" value="">Wybierz rodzaj</option>
+                <select class="form-control input-sm" ng-model="mylandArea" ng-options="area.Area for area in landList|unique:'Area'|filter:mylandCity.City|filter:{Price:mylandPrice.Price}">
+                    <option value="">Wszystkie powierzchnie</option>
                 </select>
             </div>
             <div class="col-md-4">
                 <small>Cena:</small>
-                <select class="form-control input-sm" ng-model="myoffertType" ng-options="offert.name for offert in offertType">
-                    <option style="display: none" value="">Wybierz rodzaj</option>
+                <select class="form-control input-sm" ng-model="mylandPrice" ng-options="price.Price for price in landList|unique:'Price'|filter:mylandCity.City|filter:{Area:mylandArea.Area}">
+                    <option value="">Każda cena</option>
                 </select>
+            </div>
+            <div class="row" style="margin-left: 15px;">
+                <button class="btn btn-sm btn-default" style="margin-top: 15px;"ng-click="clearFilters(myProperty.value)">Wyczyść filtry</button>
             </div>
         </div>
     </div>
     @* LIST FLATS*@
-    <ul style="padding-left: 0px;"  ng-show="myProperty.value =='flat'">
-        <li ng-repeat="flat in flatList|filter:{City:myflatCity.City}|filter:{ToLet:myoffertType.value}|filter:{Rooms:myflatRoom.Rooms}">
-        <div class="col-md-12 custom-left-panel" style="margin-left: 15px; padding-left: 0px; border: 2px solid rgb(255, 227, 176); background-color:rgb(255, 245, 227)">         
+    <ul style="padding-left: 0px;" ng-show="myProperty.value =='flat'">
+        <li ng-repeat="flat in filteredflatList = (flatList|filter:{City:myflatCity.City}|filter:{ToLet:myoffertType.value}|filter:{Rooms:myflatRoom.Rooms}|filter:{Price:myflatPrice.Price})">
+            <div class="col-md-12 custom-left-panel" style="margin-left: 15px; padding-left: 0px; border: 2px solid rgb(255, 227, 176); background-color: rgb(255, 245, 227)">
                 <div class="col-md-3">
-                    <img ng-show="flat.Picture != null" ng-src="/Content/Photos/{{flat.Picture.Link}}" style="width: 100%"/>
+                    <img ng-show="flat.Picture != null" ng-src="/Content/Photos/{{flat.Picture.Link}}" style="width: 100%" />
                     <img ng-show="flat.Picture == null" ng-src="/Content/Photos/NoImageAvailable.jpg" style="width: 100%">
                 </div>
-            <div class="col-md-9">
-                <div class="row">
-                    <div class="col-md-12" style="border-bottom: 2px solid rgb(255, 227, 176); padding-left: 0px; padding-right: 0px; margin-bottom:5px">
-                        <div class="pull-left" style="font-weight: bold">{{flat.Title}}</div>
-                        <div class="pull-right" style="font-weight: bolder; font-size:larger">{{flat.Price}}</div>
+                <div class="col-md-9">
+                    <div class="row">
+                        <div class="col-md-12" style="border-bottom: 2px solid rgb(255, 227, 176); padding-left: 0px; padding-right: 0px; margin-bottom: 5px">
+                            <div class="pull-left" style="font-weight: bold">{{flat.Title}}</div>
+                            <div class="pull-right" style="font-weight: bolder; font-size: larger">{{flat.Price}}</div>
+                        </div>
                     </div>
-                </div>
-                <div class="row">
-                    <div class="col-md-12">
-                        {{flat.City}}, <small>{{flat.Rooms}}</small>
+                    <div class="row">
+                        <div class="col-md-12">
+                            {{flat.City}}, <small>{{flat.Rooms}}</small>
+                        </div>
                     </div>
-                </div>
-                <div class="row">
-                    <div class="col-md-12">
-                        <p style="font-size: small; text-align: justify; height: 60px; overflow:hidden">{{flat.Description}}</p>
+                    <div class="row">
+                        <div class="col-md-12">
+                            <p style="font-size: small; text-align: justify; height: 60px; overflow: hidden">{{flat.Description}}</p>
+                        </div>
                     </div>
                 </div>
             </div>
-        </div>
-        </li>    
-   </ul>
-        @* LIST HOUSES*@
+        </li>
+        <li ng-show="!filteredflatList.length">
+             <div class="col-md-12 custom-left-panel" style="margin-left: 15px; border: 2px solid rgb(255, 227, 176); background-color: rgb(255, 245, 227)">
+                <p  style="font-weight: bold">Brak wyników</p>
+            </div>
+        </li>
+    </ul>
+    @* LIST HOUSES*@
     <ul style="padding-left: 0px;" ng-show="myProperty.value =='house'">
-        <li ng-repeat="house in houseList|filter:{City:myhouseCity.City}|filter:{ToLet:myofferType.value}|filter:{Rooms:myhouseRoom.Rooms}">
-            <div class="col-md-12 custom-left-panel" style="margin-left: 15px; padding-left: 0px; border: 2px solid rgb(255, 227, 176); background-color:rgb(255, 245, 227)">
+        <li ng-repeat="house in filteredhouseList = (houseList|filter:{City:myhouseCity.City}|filter:{ToLet:myofferType.value}|filter:{UsableArea:myhouseUsableArea.UsableArea}|filter:{Price:myhousePrice.Price})">
+            <div class="col-md-12 custom-left-panel" style="margin-left: 15px; padding-left: 0px; border: 2px solid rgb(255, 227, 176); background-color: rgb(255, 245, 227)">
                 <div class="col-md-3">
                     <img ng-show="house.Picture != null" ng-src="/Content/Photos/{{house.Picture.Link}}" style="width: 100%"/>
                     <img ng-show="house.Picture == null" ng-src="/Content/Photos/NoImageAvailable.jpg" style="width: 100%">
                 </div>
                 <div class="col-md-9">
                     <div class="row">
-                        <div class="col-md-12" style="border-bottom: 2px solid rgb(255, 227, 176); padding-left: 0px; padding-right: 0px; margin-bottom:5px">
-                            <div class="pull-left" style="font-weight: bold">{{flat.Title}}</div>
-                            <div class="pull-right" style="font-weight: bolder; font-size:larger">{{flat.Price}}</div>
+                        <div class="col-md-12" style="border-bottom: 2px solid rgb(255, 227, 176); padding-left: 0px; padding-right: 0px; margin-bottom: 5px">
+                            <div class="pull-left" style="font-weight: bold">{{house.Title}}</div>
+                            <div class="pull-right" style="font-weight: bolder; font-size: larger">{{house.Price}}</div>
                         </div>
                     </div>
                     <div class="row">
                         <div class="col-md-12">
-                            {{flat.City}}, <small>{{flat.UsableArea}}</small>
+                            {{house.City}}, <small>{{house.UsableArea}}</small>
                         </div>
                     </div>
                     <div class="row">
                         <div class="col-md-12">
-                            <p style="font-size: small; text-align: justify; height: 60px; overflow:hidden">{{flat.Description}}</p>
+                            <p style="font-size: small; text-align: justify; height: 60px; overflow: hidden">{{house.Description}}</p>
                         </div>
                     </div>
                 </div>
             </div>
-        </li>    
-   </ul>
-        @* LIST LAND*@
+        </li>
+        <li ng-show="!filteredhouseList.length">
+             <div class="col-md-12 custom-left-panel" style="margin-left: 15px; border: 2px solid rgb(255, 227, 176); background-color: rgb(255, 245, 227)">
+                <p  style="font-weight: bold">Brak wyników</p>
+            </div>
+        </li>
+    </ul>
+    @* LIST LAND*@
     <ul style="padding-left: 0px;" ng-show="myProperty.value =='land'">
-        <li ng-repeat="land in landList|filter:mylandCity.City">
-            <div class="col-md-12 custom-left-panel" style="margin-left: 15px; padding-left: 0px; border: 2px solid rgb(255, 227, 176); background-color:rgb(255, 245, 227)">
+        <li ng-repeat="land in filteredlandList =(landList|filter:mylandCity.City|filter:{Area:mylandArea.Area}|filter:{Price:mylandPrice.Price})">
+            <div class="col-md-12 custom-left-panel" style="margin-left: 15px; padding-left: 0px; border: 2px solid rgb(255, 227, 176); background-color: rgb(255, 245, 227)">
                 <div class="col-md-3">
                     <img ng-show="land.Picture != null" ng-src="/Content/Photos/{{land.Picture.Link}}" style="width: 100%"/>
                     <img ng-show="land.Picture.Link == null" ng-src="/Content/Photos/NoImageAvailable.jpg" style="width: 100%">
                 </div>
                 <div class="col-md-9">
                     <div class="row">
-                        <div class="col-md-12" style="border-bottom: 2px solid rgb(255, 227, 176); padding-left: 0px; padding-right: 0px; margin-bottom:5px">
-                            <div class="pull-left" style="font-weight: bold">{{flat.Title}}</div>
-                            <div class="pull-right" style="font-weight: bolder; font-size:larger">{{flat.Price}}</div>
+                        <div class="col-md-12" style="border-bottom: 2px solid rgb(255, 227, 176); padding-left: 0px; padding-right: 0px; margin-bottom: 5px">
+                            <div class="pull-left" style="font-weight: bold">{{land.Title}}</div>
+                            <div class="pull-right" style="font-weight: bolder; font-size: larger">{{land.Price}}</div>
                         </div>
                     </div>
                     <div class="row">
                         <div class="col-md-12">
-                            {{flat.City}}, <small>{{flat.Area}}</small>
+                            {{land.City}}, <small>{{land.Area}}</small>
                         </div>
                     </div>
                     <div class="row">
                         <div class="col-md-12">
-                            <p style="font-size: small; text-align: justify; height: 60px; overflow:hidden">{{flat.Description}}</p>
+                            <p style="font-size: small; text-align: justify; height: 60px; overflow: hidden">{{land.Description}}</p>
                         </div>
                     </div>
                 </div>
             </div>
-        </li>    
-   </ul>
+        </li>
+        <li ng-show="!filteredlandList.length">
+             <div class="col-md-12 custom-left-panel" style="margin-left: 15px; border: 2px solid rgb(255, 227, 176); background-color: rgb(255, 245, 227)">
+                <p  style="font-weight: bold">Brak wyników</p>
+            </div>
+        </li>
+    </ul>
 </div>
 <div class="row" style="margin-right: 15px">
     <div class="col-md-12 custom-left-panel" style="margin-left: 15px">

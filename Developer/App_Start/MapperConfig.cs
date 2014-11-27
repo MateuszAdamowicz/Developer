@@ -4,6 +4,7 @@ using System.Linq;
 using System.Web;
 using System.Web.UI;
 using AutoMapper;
+using Developer.Models;
 using Developer.Models.EntityModels;
 using Developer.Models.EntityModels.Interfaces;
 using Developer.Models.ViewModels;
@@ -42,6 +43,9 @@ namespace Developer.App_Start
                 .ForMember(dest => dest.Worker, opts => opts.MapFrom(src => src.Worker.Id));
 
             Mapper.CreateMap<CreateOffer, Offer>().ForMember(dest => dest.Status, opts => opts.UseValue(OfferStatus.New));
+
+            Mapper.CreateMap<ContactEmail, Mail>();
+
 
         }
     }

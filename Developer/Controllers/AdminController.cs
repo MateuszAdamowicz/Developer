@@ -328,5 +328,21 @@ namespace Developer.Controllers
             }
             return RedirectToAction("Offers");
         }
+
+        public ActionResult Messages()
+        {
+            var msgList = _applicationContext.Mails.ToList();
+            return View(msgList);
+        }
+
+        public ActionResult Message(int id)
+        {
+            var msg = _applicationContext.Mails.Find(id);
+            if (msg != null)
+            {
+                return View(msg);
+            }
+            return RedirectToAction("Messages");
+        }
     }
 }

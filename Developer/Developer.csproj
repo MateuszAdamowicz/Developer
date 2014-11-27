@@ -953,6 +953,7 @@
     <Compile Include="Migrations\DbInitializer.cs" />
     <Compile Include="Models\ApplicationModels\Result.cs" />
     <Compile Include="Models\ContactEmail.cs" />
+    <Compile Include="Models\EntityModels\Mail.cs" />
     <Compile Include="Models\EntityModels\Offer.cs" />
     <Compile Include="Models\EntityModels\Photo.cs" />
     <Compile Include="Models\ViewModels\AdminWorker.cs" />
@@ -1034,6 +1035,7 @@
     <Content Include="Views\Admin\Workers.cshtml" />
     <Content Include="Views\Admin\AddWorker.cshtml" />
     <Content Include="Views\Admin\EditWorker.cshtml" />
+    <None Include="Services\Home\EmailService\Templates\ContactEmailTemplate.cshtml" />
     <None Include="Services\Home\EmailService\Templates\QuestionEmailTemplate.cshtml" />
     <Content Include="Views\Admin\AdList.cshtml" />
     <Content Include="Views\Admin\AdminMenu.cshtml" />
@@ -1043,13 +1045,19 @@
     <None Include="Views\Admin\EditHouse.cshtml" />
     <None Include="Views\Admin\EditLand.cshtml" />
     <Content Include="Views\Admin\Photos.cshtml" />
+    <None Include="Views\Admin\Message.cshtml" />
+    <Content Include="Views\Admin\Messages.cshtml">
+      <SubType>Code</SubType>
+    </Content>
     <None Include="Views\Admin\Offer.cshtml" />
     <None Include="Views\Admin\Offers.cshtml" />
     <None Include="Views\Admin\_AddFlat.cshtml" />
     <None Include="Views\Admin\_AddHouse.cshtml" />
     <None Include="Views\Admin\_AddLand.cshtml" />
     <Content Include="Views\Home\Show.cshtml" />
+    <None Include="Views\Home\ConfirmMail.cshtml" />
     <None Include="Views\Home\ConfirmOffer.cshtml" />
+    <None Include="Views\Home\Contact.cshtml" />
     <None Include="Views\Home\NotFound.cshtml" />
     <Content Include="Views\Home\CreateOffer.cshtml" />
     <None Include="Views\Home\_ContactForm.cshtml" />

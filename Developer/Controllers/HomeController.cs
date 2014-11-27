@@ -106,6 +106,24 @@ namespace Developer.Controllers
             return View(createOffer);
         }
 
+        [HttpPost]
+        public ActionResult Contact(ContactEmail contactEmail)
+        {
+            if (ModelState.IsValid)
+            {
+                var mail = AutoMapper.Mapper.Map<Mail>(contactEmail);
+                _context.Mails.Add(mail);
+                _context.SaveChanges();
+                return View("ConfirmMail");
+            }
+            return View(contactEmail);
+        }
+
+        public ActionResult Contact()
+        {
+            return View(new ContactEmail());
+        }
+
         public ActionResult NotFound()
         {
             return View();

@@ -1,4 +1,5 @@
 ﻿@using System.Data.SqlTypes
+@using Developer.Models.ViewModels
 @model List<Developer.Models.EntityModels.Offer>
 
 <div class="row" style="margin-right: 15px">
@@ -25,17 +26,41 @@
                             <th>
                                 Miasto
                             </th>
+                            <th>
+
+                            </th>
                         </tr>
                     </thead>
                     <tbody>
                         @foreach (var ad in Model)
                         {
-                            <tr>
-                                <td>@ad.CreatedAt</td>
-                                <td>@ad.FullName</td>
-                                <td>@ad.Email</td>
-                                <td>@ad.AdType</td>
-                                <td>@ad.City</td>
+                            string clas;
+                            if (ad.Status == OfferStatus.New)
+                            {
+                                clas = "active";
+                            }
+                            else if (ad.Status == OfferStatus.Accepted)
+                            {
+                                clas = "success";
+                            }
+                            else
+                            {
+                                clas = "danger";
+                            }
+
+                            <tr class="@clas">
+                                <td style="vertical-align:middle">@ad.CreatedAt</td>
+                                <td style="vertical-align:middle">@ad.FullName</td>
+                                <td style="vertical-align:middle">@ad.Email</td>
+                                <td style="vertical-align:middle">@ad.AdType</td>
+                                <td style="vertical-align:middle">@ad.City</td>
+                                <td style="vertical-align: middle">
+                                    <a href="/Admin/Offer/@ad.Id">
+                                        <button class="btn btn-sm">
+                                            <span class="glyphicon glyphicon-search"></span>
+                                        </button>
+                                    </a>
+                                </td>
                             </tr>
                         }
                     </tbody>

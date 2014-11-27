@@ -101,7 +101,7 @@ namespace Developer.Controllers
                 var offer = AutoMapper.Mapper.Map<Offer>(createOffer);
                 _context.Offers.Add(offer);
                 _context.SaveChanges();
-                return View(new CreateOffer());
+                return View("ConfirmOffer", createOffer);
             }
             return View(createOffer);
         }

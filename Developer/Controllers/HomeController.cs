@@ -98,12 +98,12 @@ namespace Developer.Controllers
         {
             if (ModelState.IsValid)
             {
-                return View(createOffer);
+                var offer = AutoMapper.Mapper.Map<Offer>(createOffer);
+                _context.Offers.Add(offer);
+                _context.SaveChanges();
+                return View(new CreateOffer());
             }
-            else
-            {
-                return View(createOffer);
-            }
+            return View(createOffer);
         }
 
         public ActionResult NotFound()

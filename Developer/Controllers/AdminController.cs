@@ -312,7 +312,8 @@ namespace Developer.Controllers
 
         public ActionResult Offers()
         {
-            return View();
+            var offers = _applicationContext.Offers.ToList();
+            return View(offers);
         }
     }
 }

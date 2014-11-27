@@ -40,6 +40,8 @@ namespace Developer.App_Start
             Mapper.CreateMap<House, EditHouse>()
                 .ForMember(dest => dest.Worker, opts => opts.MapFrom(src => src.Worker.Id));
 
+            Mapper.CreateMap<CreateOffer, Offer>();
+
         }
     }
 }

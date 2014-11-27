@@ -174,7 +174,7 @@ namespace Developer.Controllers
         }
 
         [HttpGet]
-        public ActionResult AdList()
+        public ActionResult AdList(bool? changed, bool? hide)
         {
             var flats = AutoMapper.Mapper.Map<List<AdminAdvertToShow>>(_applicationContext.Flats);
             var houses = AutoMapper.Mapper.Map<List<AdminAdvertToShow>>(_applicationContext.Houses);
@@ -258,8 +258,61 @@ namespace Developer.Controllers
         public ActionResult EditLand(int id)
         {
             var land = Enumerable.FirstOrDefault(_applicationContext.Lands.Where(obj => obj.Id == id));
+            var landToEdit = AutoMapper.Mapper.Map<EditLand>(land);
+            ViewData["Workers"] = _applicationContext.Workers.ToList();
 
-            return View(land);
+            return View(landToEdit);
+        }
+
+        [HttpPost]
+        public ActionResult EditLand(EditLand editLand, int id)
+        {
+            editLand.Pictures = new List<Photo>();
+            if (ModelState.IsValid)
+            {
+                _updateAdvertService.UpdateLand(editLand, id);
+                return RedirectToAction("Show", "Home", new {id = id, AdType.Land});
+            }
+
+            var land = _applicationContext.Lands.Find(id);
+            if (land != null)
+            {
+                editLand.Pictures = land.Pictures;
+            }
+            ViewData["Workers"] = _applicationContext.Workers.ToList();
+            return View(editLand);
+        }
+
+        public ActionResult Hide(int id, AdType adtype)
+        {
+
+            bool visible;
+            if (adtype == AdType.Flat)
+            {
+                var advert = _applicationContext.Flats.Find(id);
+                advert.Visible = !advert.Visible;
+                visible = advert.Visible;
+            }
+            else if (adtype == AdType.House)
+            {
+                var advert = _applicationContext.Houses.Find(id);
+                advert.Visible = !advert.Visible;
+                visible = advert.Visible;
+            }
+            else
+            {
+                var advert = _applicationContext.Lands.Find(id);
+                advert.Visible = !advert.Visible;
+                visible = advert.Visible;
+            }
+            _applicationContext.SaveChanges();
+
+            return RedirectToAction("AdList", new{changed = true, hide = !visible});
+        }
+
+        public ActionResult Offers()
+        {
+            return View();
         }
     }
 }

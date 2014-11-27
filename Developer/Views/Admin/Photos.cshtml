@@ -44,9 +44,13 @@
                     {
                         <td><a href="/Home/Show?id=@photo.House.Id&adType=House">Dom</a></td>
                     }
-                    else
+                    else if (photo.Land != null)
                     {
                         <td><a href="/Home/Show?id=@photo.Land.Id&adType=Land">Działka</a></td>
+                    }
+                    else
+                    {
+                        <td>Brak odniesienia</td>
                     }
                     <td>@photo.CreatedAt.ToShortDateString()</td>
                     <td><img src="/Content/Photos/@photo.Link" style="width: 50px"/></td>

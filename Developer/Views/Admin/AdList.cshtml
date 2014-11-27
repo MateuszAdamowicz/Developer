@@ -1,8 +1,33 @@
-﻿@model System.Collections.Generic.IEnumerable<Developer.Models.ViewModels.AdminAdvertToShow>
+﻿@using System.Data.SqlTypes
+@model System.Collections.Generic.IEnumerable<Developer.Models.ViewModels.AdminAdvertToShow>
 
 <div class="row" style="margin-right: 15px">
     <div class="col-md-12 custom-left-panel" style="margin-left: 15px">
         @Html.Partial("AdminMenu")
+        @if (HttpContext.Current.Request.Params.Get("changed") == "True")
+        {
+            <div class="alert alert-dismissable alert-info" style="margin: 10px">
+                <button type="button" class="close" data-dismiss="alert">×</button>
+                @{
+            var hide = HttpContext.Current.Request.Params.Get("hide");
+            if (hide == "True")
+            {
+                <div>
+                    <strong>Ogłoszenie zostało ukryte!</strong><br />
+                    Od tej pory nie będzie widoczne na liście nieruchomości.
+                </div>
+            }
+            else
+            {
+                <div>
+                    <strong>Ogłoszenie zostało odkryte!</strong><br />
+                    Od tej pory będzie widoczne na liście nieruchomości.
+                </div>
+            }
+                }
+
+            </div>
+        }
         <h4>Lista nieruchomości</h4>
         <div class="row">
             <div class="col-md-12" style="font-size: small">
@@ -22,22 +47,33 @@
                                 Osoba prowadząca
                             </th>
                             <th></th>
+                            <th>Pokaż/Ukryj</th>
                         </tr>
                     </thead>
                     <tbody>
-                    @foreach (var ad in Model)
-                    {
-                        <tr>
-                            <td>@ad.AdType</td>
-                            <td>@ad.Title</td>
-                            <td>@ad.City</td>
-                            <td>@ad.Worker.FullName</td>
-                            <td style="text-align: center">
-                                @Html.ActionLink("Pokaż", "Show", "Home", new { id = ad.Id, adType = ad.AdType }, new { @class = "btn btn-success btn-xs" })
-                                @Html.ActionLink("Edytuj","EditAd","Admin", new {id = ad.Id, adType = ad.AdType}, new {@class = "btn btn-danger btn-xs"})
-                            </td>
-                        </tr>
-                    }
+                        @foreach (var ad in Model)
+                        {
+                            <tr style="@((!ad.Visible) ? "background-color: black; color:white" : "")">
+                                <td>@ad.AdType</td>
+                                <td>@ad.Title</td>
+                                <td>@ad.City</td>
+                                <td>@ad.Worker.FullName</td>
+                                <td style="text-align: center">
+                                    @Html.ActionLink("Info", "Show", "Home", new { id = ad.Id, adType = ad.AdType }, new { @class = "btn btn-success btn-xs" })
+                                    @Html.ActionLink("Edytuj", "EditAd", "Admin", new { id = ad.Id, adType = ad.AdType }, new { @class = "btn btn-danger btn-xs" })
+                                </td>
+                                <td style="text-align: center">
+                                    @if (ad.Visible)
+                                    {
+                                        @Html.ActionLink("Ukryj", "Hide", "Admin", new { id = ad.Id, adType = ad.AdType }, new { @class = "btn btn-default btn-xs" })
+                                    }
+                                    else
+                                    {
+                                        @Html.ActionLink("Pokaż", "Hide", "Admin", new { id = ad.Id, adType = ad.AdType }, new { @class = "btn btn-info btn-xs" })
+                                    }
+                                </td>
+                            </tr>
+                        }
                     </tbody>
                 </table>
             </div>

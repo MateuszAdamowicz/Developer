@@ -953,6 +953,7 @@
     <Compile Include="Migrations\DbInitializer.cs" />
     <Compile Include="Models\ApplicationModels\Result.cs" />
     <Compile Include="Models\ContactEmail.cs" />
+    <Compile Include="Models\EntityModels\Offer.cs" />
     <Compile Include="Models\EntityModels\Photo.cs" />
     <Compile Include="Models\ViewModels\AdminWorker.cs" />
     <Compile Include="Models\ViewModels\AdType.cs" />
@@ -977,6 +978,7 @@
     <Compile Include="Models\ViewModels\AdminFlat.cs" />
     <Compile Include="Models\ViewModels\AdminHouse.cs" />
     <Compile Include="Models\ViewModels\AdminLand.cs" />
+    <Compile Include="Models\ViewModels\CreateOffer.cs" />
     <Compile Include="Models\ViewModels\EditFlat.cs" />
     <Compile Include="Models\ViewModels\EditHouse.cs" />
     <Compile Include="Models\ViewModels\EditLand.cs" />
@@ -1039,11 +1041,13 @@
     <None Include="Views\Admin\EditHouse.cshtml" />
     <None Include="Views\Admin\EditLand.cshtml" />
     <Content Include="Views\Admin\Photos.cshtml" />
+    <None Include="Views\Admin\Offers.cshtml" />
     <None Include="Views\Admin\_AddFlat.cshtml" />
     <None Include="Views\Admin\_AddHouse.cshtml" />
     <None Include="Views\Admin\_AddLand.cshtml" />
     <Content Include="Views\Home\Show.cshtml" />
     <None Include="Views\Home\NotFound.cshtml" />
+    <Content Include="Views\Home\CreateOffer.cshtml" />
     <None Include="Views\Home\_ContactForm.cshtml" />
     <None Include="Views\Home\_ShowFlat.cshtml" />
     <None Include="Views\Home\_ShowHouse.cshtml" />

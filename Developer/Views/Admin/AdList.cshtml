@@ -1,0 +1,46 @@
+﻿@model System.Collections.Generic.IEnumerable<Developer.Models.ViewModels.AdminAdvertToShow>
+
+<div class="row" style="margin-right: 15px">
+    <div class="col-md-12 custom-left-panel" style="margin-left: 15px">
+        @Html.Partial("AdminMenu")
+        <h4>Lista nieruchomości</h4>
+        <div class="row">
+            <div class="col-md-12" style="font-size: small">
+                <table class="table table-striped">
+                    <thead>
+                        <tr>
+                            <th>
+                                Typ
+                            </th>
+                            <th>
+                                Tytuł
+                            </th>
+                            <th>
+                                Miasto
+                            </th>
+                            <th>
+                                Osoba prowadząca
+                            </th>
+                            <th></th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                    @foreach (var ad in Model)
+                    {
+                        <tr>
+                            <td>@ad.AdType</td>
+                            <td>@ad.Title</td>
+                            <td>@ad.City</td>
+                            <td>@ad.Worker.FullName</td>
+                            <td style="text-align: center">
+                                @Html.ActionLink("Pokaż", "Show", "Home", new { id = ad.Id, adType = ad.AdType }, new { @class = "btn btn-success btn-xs" })
+                                @Html.ActionLink("Edytuj","EditAd","Admin", new {id = ad.Id, adType = ad.AdType}, new {@class = "btn btn-danger btn-xs"})
+                            </td>
+                        </tr>
+                    }
+                    </tbody>
+                </table>
+            </div>
+        </div>
+    </div>
+</div>

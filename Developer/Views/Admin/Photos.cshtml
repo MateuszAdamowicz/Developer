@@ -1,0 +1,60 @@
+﻿@using Developer.Models.EntityModels
+@model List<Developer.Models.EntityModels.Photo>
+
+<div class="row" style="margin-right: 15px">
+    <div class="col-md-12 custom-left-panel" style="margin-left: 15px">
+        @Html.Partial("AdminMenu")
+        <h4>Lista zdjęć</h4>
+        <div class="row">
+            <div class="col-md-12" style="font-size: small">
+                Liczba zdjęć: @Model.Count
+                <ul>
+                    <li>
+                        Mieszkania: @Model.Count(x => x.AdType == AdType.Flat)
+                    </li> 
+                    <li>
+                        Domy: @Model.Count(x => x.AdType == AdType.House)
+                    </li> 
+                    <li>
+                        Działki: @Model.Count(x => x.AdType == AdType.Land)
+                    </li>
+                </ul>
+            </div>
+        </div>
+        <table class="table table-striped">
+            <thead>
+            <tr>
+                <th>Nazwa</th>
+                <th>Ogłoszenie</th>
+                <th>Data dodania</th>
+                <th>Miniatura</th>
+            </tr>
+
+            </thead>
+            <tbody>
+            @foreach (var photo in Model)
+            {
+                <tr>
+                    <td>@photo.Link</td>
+                    @if (photo.Flat != null)
+                    {
+                        <td><a href="/Home/Show?id=@photo.Flat.Id&adType=Flat">Mieszkanie</a></td>
+                    }
+                    else if (photo.House != null)
+                    {
+                        <td><a href="/Home/Show?id=@photo.House.Id&adType=House">Dom</a></td>
+                    }
+                    else
+                    {
+                        <td><a href="/Home/Show?id=@photo.Land.Id&adType=Land">Działka</a></td>
+                    }
+                    <td>@photo.CreatedAt.ToShortDateString()</td>
+                    <td><img src="/Content/Photos/@photo.Link" style="width: 50px"/></td>
+                </tr>
+            }
+            </tbody>
+        </table>
+    </div>
+</div>
+
+@*//Show?id=3&adType=Flat*@

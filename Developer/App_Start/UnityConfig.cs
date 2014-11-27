@@ -21,6 +21,7 @@ namespace Developer
             container.RegisterType<ITemplateService, TemplateService>();
             container.RegisterType<IEmailService, EmailService>();
             container.RegisterType<ITemplateServiceConfiguration, TemplateServiceConfiguration>();
+            container.RegisterType<IUpdateAdvertService, UpdateAdvertService>();
 
         }
     }

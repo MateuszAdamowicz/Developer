@@ -7,6 +7,7 @@ using AutoMapper;
 using Developer.Models.EntityModels;
 using Developer.Models.EntityModels.Interfaces;
 using Developer.Models.ViewModels;
+using RazorEngine.Configuration;
 
 namespace Developer.App_Start
 {
@@ -34,6 +35,11 @@ namespace Developer.App_Start
                 .ForMember(dest => dest.Picture, opts => opts.MapFrom(src => src.Pictures.FirstOrDefault()));
             Mapper.CreateMap<Land, ShowListLand>()
                 .ForMember(dest => dest.Picture, opts => opts.MapFrom(src => src.Pictures.FirstOrDefault()));
+
+            Mapper.CreateMap<Flat, EditFlat>().ForMember(dest => dest.Worker, opts => opts.MapFrom(src => src.Worker.Id));
+            Mapper.CreateMap<House, EditHouse>()
+                .ForMember(dest => dest.Worker, opts => opts.MapFrom(src => src.Worker.Id));
+
         }
     }
 }

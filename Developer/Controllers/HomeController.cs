@@ -24,7 +24,11 @@ namespace Developer.Controllers
 
         public ActionResult SendEmail(ContactEmail contactEmail)
         {
-            var result = _emailService.SendQuestion(contactEmail);
+            if (ModelState.IsValid)
+            {
+                var result = _emailService.SendQuestion(contactEmail);
+            }
+            
 
             return View("Index");
         }

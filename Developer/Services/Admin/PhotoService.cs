@@ -23,7 +23,6 @@ namespace Developer.Services.Admin
         {
             if (file != null && file.ContentLength > 0)
             {
-
                 var path = HttpContext.Current.Server.MapPath("~/Content/Photos/Workers/");
                 file.SaveAs(path + fileName + Path.GetExtension(file.FileName));
                 return new Result<string>(true, null, "", fileName + Path.GetExtension(file.FileName));

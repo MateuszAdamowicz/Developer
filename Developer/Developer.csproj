@@ -977,6 +977,9 @@
     <Compile Include="Models\ViewModels\AdminFlat.cs" />
     <Compile Include="Models\ViewModels\AdminHouse.cs" />
     <Compile Include="Models\ViewModels\AdminLand.cs" />
+    <Compile Include="Models\ViewModels\EditFlat.cs" />
+    <Compile Include="Models\ViewModels\EditHouse.cs" />
+    <Compile Include="Models\ViewModels\EditLand.cs" />
     <Compile Include="Models\ViewModels\Response.cs">
       <SubType>Code</SubType>
     </Compile>
@@ -993,8 +996,12 @@
     <Compile Include="Services\Admin\AddAdvertService.cs" />
     <Compile Include="Services\Admin\IAddAdvertService.cs" />
     <Compile Include="Services\Admin\IPhotoService.cs" />
+    <Compile Include="Services\Admin\IUpdateAdvertService.cs" />
     <Compile Include="Services\Admin\IWorkerService.cs" />
     <Compile Include="Services\Admin\PhotoService.cs" />
+    <Compile Include="Services\Admin\UpdateAdvertService.cs">
+      <SubType>Code</SubType>
+    </Compile>
     <Compile Include="Services\Admin\WorkerService.cs" />
     <Compile Include="Services\Home\EmailService\EmailService.cs" />
     <Compile Include="Services\Home\EmailService\IEmailService.cs" />
@@ -1024,12 +1031,14 @@
     <Content Include="Views\Admin\AddWorker.cshtml" />
     <Content Include="Views\Admin\EditWorker.cshtml" />
     <None Include="Services\Home\EmailService\Templates\QuestionEmailTemplate.cshtml" />
-    <None Include="Views\Admin\AdList.cshtml" />
-    <None Include="Views\Admin\AdminMenu.cshtml" />
-    <None Include="Views\Admin\EditFlat.cshtml" />
+    <Content Include="Views\Admin\AdList.cshtml" />
+    <Content Include="Views\Admin\AdminMenu.cshtml" />
+    <Content Include="Views\Admin\EditFlat.cshtml">
+      <SubType>Code</SubType>
+    </Content>
     <None Include="Views\Admin\EditHouse.cshtml" />
     <None Include="Views\Admin\EditLand.cshtml" />
-    <None Include="Views\Admin\Photos.cshtml" />
+    <Content Include="Views\Admin\Photos.cshtml" />
     <None Include="Views\Admin\_AddFlat.cshtml" />
     <None Include="Views\Admin\_AddHouse.cshtml" />
     <None Include="Views\Admin\_AddLand.cshtml" />

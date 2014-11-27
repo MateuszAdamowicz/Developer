@@ -15,13 +15,15 @@ namespace Developer.Controllers
         private readonly IApplicationContext _applicationContext;
         private readonly IAddAdvertService _addAdvertService;
         private readonly IWorkerService _workerService;
+        private readonly IUpdateAdvertService _updateAdvertService;
 
         // GET: Admin
-        public AdminController(IApplicationContext applicationContext, IAddAdvertService addAdvertService, IWorkerService workerService)
+        public AdminController(IApplicationContext applicationContext, IAddAdvertService addAdvertService, IWorkerService workerService, IUpdateAdvertService updateAdvertService)
         {
             _applicationContext = applicationContext;
             _addAdvertService = addAdvertService;
             _workerService = workerService;
+            _updateAdvertService = updateAdvertService;
         }
 
         public ActionResult Index()
@@ -172,7 +174,7 @@ namespace Developer.Controllers
         }
 
         [HttpGet]
-        public ActionResult AdList()
+        public ActionResult AdList(bool? changed, bool? hide)
         {
             var flats = AutoMapper.Mapper.Map<List<AdminAdvertToShow>>(_applicationContext.Flats);
             var houses = AutoMapper.Mapper.Map<List<AdminAdvertToShow>>(_applicationContext.Houses);
@@ -197,26 +199,120 @@ namespace Developer.Controllers
             }
         }
 
+        [HttpPost]
+        public ActionResult EditFlat(EditFlat editFlat, int id)
+        {
+            editFlat.Pictures = new List<Photo>();
+            if (ModelState.IsValid)
+            {
+                _updateAdvertService.UpdateFlat(editFlat, id);
+                return RedirectToAction("Show", "Home", new {id = id, AdType = AdType.Flat});
+            }
+
+            var flat = _applicationContext.Flats.Find(id);
+            if (flat != null)
+            {
+                editFlat.Pictures = flat.Pictures;
+            }
+            ViewData["Workers"] = _applicationContext.Workers.ToList();
+            return View(editFlat);
+        }
+
         public ActionResult EditFlat(int id)
         {
             var flat = Enumerable.FirstOrDefault(_applicationContext.Flats.Where(obj => obj.Id == id));
+            var flatToEdit = AutoMapper.Mapper.Map<EditFlat>(flat);
             ViewData["Workers"] = _applicationContext.Workers.ToList();
 
-            return View(flat);
+            return View(flatToEdit);
         }
 
+
+        [HttpPost]
+        public ActionResult EditHouse(EditHouse editHouse, int id)
+        {
+            editHouse.Pictures = new List<Photo>();
+            if (ModelState.IsValid)
+            {
+                _updateAdvertService.UpdateHouse(editHouse, id);
+                return RedirectToAction("Show", "Home", new {id = id, AdType = AdType.House});
+            }
+
+            var house = _applicationContext.Houses.Find(id);
+            if (house != null)
+            {
+                editHouse.Pictures = house.Pictures;
+            }
+            ViewData["Workers"] = _applicationContext.Workers.ToList();
+            return View(editHouse);
+        }
         public ActionResult EditHouse(int id)
         {
             var house = Enumerable.FirstOrDefault(_applicationContext.Houses.Where(obj => obj.Id == id));
+            var houseToEdit = AutoMapper.Mapper.Map<EditHouse>(house);
+            ViewData["Workers"] = _applicationContext.Workers.ToList();
 
-            return View(house);
+            return View(houseToEdit);
         }
 
         public ActionResult EditLand(int id)
         {
             var land = Enumerable.FirstOrDefault(_applicationContext.Lands.Where(obj => obj.Id == id));
+            var landToEdit = AutoMapper.Mapper.Map<EditLand>(land);
+            ViewData["Workers"] = _applicationContext.Workers.ToList();
 
-            return View(land);
+            return View(landToEdit);
+        }
+
+        [HttpPost]
+        public ActionResult EditLand(EditLand editLand, int id)
+        {
+            editLand.Pictures = new List<Photo>();
+            if (ModelState.IsValid)
+            {
+                _updateAdvertService.UpdateLand(editLand, id);
+                return RedirectToAction("Show", "Home", new {id = id, AdType.Land});
+            }
+
+            var land = _applicationContext.Lands.Find(id);
+            if (land != null)
+            {
+                editLand.Pictures = land.Pictures;
+            }
+            ViewData["Workers"] = _applicationContext.Workers.ToList();
+            return View(editLand);
+        }
+
+        public ActionResult Hide(int id, AdType adtype)
+        {
+
+            bool visible;
+            if (adtype == AdType.Flat)
+            {
+                var advert = _applicationContext.Flats.Find(id);
+                advert.Visible = !advert.Visible;
+                visible = advert.Visible;
+            }
+            else if (adtype == AdType.House)
+            {
+                var advert = _applicationContext.Houses.Find(id);
+                advert.Visible = !advert.Visible;
+                visible = advert.Visible;
+            }
+            else
+            {
+                var advert = _applicationContext.Lands.Find(id);
+                advert.Visible = !advert.Visible;
+                visible = advert.Visible;
+            }
+            _applicationContext.SaveChanges();
+
+            return RedirectToAction("AdList", new{changed = true, hide = !visible});
+        }
+
+        public ActionResult Offers()
+        {
+            return View();
         }
     }
 }

@@ -24,7 +24,11 @@ namespace Developer.Controllers
 
         public ActionResult SendEmail(ContactEmail contactEmail)
         {
-            var result = _emailService.SendQuestion(contactEmail);
+            if (ModelState.IsValid)
+            {
+                var result = _emailService.SendQuestion(contactEmail);
+            }
+            
 
             return View("Index");
         }
@@ -82,6 +86,24 @@ namespace Developer.Controllers
             }
 
             return View(showAdvert);
+        }
+
+        public ActionResult CreateOffer()
+        {
+            return View(new CreateOffer());
+        }
+
+        [HttpPost]
+        public ActionResult CreateOffer(CreateOffer createOffer)
+        {
+            if (ModelState.IsValid)
+            {
+                return View(createOffer);
+            }
+            else
+            {
+                return View(createOffer);
+            }
         }
 
         public ActionResult NotFound()

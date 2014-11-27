@@ -1,0 +1,46 @@
+﻿@using System.Data.SqlTypes
+@model List<Developer.Models.EntityModels.Offer>
+
+<div class="row" style="margin-right: 15px">
+    <div class="col-md-12 custom-left-panel" style="margin-left: 15px">
+        @Html.Partial("AdminMenu")
+        <h4>Lista ofert</h4>
+        <div class="row">
+            <div class="col-md-12" style="font-size: small">
+                <table class="table table-striped">
+                    <thead>
+                        <tr>
+                            <th>
+                                Data dodania
+                            </th>
+                            <th>
+                                Imię i nazwisko
+                            </th>
+                            <th>
+                                Email
+                            </th>
+                            <th>
+                                Rodzaj nieruchomości
+                            </th>
+                            <th>
+                                Miasto
+                            </th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        @foreach (var ad in Model)
+                        {
+                            <tr>
+                                <td>@ad.CreatedAt</td>
+                                <td>@ad.FullName</td>
+                                <td>@ad.Email</td>
+                                <td>@ad.AdType</td>
+                                <td>@ad.City</td>
+                            </tr>
+                        }
+                    </tbody>
+                </table>
+            </div>
+        </div>
+    </div>
+</div>

@@ -189,14 +189,11 @@ namespace Developer.Controllers
             {
                 return RedirectToAction("EditFlat", new {id = id});
             }
-            else if (adtype == AdType.House)
+            if (adtype == AdType.House)
             {
                 return RedirectToAction("EditHouse", new {id = id});
             }
-            else
-            {
-                return RedirectToAction("EditLand", new {id = id});
-            }
+            return RedirectToAction("EditLand", new {id = id});
         }
 
         [HttpPost]
@@ -312,7 +309,40 @@ namespace Developer.Controllers
 
         public ActionResult Offers()
         {
-            return View();
+            var offers = _applicationContext.Offers.ToList();
+            return View(offers);
+        }
+
+        public ActionResult Offer(int id, OfferStatus? status)
+        {
+            var offer = _applicationContext.Offers.Find(id);
+            if (offer != null)
+            {
+                if (status != null)
+                {
+                    offer.Status = (OfferStatus)status;
+                    _applicationContext.SaveChanges();
+                    return RedirectToAction("Offers");
+                }
+                return View(offer);
+            }
+            return RedirectToAction("Offers");
+        }
+
+        public ActionResult Messages()
+        {
+            var msgList = _applicationContext.Mails.ToList();
+            return View(msgList);
+        }
+
+        public ActionResult Message(int id)
+        {
+            var msg = _applicationContext.Mails.Find(id);
+            if (msg != null)
+            {
+                return View(msg);
+            }
+            return RedirectToAction("Messages");
         }
     }
 }

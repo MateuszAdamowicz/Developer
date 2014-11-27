@@ -98,12 +98,30 @@ namespace Developer.Controllers
         {
             if (ModelState.IsValid)
             {
-                return View(createOffer);
+                var offer = AutoMapper.Mapper.Map<Offer>(createOffer);
+                _context.Offers.Add(offer);
+                _context.SaveChanges();
+                return View("ConfirmOffer", createOffer);
             }
-            else
+            return View(createOffer);
+        }
+
+        [HttpPost]
+        public ActionResult Contact(ContactEmail contactEmail)
+        {
+            if (ModelState.IsValid)
             {
-                return View(createOffer);
+                var mail = AutoMapper.Mapper.Map<Mail>(contactEmail);
+                _context.Mails.Add(mail);
+                _context.SaveChanges();
+                return View("ConfirmMail");
             }
+            return View(contactEmail);
+        }
+
+        public ActionResult Contact()
+        {
+            return View(new ContactEmail());
         }
 
         public ActionResult NotFound()

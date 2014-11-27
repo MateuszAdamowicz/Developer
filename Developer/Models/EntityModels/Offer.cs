@@ -1,4 +1,6 @@
-﻿namespace Developer.Models.EntityModels
+﻿using Developer.Models.ViewModels;
+
+namespace Developer.Models.EntityModels
 {
     public class Offer: Base
     {
@@ -10,6 +12,7 @@
         public string City { get; set; }
         public string Location { get; set; }
         public string Description { get; set; }
+        public OfferStatus Status { get; set; }
 
     }
 }

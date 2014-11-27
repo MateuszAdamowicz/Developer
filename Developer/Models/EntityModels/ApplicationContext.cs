@@ -13,6 +13,7 @@ namespace Developer.Models.EntityModels
         public IDbSet<Land> Lands { get; set; }
         public IDbSet<Photo> Photos { get; set; }
         public IDbSet<Offer> Offers { get; set; }
+        public IDbSet<Mail> Mails { get; set; }
         
 
         public ApplicationContext() : base()

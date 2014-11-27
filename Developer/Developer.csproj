@@ -977,6 +977,7 @@
     <Compile Include="Models\ViewModels\AdminFlat.cs" />
     <Compile Include="Models\ViewModels\AdminHouse.cs" />
     <Compile Include="Models\ViewModels\AdminLand.cs" />
+    <Compile Include="Models\ViewModels\ShowListPhoto.cs" />
     <Compile Include="Models\ViewModels\Response.cs">
       <SubType>Code</SubType>
     </Compile>
@@ -1025,7 +1026,7 @@
     <Content Include="Views\Admin\EditWorker.cshtml" />
     <None Include="Services\Home\EmailService\Templates\QuestionEmailTemplate.cshtml" />
     <None Include="Views\Admin\AdList.cshtml" />
-    <None Include="Views\Admin\AdminMenu.cshtml" />
+    <Content Include="Views\Admin\AdminMenu.cshtml" />
     <None Include="Views\Admin\EditFlat.cshtml" />
     <None Include="Views\Admin\EditHouse.cshtml" />
     <None Include="Views\Admin\EditLand.cshtml" />

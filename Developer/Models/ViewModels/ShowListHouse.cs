@@ -6,6 +6,7 @@ namespace Developer.Models.ViewModels
 {
     public class ShowListHouse
     {
+        public int Id { get; set; }
         public string UsableArea { get; set; }
         public string Location { get; set; }
         public string Price { get; set; }

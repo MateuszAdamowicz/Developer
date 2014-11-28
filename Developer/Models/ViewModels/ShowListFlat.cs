@@ -6,6 +6,7 @@ namespace Developer.Models.ViewModels
 {
     public class ShowListFlat
     {
+        public int Id { get; set; }
         public string Area { get; set; }
         public string Location { get; set; }
         public string Price { get; set; }

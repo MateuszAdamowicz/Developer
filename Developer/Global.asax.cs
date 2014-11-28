@@ -23,7 +23,6 @@ namespace Developer
             Bootstrapper.Initialise();
             
             //Database.SetInitializer(new DropCreateDatabaseAlways<ApplicationContext>());
-            
             Database.SetInitializer(new MigrateDatabaseToLatestVersion<ApplicationContext, Configuration>());
             MapperConfig.Register();
             BundleConfig.RegisterBundles(BundleTable.Bundles);

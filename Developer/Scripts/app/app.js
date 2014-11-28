@@ -133,7 +133,7 @@ searcher.controller('SearcherController', function ($scope, $resource) {
         }
     };
     $scope.currentPage = 1;
-    $scope.pageSize = 2;
+    $scope.pageSize = 10;
 
 });
 

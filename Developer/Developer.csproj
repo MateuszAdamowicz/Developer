@@ -951,6 +951,10 @@
     <Compile Include="Migrations\201411260711067_init.Designer.cs">
       <DependentUpon>201411260711067_init.cs</DependentUpon>
     </Compile>
+    <Compile Include="Migrations\201411280726465_init1.cs" />
+    <Compile Include="Migrations\201411280726465_init1.Designer.cs">
+      <DependentUpon>201411280726465_init1.cs</DependentUpon>
+    </Compile>
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Migrations\DbInitializer.cs" />
     <Compile Include="Models\ApplicationModels\Result.cs" />
@@ -1012,6 +1016,7 @@
     <Compile Include="Services\Admin\WorkerService.cs" />
     <Compile Include="Services\Home\EmailService\EmailService.cs" />
     <Compile Include="Services\Home\EmailService\IEmailService.cs" />
+    <Compile Include="Services\SeedService.cs" />
   </ItemGroup>
   <ItemGroup>
     <Content Include="Views\web.config" />
@@ -1083,6 +1088,9 @@
   <ItemGroup>
     <EmbeddedResource Include="Migrations\201411260711067_init.resx">
       <DependentUpon>201411260711067_init.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201411280726465_init1.resx">
+      <DependentUpon>201411280726465_init1.cs</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
   <PropertyGroup>

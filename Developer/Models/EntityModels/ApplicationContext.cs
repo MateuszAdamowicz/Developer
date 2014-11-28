@@ -21,6 +21,8 @@ namespace Developer.Models.EntityModels
             
         }
 
+        
+
         public new void SaveChanges()
         {
             base.SaveChanges();

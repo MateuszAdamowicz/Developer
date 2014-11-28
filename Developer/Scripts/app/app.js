@@ -49,29 +49,24 @@ searcher.controller('SearcherController', function ($scope, $resource) {
     $scope.myoffertType = null;
 
     $scope.loadResources = function (myProperty) {
-
         if (myProperty === 'flat') {
+            
             $scope.mySort = null;
                 var flatResource = $resource('/api/offertsapi/getflats', {}, {});
                 $scope.flatList = [];
 
                 flatResource.query(function(data) {
-                    $scope.flatList = [];
-                    angular.forEach(data, function(userData) {
-                        $scope.flatList.push(userData);
-                    });
+                    $scope.flatList = data;
                 });
-            }
+            
+        }
         else if (myProperty === 'land') {
             $scope.mySort = null;
                 var landResource = $resource('/api/offertsapi/getlands', {}, {});
                 $scope.landList = [];
 
                 landResource.query(function(data) {
-                    $scope.landList = [];
-                    angular.forEach(data, function(userData) {
-                        $scope.landList.push(userData);
-                    });
+                    $scope.landList = data;
                 });
             }
         else if (myProperty === 'house') {
@@ -80,12 +75,9 @@ searcher.controller('SearcherController', function ($scope, $resource) {
                 $scope.houseList = [];
 
                 houseResource.query(function(data) {
-                    $scope.houseList = [];
-                    angular.forEach(data, function(userData) {
-                        $scope.houseList.push(userData);
-                    });
+                    $scope.houseList = data;
                 });
-            }
+        }
     };
 
     $scope.myhouseCity = null;

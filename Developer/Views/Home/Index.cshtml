@@ -17,9 +17,15 @@
                 <option style="display: none" value="">Wybierz rodzaj</option>
             </select>
         </div>
-        <div class="col-md-6" ng-hide="myProperty.value =='land'">
+        <div class="col-md-6" ng-show="myProperty.value =='house'">
             <small>Typ oferty :</small>
-            <select class="form-control input-sm" ng-model="myoffertType" ng-options="offert.name for offert in offertType">
+            <select class="form-control input-sm" ng-model="myoffertTypeHouse" ng-options="offert.ToLet as boolToStr(offert.ToLet) for offert in houseList|filter:{UsableArea:myhouseUsableArea||undefined}|filter:{City:myhouseCity||undefined}|filter:{Price:myhousePrice||undefined}|unique:'ToLet'">
+                <option style="display: none" value="">Wybierz rodzaj</option>
+            </select>
+        </div>
+        <div class="col-md-6" ng-show="myProperty.value =='flat'">
+            <small>Typ oferty :</small>
+            <select class="form-control input-sm" ng-model="myoffertTypeFlat" ng-options="offert.ToLet as boolToStr(offert.ToLet) for offert in flatList|filter:{Rooms:myflatRoom||undefined}|filter:{Price:myflatPrice||undefined}|filter:{City:myflatCity||undefined}|unique:'ToLet'">
                 <option style="display: none" value="">Wybierz rodzaj</option>
             </select>
         </div>
@@ -28,19 +34,19 @@
     <div class="row" style="margin-top: 25px" ng-show="myProperty.value =='house'">
         <div class="col-md-4">
             <small>Miejscowość:</small>
-            <select class="form-control input-sm" ng-model="myhouseCity" ng-options="city.City for city in houseList">
+            <select class="form-control input-sm" ng-model="myhouseCity" ng-options="city.City as city.City for city in houseList|filter:{ToLet:myoffertTypeHouse||undefined}|filter:{UsableArea:myhouseUsableArea||undefined}|filter:{Price:myhousePrice||undefined}|unique:'City'">
                 <option value="">Wszystkie</option>
             </select>
         </div>
         <div class="col-md-4">
-            <small>Ilość pokoi:</small>
-            <select class="form-control input-sm" ng-model="myhouseUsableArea" ng-options="usablearea.UsableArea for usablearea in houseList">
+            <small>Powierzchnia użytkowa:</small>
+            <select class="form-control input-sm" ng-model="myhouseUsableArea" ng-options="usablearea.UsableArea as usablearea.UsableArea for usablearea in houseList|filter:{ToLet:myoffertTypeHouse||undefined}|filter:{Price:myhousePrice||undefined}|filter:{City:myhouseCity||undefined}|unique:'UsableArea'">
                 <option value="">Wszystkie powierzchnie</option>
             </select>
         </div>
         <div class="col-md-4">
             <small>Cena:</small>
-            <select class="form-control input-sm" ng-model="myhousePrice" ng-options="price.Price for price in houseList|unique:'Price'">
+            <select class="form-control input-sm" ng-model="myhousePrice" ng-options="price.Price as price.Price for price in houseList|filter:{ToLet:myoffertTypeHouse||undefined}|filter:{UsableArea:myhouseUsableArea||undefined}|filter:{City:myhouseCity||undefined}|unique:'Price'">
                 <option value="">Każda cena</option>
             </select>
         </div>
@@ -59,19 +65,19 @@
     <div class="row" style="margin-top: 25px" ng-show="myProperty.value =='flat'">
         <div class="col-md-4">
             <small>Miejscowość:</small>
-            <select class="form-control input-sm" ng-model="myflatCity" ng-options="city.City for city in flatList|unique:'City'|filter:{ToLet:myoffertType.value}|filter:{Rooms:myflatRoom.Rooms}|filter:{Price:myflatPrice.Price}">
-                <option value="">Wszystkie</option>
+            <select class="form-control input-sm" ng-model="myflatCity" ng-options="city.City as city.City for city in flatList|filter:{ToLet:myoffertTypeFlat||undefined}|filter:{Rooms:myflatRoom||undefined}|filter:{Price:myflatPrice||undefined}|unique:'City'">
+                <option ng-model="myflatCity" value="">Wszystkie</option>
             </select>
         </div>
         <div class="col-md-4">
             <small>Ilość pokoi:</small>
-            <select class="form-control input-sm" ng-model="myflatRoom" ng-options="room.Rooms for room in flatList|unique:'Rooms'|filter:{City:myflatCity.City}|filter:{ToLet:myoffertType.value}|filter:{Price:myflatPrice.Price}">
+            <select class="form-control input-sm" ng-model="myflatRoom" ng-options="room.Rooms as room.Rooms for room in flatList|filter:{City:myflatCity||undefined}|filter:{ToLet:myoffertTypeFlat||endefined}|filter:{Price:myflatPrice||undefined}|unique:'Rooms'">
                 <option value="">Każda ilość</option>
             </select>
         </div>
         <div class="col-md-4">
             <small>Cena:</small>
-            <select class="form-control input-sm" ng-model="myflatPrice" ng-options="price.Price for price in flatList|unique:'Price'|filter:{City:myflatCity.City}|filter:{ToLet:myoffertType.value}|filter:{Rooms:myflatRoom.Rooms}">
+            <select class="form-control input-sm" ng-model="myflatPrice" ng-options="price.Price as price.Price for price in flatList|filter:{City:myflatCity||undefined}|filter:{ToLet:myoffertTypeFlat||undefined}|filter:{Rooms:myflatRoom||undefined}|unique:'Price'">
                 <option value="">Każda cena</option>
             </select>
         </div>
@@ -90,19 +96,19 @@
     <div class="row" style="margin-top: 25px" ng-show="myProperty.value =='land'">
         <div class="col-md-4">
             <small>Miejscowość:</small>
-            <select class="form-control input-sm" ng-model="mylandCity" ng-options="city.City for city in landList|unique:'City'|filter:{Area:mylandArea.Area}|filter:{Price:mylandPrice.Price}">
+            <select class="form-control input-sm" ng-model="mylandCity" ng-options="city.City as city.City for city in landList|filter:{Area:mylandArea||undefined}|filter:{Price:mylandPrice||undefined}|unique:'City'">
                 <option value="">Wszystkie</option>
             </select>
         </div>
         <div class="col-md-4">
-            <small>Powierzchnia:</small>
-            <select class="form-control input-sm" ng-model="mylandArea" ng-options="area.Area for area in landList|unique:'Area'|filter:mylandCity.City|filter:{Price:mylandPrice.Price}">
+             <small>Powierzchnia:</small>
+            <select class="form-control input-sm" ng-model="mylandArea" ng-options="area.Area as area.Area for area in landList|filter:{City:mylandCity||undefined}|filter:{Price:mylandPrice||undefined}|unique:'Area'">
                 <option value="">Wszystkie powierzchnie</option>
             </select>
         </div>
         <div class="col-md-4">
             <small>Cena:</small>
-            <select class="form-control input-sm" ng-model="mylandPrice" ng-options="price.Price for price in landList|unique:'Price'|filter:mylandCity.City|filter:{Area:mylandArea.Area}">
+            <select class="form-control input-sm" ng-model="mylandPrice" ng-options="price.Price as price.Price for price in landList|filter:{City:mylandCity||undefined}|filter:{Area:mylandArea||undefined}|unique:'Price'">
                 <option style="display: none" value="">Każda cena</option>
             </select>
         </div>
@@ -118,7 +124,7 @@
         </div>
     </div>
 </div>
-    <div class="col-md-12" style="margin-left: 15px; padding-left: 0px" hidden id="spinner">
+    <div class="col-md-12" style="margin-left: 15px; padding-left: 0px; display:none" id="spinner">
         <div class="spinner">
             <div class="dot1"></div>
             <div class="dot2"></div>
@@ -128,7 +134,7 @@
 @* LIST FLATS*@
     <div ng-show="myProperty.value =='flat'">
         <ul style="padding-left: 0px;">
-            <li dir-paginate="flat in filteredflatList = (flatList|filter:{City:myflatCity.City}|filter:{ToLet:myoffertType.value}|filter:{Rooms:myflatRoom.Rooms}|filter:{Price:myflatPrice.Price}|orderBy:mySort.value:mySort.reverse)|itemsPerPage: pageSize:'flat'" current-page="currentPage" pagination-id="flat">
+            <li dir-paginate="flat in filteredflatList = (flatList|filter:{City:myflatCity||undefined}|filter:{ToLet:myoffertTypeFlat||undefined}|filter:{Rooms:myflatRoom||undefined}|filter:{Price:myflatPrice||undefined}|orderBy:mySort.value:mySort.reverse)|itemsPerPage: pageSize:'flat'" current-page="currentPage" pagination-id="flat">
                 <div class="col-md-12 custom-left-panel" style="margin-left: 15px; padding-left: 0px; border: 2px solid rgb(255, 227, 176); background-color: rgb(255, 245, 227)">
                     <div class="col-md-3">
                         <img ng-show="flat.Picture != null" ng-src="/Content/Photos/{{flat.Picture.Link}}" style="width: 100%"/>
@@ -154,14 +160,11 @@
                     </div>
                 </div>
             </li>
-            @*<li ng-show="!filteredflatList.length">
-                <div class="col-md-12" style="margin-left: 15px; padding-left: 0px" hidden>
-                    <div class="spinner">
-                        <div class="dot1"></div>
-                        <div class="dot2"></div>
-                    </div>
-                </div> 
-            </li>*@
+            <li ng-show="!filteredflatList.length">
+                <div class="col-md-12 custom-left-panel" style="margin-left: 15px; border: 2px solid rgb(255, 227, 176); background-color: rgb(255, 245, 227)">
+                    <p style="font-weight: bold">Brak wyników</p>
+                </div>
+            </li>
         </ul>
         <div class="text-center">
             <dir-pagination-controls pagination-id="flat" boundary-links="true" on-page-change="pageChangeHandler(newPageNumber)" template-url="/Scripts/app/dirPagination.tpl.html"></dir-pagination-controls>
@@ -170,7 +173,7 @@
     @* LIST HOUSES*@
     <div ng-show="myProperty.value =='house'">
         <ul style="padding-left: 0px;">
-            <li dir-paginate="house in filteredhouseList = (houseList|filter:{City:myhouseCity.City}|filter:{ToLet:myofferType.value}|filter:{UsableArea:myhouseUsableArea.UsableArea}|filter:{Price:myhousePrice.Price}|orderBy:mySort.value:mySort.reverse)|itemsPerPage: pageSize:'house'" current-page="currentPage" pagination-id="house">
+            <li dir-paginate="house in filteredhouseList = (houseList|filter:{City:myhouseCity||undefined}|filter:{ToLet:myoffertTypeHouse||undefined}|filter:{UsableArea:myhouseUsableArea||undefined}|filter:{Price:myhousePrice||undefined}|orderBy:mySort.value:mySort.reverse)|itemsPerPage: pageSize:'house'" current-page="currentPage" pagination-id="house">
                 <div class="col-md-12 custom-left-panel" style="margin-left: 15px; padding-left: 0px; border: 2px solid rgb(255, 227, 176); background-color: rgb(255, 245, 227)">
                     <div class="col-md-3">
                         <img ng-show="house.Picture != null" ng-src="/Content/Photos/{{house.Picture.Link}}" style="width: 100%"/>
@@ -209,7 +212,7 @@
     @* LIST LAND*@
     <div ng-show="myProperty.value =='land'">
         <ul style="padding-left: 0px;">
-            <li dir-paginate="land in filteredlandList =(landList|filter:mylandCity.City|filter:{Area:mylandArea.Area}|filter:{Price:mylandPrice.Price}|orderBy:mySort.value:mySort.reverse)|itemsPerPage: pageSize:'land'" current-page="currentPage" pagination-id="land">
+            <li dir-paginate="land in filteredlandList = (landList|filter:{City:mylandCity||undefined}|filter:{Area:mylandArea||undefined}|filter:{Price:mylandPrice||undefined}|orderBy:mySort.value:mySort.reverse)|itemsPerPage: pageSize:'land'" current-page="currentPage" pagination-id="land">
                 <div class="col-md-12 custom-left-panel" style="margin-left: 15px; padding-left: 0px; border: 2px solid rgb(255, 227, 176); background-color: rgb(255, 245, 227)">
                     <div class="col-md-3">
                         <img ng-show="land.Picture != null" ng-src="/Content/Photos/{{land.Picture.Link}}" style="width: 100%"/>

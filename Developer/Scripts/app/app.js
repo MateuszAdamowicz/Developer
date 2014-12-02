@@ -17,6 +17,29 @@
 
 var searcher = angular.module('searcher', ['ngRoute', 'ngResource','angularUtils.directives.dirPagination']);
 
+//searcher.config('$httpProvider', function ($httpProvider) {
+//    $httpProvider.responseInterceptors.push('myHttpInterceptor');
+
+//    var spinnerFunction = function spinnerFunction(data, headersGetter) {
+//        $("#spinner").show();
+//        return data;
+//    };
+
+//    $httpProvider.defaults.transformRequest.push(spinnerFunction);
+//});
+
+//searcher.factory('myHttpInterceptor', function ($q, $window) {
+//    return function (promise) {
+//        return promise.then(function (response) {
+//            $("#spinner").hide();
+//            return response;
+//        }, function (response) {
+//            $("#spinner").hide();
+//            return $q.reject(response);
+//        });
+//    };
+//});
+
 searcher.filter('unique', function () {
     return function (input, key) {
         if (typeof input !== "undefined") {
@@ -42,11 +65,9 @@ searcher.controller('SearcherController', function ($scope, $resource) {
     ];
     $scope.myProperty = null;
 
-    $scope.offertType = [
-    { name: 'Wynajem', value: 'true' },
-    { name: 'Sprzedaż', value: 'false' }
-    ];
-    $scope.myoffertType = null;
+    $scope.myoffertTypeHouse = null;
+    $scope.myoffertTypeFlat = null;
+    $scope.boolToStr = function (arg) { return arg ? 'Wynajem' : 'Sprzedaż' };
 
     $scope.loadResources = function (myProperty) {
         if (myProperty === 'flat') {
@@ -103,6 +124,8 @@ searcher.controller('SearcherController', function ($scope, $resource) {
 
     $scope.clearFilters = function (myProperty) {
         if (myProperty === 'flat') {
+            $scope.myoffertTypeHouse = null;
+            $scope.myoffertTypeFlat = null;
             $scope.myflatCity = null;
             $scope.myflatRoom = null;
             $scope.myflatPrice = null;
@@ -117,6 +140,8 @@ searcher.controller('SearcherController', function ($scope, $resource) {
             $scope.mySort = null;
         }
         else if (myProperty === 'house') {
+            $scope.myoffertTypeHouse = null;
+            $scope.myoffertTypeFlat = null;
             $scope.myhouseCity = null;
             $scope.myhouseUsableArea = null;
             $scope.myhousePrice = null;
@@ -125,7 +150,7 @@ searcher.controller('SearcherController', function ($scope, $resource) {
         }
     };
     $scope.currentPage = 1;
-    $scope.pageSize = 10;
+    $scope.pageSize = 5;
 
 });
 

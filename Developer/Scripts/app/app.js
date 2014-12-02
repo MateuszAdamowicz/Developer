@@ -15,30 +15,29 @@
 //        });
 //    }]);
 
-var searcher = angular.module('searcher', ['ngRoute', 'ngResource','angularUtils.directives.dirPagination']);
+var searcher = angular.module('searcher', ['ngResource', 'angularUtils.directives.dirPagination']);
 
-//searcher.config('$httpProvider', function ($httpProvider) {
-//    $httpProvider.responseInterceptors.push('myHttpInterceptor');
 
-//    var spinnerFunction = function spinnerFunction(data, headersGetter) {
-//        $("#spinner").show();
-//        return data;
-//    };
+searcher.config(function ($httpProvider) {
+    $httpProvider.interceptors.push('myHttpInterceptor');
 
-//    $httpProvider.defaults.transformRequest.push(spinnerFunction);
-//});
+    var spinnerFunction = function spinnerFunction(data) {
+        $("#spinner").show();
+        return data;
+    };
 
-//searcher.factory('myHttpInterceptor', function ($q, $window) {
-//    return function (promise) {
-//        return promise.then(function (response) {
-//            $("#spinner").hide();
-//            return response;
-//        }, function (response) {
-//            $("#spinner").hide();
-//            return $q.reject(response);
-//        });
-//    };
-//});
+    $httpProvider.defaults.transformRequest.push(spinnerFunction);
+});
+
+searcher.factory('myHttpInterceptor', function ($q, $window) {
+    return{
+        'response':
+            function(response) {
+                $("#spinner").hide();
+                return response;
+        }
+    };
+});
 
 searcher.filter('unique', function () {
     return function (input, key) {

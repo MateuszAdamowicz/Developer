@@ -101,7 +101,7 @@
             </select>
         </div>
         <div class="col-md-4">
-             <small>Powierzchnia:</small>
+            <small>Powierzchnia:</small>
             <select class="form-control input-sm" ng-model="mylandArea" ng-options="area.Area as area.Area for area in landList|filter:{City:mylandCity||undefined}|filter:{Price:mylandPrice||undefined}|unique:'Area'">
                 <option value="">Wszystkie powierzchnie</option>
             </select>
@@ -124,7 +124,8 @@
         </div>
     </div>
 </div>
-    <div class="col-md-12" style="margin-left: 15px; padding-left: 0px; display:none" id="spinner">
+
+    <div  id="spinner" class="col-md-12" style="margin-left: 15px; padding-left: 0px;">
         <div class="spinner">
             <div class="dot1"></div>
             <div class="dot2"></div>
@@ -160,11 +161,11 @@
                     </div>
                 </div>
             </li>
-            <li ng-show="!filteredflatList.length">
+@*            <li ng-show="!filteredflatList.length">
                 <div class="col-md-12 custom-left-panel" style="margin-left: 15px; border: 2px solid rgb(255, 227, 176); background-color: rgb(255, 245, 227)">
                     <p style="font-weight: bold">Brak wyników</p>
                 </div>
-            </li>
+            </li>*@
         </ul>
         <div class="text-center">
             <dir-pagination-controls pagination-id="flat" boundary-links="true" on-page-change="pageChangeHandler(newPageNumber)" template-url="/Scripts/app/dirPagination.tpl.html"></dir-pagination-controls>
@@ -199,11 +200,11 @@
                     </div>
                 </div>
             </li>
-            <li ng-show="!filteredhouseList.length">
+@*            <li ng-show="!filteredhouseList.length">
                 <div class="col-md-12 custom-left-panel" style="margin-left: 15px; border: 2px solid rgb(255, 227, 176); background-color: rgb(255, 245, 227)">
                     <p style="font-weight: bold">Brak wyników</p>
                 </div>
-            </li>
+            </li>*@
         </ul>
         <div class="text-center">
             <dir-pagination-controls pagination-id="house" boundary-links="true" on-page-change="pageChangeHandler(newPageNumber)" template-url="/Scripts/app/dirPagination.tpl.html"></dir-pagination-controls>
@@ -238,11 +239,11 @@
                     </div>
                 </div>
             </li>
-            <li ng-show="!filteredlandList.length">
+@*            <li ng-show="!filteredlandList.length">
                 <div class="col-md-12 custom-left-panel" style="margin-left: 15px; border: 2px solid rgb(255, 227, 176); background-color: rgb(255, 245, 227)">
                     <p style="font-weight: bold">Brak wyników</p>
                 </div>
-            </li>
+            </li>*@
         </ul>
         <div class="text-center">
             <dir-pagination-controls pagination-id="land" boundary-links="true" on-page-change="pageChangeHandler(newPageNumber)" template-url="/Scripts/app/dirPagination.tpl.html"></dir-pagination-controls>

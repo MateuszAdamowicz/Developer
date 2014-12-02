@@ -132,8 +132,8 @@
                                     </div>
                                 </div>
                             </div>
-                            <div class="col-md-6" style="border-left: 1px solid #f39c12">
-                                @Html.Partial("_ContactForm", new ContactEmail())
+                            <div class="col-md-6" style="border-left: 1px solid #f39c12" id="contactForm">
+                                @{ Html.RenderPartial("_ContactForm", new ContactEmail()); }
                             </div>
                         </div>
                     </div>

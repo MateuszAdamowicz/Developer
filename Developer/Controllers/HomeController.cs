@@ -22,13 +22,66 @@ namespace Developer.Controllers
             _emailService = emailService;
         }
 
+        public ActionResult About()
+        {
+            return View();
+        }
+
+        public ActionResult Credits()
+        {
+            return View();
+        }
+
+        public ActionResult Search(string key)
+        {
+
+            int idParsed;
+            var id = key.Substring(0, key.Count() - 1);
+            Int32.TryParse(id, out idParsed);
+
+            var type = key.Substring(key.Count() - 1,1);
+            AdType typeParsed = AdType.Flat;
+
+            if (type == "f")
+            {
+                typeParsed = AdType.Flat;
+            }
+            else if (type == "h")
+            {
+                typeParsed = AdType.House;
+            }
+            else if (type == "l")
+            {
+                typeParsed = AdType.Land;
+            }
+            else
+            {
+                idParsed = 0;
+            }
+
+            if (idParsed != 0)
+            {
+                return RedirectToAction("Show", new {id = idParsed, adType = typeParsed});
+            }
+
+            return RedirectToAction("NotFound");
+        }
+
+        public ActionResult Where()
+        {
+            return View();
+        }
+
         public ActionResult SendEmail(ContactEmail contactEmail)
         {
             if (ModelState.IsValid)
             {
                 var result = _emailService.SendQuestion(contactEmail);
             }
-            
+            else
+            {
+                return View("_ContactForm", contactEmail);
+            }
 
             return View("Index");
         }

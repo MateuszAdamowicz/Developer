@@ -2,6 +2,7 @@
 using System.IO;
 using Developer.Models;
 using Developer.Models.ApplicationModels;
+using Developer.Models.ViewModels;
 using RazorEngine.Templating;
 
 namespace Developer.Services.Home

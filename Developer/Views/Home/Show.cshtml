@@ -17,6 +17,6 @@ else if (Model.AdType == AdType.House)
 }
 else if (Model.AdType == AdType.Land)
 {
-    @Html.Partial("_ShowLand")
+    @Html.Partial("_ShowLand", Model.Land)
 }
 

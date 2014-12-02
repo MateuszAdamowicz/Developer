@@ -180,7 +180,8 @@ namespace Developer.Controllers
             var houses = AutoMapper.Mapper.Map<List<AdminAdvertToShow>>(_applicationContext.Houses);
             var lands = AutoMapper.Mapper.Map<List<AdminAdvertToShow>>(_applicationContext.Lands);
 
-            return View(flats.Concat(houses).Concat(lands));
+            var ads = flats.Concat(houses).Concat(lands).OrderByDescending(x => x.CreatedAt);
+            return View(ads);
         }
 
         public ActionResult EditAd(int id, AdType adtype)

@@ -1,4 +1,5 @@
-﻿using Developer.Models.EntityModels;
+﻿using System;
+using Developer.Models.EntityModels;
 
 namespace Developer.Models.ViewModels
 {
@@ -10,5 +11,6 @@ namespace Developer.Models.ViewModels
         public bool Visible { get; set; }
         public Worker Worker { get; set; }
         public AdType AdType { get; set; }
+        public DateTime CreatedAt { get; set; }
     }
 }

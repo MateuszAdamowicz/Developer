@@ -19,5 +19,7 @@ namespace Developer.Models.ViewModels
         public bool Deleted { get; set; }
         public virtual List<Photo> Pictures { get; set; }
         public DateTime CreatedAt { get; set; }
+        public ContactEmail ContactEmail { get; set; }
+        public string Number { get; set; }
     }
 }

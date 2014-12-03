@@ -9,6 +9,7 @@
 }
 <div class="row" style="margin-right: 15px">
     <div class="col-md-12 custom-left-panel" style="margin-left: 15px">
+        <div class="pull-right" style="font-size: 12px; font-weight:100">Numer oferty: @Model.Number</div>
         <h4>@Model.Title</h4>
         <h5>Działka</h5>
         <div class="row">
@@ -22,9 +23,9 @@
                             }
                             else
                             {
-                                <img src="\Content\Photos\@Model.Pictures[0].Link" class="custom-head-photo" />
+                                <img src="\Content\Photos\@Model.Pictures[0].Link" class="custom-head-photo"/>
                             }
-}
+                        }
                     </div>
                 </div>
 
@@ -68,7 +69,7 @@
                                 foreach (var picture in Model.Pictures)
                                 {
                                     <div class="col-md-2" style="padding-bottom: 10px">
-                                        <img src="/Content/Photos/@picture.Link" style="width: 100%" />
+                                        <img src="/Content/Photos/@picture.Link" style="width: 100%"/>
                                     </div>
                                 }
                             }
@@ -109,20 +110,20 @@
                         <div class="list-group-item-warning" style="padding-left: 15px">
                             Zapytaj
                         </div>
-                        <div class="col-md-12" style="border: 2px solid #f39c12; padding:10px">
+                        <div class="col-md-12" style="border: 2px solid #f39c12; padding: 10px">
                             <div class="col-md-6" style="font-size: small; padding-left: 0px">
                                 <b>Ofertę prowadzi:</b>
                                 <div class="row">
                                     <div class="col-md-4">
                                         @if (Model.Worker.HasPhoto)
                                         {
-                                            <img src="/Content/Photos/Workers/@Model.Worker.Photo" style="width: 100%; cursor:pointer" class="small-pict" />
+                                            <img src="/Content/Photos/Workers/@Model.Worker.Photo" style="width: 100%; cursor: pointer" class="small-pict"/>
                                         }
                                     </div>
                                     <div class="col-md-8">
-                                        @Model.Worker.FullName<br />
-                                        tel. 1: @Model.Worker.PhoneFirst<br />
-                                        tel. 2: @Model.Worker.PhoneSecond<br />
+                                        @Model.Worker.FullName<br/>
+                                        tel. 1: @Model.Worker.PhoneFirst<br/>
+                                        tel. 2: @Model.Worker.PhoneSecond<br/>
                                         email: @Model.Worker.Email
                                     </div>
                                 </div>

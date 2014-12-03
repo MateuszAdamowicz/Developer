@@ -6,10 +6,10 @@ namespace Developer.Models.EntityModels
     
     {
         [Display(Name = "Mieszkanie")]
-        Flat,
+        Flat = 12,
         [Display(Name = "Dom")]
-        House,
+        House = 13,
         [Display(Name = "Działka")]
-        Land
+        Land = 14
     }
 }

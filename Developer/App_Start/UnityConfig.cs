@@ -22,6 +22,11 @@ namespace Developer
             container.RegisterType<IEmailService, EmailService>();
             container.RegisterType<ITemplateServiceConfiguration, TemplateServiceConfiguration>();
             container.RegisterType<IUpdateAdvertService, UpdateAdvertService>();
+            container.RegisterType<ISearchService, SearchService>();
+            container.RegisterType<ISmtpManager, SmtpManager>();
+            container.RegisterType<IEmailSenderService, EmailSenderService>();
+            container.RegisterType<IEmailStorageService, EmailStorageService>();
+            container.RegisterType<IShowAdvertService, ShowAdvertService>();
 
         }
     }

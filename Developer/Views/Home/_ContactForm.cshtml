@@ -21,7 +21,7 @@
     </div>
 }
 
-@using (Html.BeginForm("SendEmail", "Home", FormMethod.Post))
+@using (Html.BeginForm("Show", "Home", new { key = ViewContext.ViewData.ModelState["key"].Value.AttemptedValue}, FormMethod.Post))
 {
     @Html.AntiForgeryToken()
     <div class="form-group-sm">

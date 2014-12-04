@@ -15,7 +15,7 @@
     </div>
     <div class="container body-content">
         <div class="row">
-            <div class="col-md-2 custom-left-panel">
+            <div class="col-md-2 custom-left-menu">
                 <img src="~/Content/img/the-palace-of-culture.jpg" width="100%"/>
             </div>
             <div class="col-md-10">
@@ -75,7 +75,7 @@
         <div class="row">
             <div class="col-md-2">
                 <div class="row">
-                    <div class="col-md-12 custom-left-panel">
+                    <div class="col-md-12 custom-left-menu" style="padding: 0px">
                         <ul class="nav nav-pills nav-stacked small">
                             <li class="custom-list"><a href="/Home/Index">Strona główna</a></li>
                             <li class="custom-list"><a href="/Home/About">O firmie</a></li>
@@ -85,8 +85,8 @@
                     </div>
                 </div>
                 <div class="row">
-                    <div class="col-md-12 custom-left-panel">
-                        <small>Wprowadź numer oferty</small><br/>
+                    <div class="col-md-12 custom-left-menu">
+                        <small>Wprowadź numer oferty:</small><br/>
                         @using (Html.BeginForm("Search", "Home"))
                         {
                             <div class="row">
@@ -101,12 +101,12 @@
                     </div>
                 </div>
                 <div class="row">
-                    <div class="col-md-12 custom-left-panel">
+                    <div class="col-md-12 custom-left-menu" style="padding:0px">
                         <a role="button" class="btn btn-sm btn-danger" style="width: 100%" href="/Home/CreateOffer">Dodaj bezpłatnie ofertę</a>
                     </div>
                 </div>
                 <div class="row">
-                    <div class="col-md-12 custom-left-panel">
+                    <div class="col-md-12 custom-left-menu" style="padding: 0px">
                         <a role="button" class="btn btn-sm btn-danger" style="width: 100%" href="/Home/Where">Gdzie jesteśmy</a>
                     </div>
                 </div>

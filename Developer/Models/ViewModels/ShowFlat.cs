@@ -6,6 +6,11 @@ namespace Developer.Models.ViewModels
 {
     public class ShowFlat
     {
+        public ShowFlat()
+        {
+            ContactEmail = new ContactEmail();
+        }
+
         public ShowWorker Worker { get; set; }
         public string Location { get; set; }
         public string Area { get; set; }
@@ -26,5 +31,7 @@ namespace Developer.Models.ViewModels
         public bool Deleted { get; set; }
         public virtual List<Photo> Pictures { get; set; }
         public DateTime CreatedAt { get; set; }
+        public ContactEmail ContactEmail { get; set; }
+        public string Number { get; set; }
     }
 }

@@ -10,6 +10,7 @@ using System.Web.Optimization;
 using Developer.App_Start;
 using Developer.Migrations;
 using Developer.Models.EntityModels;
+using log4net;
 
 namespace Developer
 {
@@ -21,6 +22,9 @@ namespace Developer
             WebApiConfig.Register(GlobalConfiguration.Configuration);
             RouteConfig.RegisterRoutes(RouteTable.Routes);
             Bootstrapper.Initialise();
+
+            ILog logger = LogManager.GetLogger("Log4NetTest.OtherClass");
+            FilterConfig.RegisterGlobalFilters(GlobalFilters.Filters, logger);
             
             //Database.SetInitializer(new DropCreateDatabaseAlways<ApplicationContext>());
             Database.SetInitializer(new MigrateDatabaseToLatestVersion<ApplicationContext, Configuration>());

@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Web;
 using System.Web.Mvc;
+using System.Web.Security;
 using Developer.Models.EntityModels;
 using Developer.Models.EntityModels.Interfaces;
 using Developer.Models.ViewModels;
@@ -10,20 +11,56 @@ using Developer.Services.Admin;
 
 namespace Developer.Controllers
 {
+    [Authorize]
     public class AdminController : Controller
     {
         private readonly IApplicationContext _applicationContext;
         private readonly IAddAdvertService _addAdvertService;
         private readonly IWorkerService _workerService;
         private readonly IUpdateAdvertService _updateAdvertService;
+        private readonly IAdminLoginService _adminLoginService;
 
         // GET: Admin
-        public AdminController(IApplicationContext applicationContext, IAddAdvertService addAdvertService, IWorkerService workerService, IUpdateAdvertService updateAdvertService)
+        public AdminController(IApplicationContext applicationContext, IAddAdvertService addAdvertService, IWorkerService workerService, IUpdateAdvertService updateAdvertService, IAdminLoginService adminLoginService)
         {
             _applicationContext = applicationContext;
             _addAdvertService = addAdvertService;
             _workerService = workerService;
             _updateAdvertService = updateAdvertService;
+            _adminLoginService = adminLoginService;
+        }
+        [AllowAnonymous]
+        public ActionResult Login()
+        {
+            if (User.Identity.IsAuthenticated == false)
+            {
+                return View(new LoginViewModel());
+            }
+            var ticket = new FormsAuthenticationTicket(1, "", DateTime.Now, DateTime.Now.AddMinutes(-30), false, String.Empty, FormsAuthentication.FormsCookiePath);
+            _adminLoginService.Cookies().Add(new HttpCookie(FormsAuthentication.FormsCookieName, FormsAuthentication.Encrypt(ticket)));
+            _adminLoginService.Logout();
+            Session.Clear();
+            Session.Abandon();
+            return RedirectToAction("Index","Home");
+        }
+
+        [HttpPost]
+        [ValidateAntiForgeryToken]
+        [AllowAnonymous]
+        public ActionResult Login(LoginViewModel loginViewModel)
+        {
+            if (ModelState.IsValid)
+            {
+                var result = _adminLoginService.Login(loginViewModel);
+                if (result.Authorized)
+                {
+                    string user = HttpContext.User.ToString();
+                    _adminLoginService.SetLoginCookies(loginViewModel.Login);
+                    return RedirectToAction("Index");
+                }
+                return View(loginViewModel);
+            }
+            return View(loginViewModel);
         }
 
         public ActionResult Index()
@@ -49,12 +86,13 @@ namespace Developer.Controllers
         }
 
         [HttpPost]
+        [ValidateAntiForgeryToken]
         public ActionResult AddFlat(AdminFlat adminFlat)
         {
             if (ModelState.IsValid)
             {
                 var result = _addAdvertService.AddFlat(adminFlat);
-                return RedirectToAction("Show", "Home", new { id = result.Data, adType = AdType.Flat });
+                return RedirectToAction("Show", "Home", new { key = result.Data});
             }
             ViewData["Workers"] = _applicationContext.Workers.ToList();
             TempData["AdType"] = 0;
@@ -69,12 +107,13 @@ namespace Developer.Controllers
         }
 
         [HttpPost]
+        [ValidateAntiForgeryToken]
         public ActionResult AddHouse(AdminHouse adminHouse)
         {
             if (ModelState.IsValid)
             {
                 var result = _addAdvertService.AddHouse(adminHouse);
-                return RedirectToAction("Show", "Home", new { id = result.Data, adType = AdType.House });
+                return RedirectToAction("Show", "Home", new { key = result.Data });
             }
             ViewData["Workers"] = _applicationContext.Workers.ToList();
             TempData["AdType"] = 1;
@@ -88,11 +127,13 @@ namespace Developer.Controllers
             return RedirectToAction("AddAdvert");
         }
         [HttpPost]
+        [ValidateAntiForgeryToken]
         public ActionResult AddLand(AdminLand adminLand)
         {
             if (ModelState.IsValid)
             {
                 var result = _addAdvertService.AddLand(adminLand);
+                return RedirectToAction("Show", "Home", new { key = result.Data });
             }
             ViewData["Workers"] = _applicationContext.Workers.ToList();
             TempData["AdType"] = 2;
@@ -114,6 +155,7 @@ namespace Developer.Controllers
         }
 
         [HttpPost]
+        [ValidateAntiForgeryToken]
         public ActionResult AddWorker(AdminWorker adminWorker)
         {
             if (ModelState.IsValid)
@@ -146,6 +188,7 @@ namespace Developer.Controllers
         }
 
         [HttpPost]
+        [ValidateAntiForgeryToken]
         public ActionResult EditWorker(AdminWorker adminWorker, int id)
         {
             if (ModelState.IsValid)
@@ -198,13 +241,14 @@ namespace Developer.Controllers
         }
 
         [HttpPost]
+        [ValidateAntiForgeryToken]
         public ActionResult EditFlat(EditFlat editFlat, int id)
         {
             editFlat.Pictures = new List<Photo>();
             if (ModelState.IsValid)
             {
                 _updateAdvertService.UpdateFlat(editFlat, id);
-                return RedirectToAction("Show", "Home", new {id = id, AdType = AdType.Flat});
+                return RedirectToAction("Show", "Home", new {key = String.Format("{0}{1}", id*9999, "12")});
             }
 
             var flat = _applicationContext.Flats.Find(id);
@@ -227,13 +271,14 @@ namespace Developer.Controllers
 
 
         [HttpPost]
+        [ValidateAntiForgeryToken]
         public ActionResult EditHouse(EditHouse editHouse, int id)
         {
             editHouse.Pictures = new List<Photo>();
             if (ModelState.IsValid)
             {
                 _updateAdvertService.UpdateHouse(editHouse, id);
-                return RedirectToAction("Show", "Home", new {id = id, AdType = AdType.House});
+                return RedirectToAction("Show", "Home", new { key = String.Format("{0}{1}", id * 9999, "14") });
             }
 
             var house = _applicationContext.Houses.Find(id);
@@ -263,13 +308,14 @@ namespace Developer.Controllers
         }
 
         [HttpPost]
+        [ValidateAntiForgeryToken]
         public ActionResult EditLand(EditLand editLand, int id)
         {
             editLand.Pictures = new List<Photo>();
             if (ModelState.IsValid)
             {
                 _updateAdvertService.UpdateLand(editLand, id);
-                return RedirectToAction("Show", "Home", new {id = id, AdType.Land});
+                return RedirectToAction("Show", "Home", new { key = String.Format("{0}{1}", id * 9999, "18") });
             }
 
             var land = _applicationContext.Lands.Find(id);

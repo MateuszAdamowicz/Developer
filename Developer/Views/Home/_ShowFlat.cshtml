@@ -5,12 +5,14 @@
 
 @{
     ViewBag.Title = "ShowFlat";
+    var x = String.Format("{0}", AdType.Flat);
 }
 <div class="row" style="margin-right: 15px">
-    <div class="col-md-12 custom-left-panel" style="margin-left: 15px">
+    <div class="col-md-12 custom-center-panel" style="margin-left: 15px">
+        <div class="pull-right" style="font-size: 12px; font-weight:100">Numer oferty: @Model.Number</div>
         <h4>@Model.Title</h4>
         <h5>Mieszkanie</h5>
-        <div class="row">
+        <div class="row" style="margin-bottom:20px">
             <div class="col-md-7">
                 <div class="row">
                     <div class="col-md-12">
@@ -21,21 +23,19 @@
                             }
                             else
                             {
-                                <img class="custom-head-photo" src="\Content\Photos\@Model.Pictures[0].Link" />
+                                <img class="custom-head-photo" src="\Content\Photos\@Model.Pictures[0].Link"/>
                             }
-}
+                        }
                     </div>
                 </div>
 
             </div>
-            <div class="col-md-5" style="border-left: 1px solid #f39c12; border-radius: 10px">
+            <div class="col-md-5" style="border-left: 1px solid #8B0808; border-radius: 10px">
                 <div class="list-group" style="margin-top: 20px">
-                    <div class="list-group-item-info" style="margin-bottom: 3px; padding-left: 15px">
-                        <div class="row" style="font-size: large">
+                        <div class="row custom-advert-type">
                             <div class="col-md-5">Typ oferty:</div>
                             <div class="col-md-7">@(Model.ToLet ? "Wynajem" : "Sprzedaż")</div>
                         </div>
-                    </div>
                     @OwnHelpers.PropertyNotNull("Miasto", @Model.City)
                     @OwnHelpers.PropertyNotNull("Lokalizacja", @Model.Location)
                     @OwnHelpers.PropertyNotNull("Pow. całkowita", @Model.Area)
@@ -47,22 +47,20 @@
                     @OwnHelpers.PropertyNotNull("Forma własności", @Model.Ownership)
                     @OwnHelpers.PropertyNotNull("Cena za m<sup>2</sup>", @Model.PricePerMeter)
 
-                    <div class="list-group-item-warning" style="margin-bottom: 3px; padding-left: 15px">
-                        <div class="row" style="font-size: large">
+                        <div class="row custom-advert-price">
                             <div class="col-md-5">Cena:</div>
                             <div class="col-md-7">@Model.Price</div>
                         </div>
-                    </div>
                 </div>
             </div>
         </div>
         <div class="row">
             <div class="col-md-12">
-                <div class="list-group" style="margin-top: 10px; margin-bottom: 0px">
-                    <div class="list-group-item-warning" style="padding-left: 15px">
+                <div class="list-group">
+                    <div class="custom-advert-panel-title">
                         Galeria
                     </div>
-                    <div class="col-md-12" style="font-size: small; padding: 10px; border: 2px solid #f39c12">
+                    <div class="col-md-12 custom-advert-panel-body">
                         @{
                             if (Model.Pictures == null || Model.Pictures.Count == 0)
                             {
@@ -73,7 +71,7 @@
                                 foreach (var picture in Model.Pictures)
                                 {
                                     <div class="col-md-2" style="padding-bottom: 10px">
-                                        <img src="/Content/Photos/@picture.Link" style="width: 100%; cursor:pointer" class="small-pict"/>
+                                        <img src="/Content/Photos/@picture.Link" style="width: 100%; cursor: pointer" class="small-pict"/>
                                     </div>
                                 }
                             }
@@ -84,11 +82,11 @@
         </div>
         <div class="row">
             <div class="col-md-12">
-                <div class="list-group" style="margin-top: 10px; margin-bottom: 0px">
-                    <div class="list-group-item-warning" style="padding-left: 15px">
+                <div class="list-group">
+                    <div class="custom-advert-panel-title">
                         Opis
                     </div>
-                    <p style="font-size: small; padding: 10px; border: 2px solid #f39c12">
+                    <p class="custom-advert-panel-body">
                         @Model.Description
                     </p>
                 </div>
@@ -96,11 +94,11 @@
         </div>
         <div class="row">
             <div class="col-md-12">
-                <div class="list-group" style="margin-top: 10px; margin-bottom: 0px">
-                    <div class="list-group-item-warning" style="padding-left: 15px">
+                <div class="list-group">
+                    <div class="custom-advert-panel-title">
                         Szczegóły
                     </div>
-                    <p style="font-size: small; padding: 10px; border: 2px solid #f39c12">
+                    <p class="custom-advert-panel-body">
                         @Model.Details
                     </p>
                 </div>
@@ -111,29 +109,29 @@
             <div class="row">
                 <div class="col-md-12">
                     <div class="list-group" style="margin-top: 10px">
-                        <div class="list-group-item-warning" style="padding-left: 15px">
+                        <div class="custom-advert-panel-title">
                             Zapytaj
                         </div>
-                        <div class="col-md-12" style="border: 2px solid #f39c12; padding:10px">
+                        <div class="col-md-12 custom-advert-panel-body">
                             <div class="col-md-6" style="font-size: small; padding-left: 0px">
                                 <b>Ofertę prowadzi:</b>
                                 <div class="row">
                                     <div class="col-md-4">
                                         @if (Model.Worker.HasPhoto)
                                         {
-                                            <img src="/Content/Photos/Workers/@Model.Worker.Photo" style="width: 100%" />
+                                            <img src="/Content/Photos/Workers/@Model.Worker.Photo" style="width: 100%"/>
                                         }
                                     </div>
                                     <div class="col-md-8">
-                                        @Model.Worker.FullName<br />
-                                        tel. 1: @Model.Worker.PhoneFirst<br />
-                                        tel. 2: @Model.Worker.PhoneSecond<br />
+                                        @Model.Worker.FullName<br/>
+                                        tel. 1: @Model.Worker.PhoneFirst<br/>
+                                        tel. 2: @Model.Worker.PhoneSecond<br/>
                                         email: @Model.Worker.Email
                                     </div>
                                 </div>
                             </div>
                             <div class="col-md-6" style="border-left: 1px solid #f39c12" id="contactForm">
-                                @{ Html.RenderPartial("_ContactForm", new ContactEmail()); }
+                                @{ Html.RenderPartial("_ContactForm", Model.ContactEmail); }
                             </div>
                         </div>
                     </div>

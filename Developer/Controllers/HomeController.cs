@@ -15,11 +15,15 @@ namespace Developer.Controllers
     {
         private readonly IApplicationContext _context;
         private readonly IEmailService _emailService;
+        private readonly ISearchService _searchService;
+        private readonly IShowAdvertService _showAdvertService;
         // GET: Home
-        public HomeController(IApplicationContext context, IEmailService emailService)
+        public HomeController(IApplicationContext context, IEmailService emailService, ISearchService searchService, IShowAdvertService showAdvertService)
         {
             _context = context;
             _emailService = emailService;
+            _searchService = searchService;
+            _showAdvertService = showAdvertService;
         }
 
         public ActionResult About()
@@ -34,37 +38,7 @@ namespace Developer.Controllers
 
         public ActionResult Search(string key)
         {
-
-            int idParsed;
-            var id = key.Substring(0, key.Count() - 1);
-            Int32.TryParse(id, out idParsed);
-
-            var type = key.Substring(key.Count() - 1,1);
-            AdType typeParsed = AdType.Flat;
-
-            if (type == "f")
-            {
-                typeParsed = AdType.Flat;
-            }
-            else if (type == "h")
-            {
-                typeParsed = AdType.House;
-            }
-            else if (type == "l")
-            {
-                typeParsed = AdType.Land;
-            }
-            else
-            {
-                idParsed = 0;
-            }
-
-            if (idParsed != 0)
-            {
-                return RedirectToAction("Show", new {id = idParsed, adType = typeParsed});
-            }
-
-            return RedirectToAction("NotFound");
+            return RedirectToAction("Show", new {key});
         }
 
         public ActionResult Where()
@@ -76,7 +50,7 @@ namespace Developer.Controllers
         {
             if (ModelState.IsValid)
             {
-                var result = _emailService.SendQuestion(contactEmail);
+                var result = _emailService.SendAndSaveOfferQuestion(contactEmail);
             }
             else
             {
@@ -102,43 +76,57 @@ namespace Developer.Controllers
         {
             return View();
         }
-
-        public ActionResult Show(int id, AdType adType)
+        [HttpPost]
+        public ActionResult Show(ContactEmail contactEmail, string key)
         {
-            var showAdvert = new ShowAdvert {AdType = adType};
-
-            if (adType == AdType.Flat)
+            if (ModelState.IsValid)
             {
-                var flat = Enumerable.FirstOrDefault(_context.Flats.Where(x => x.Id == id));
-                if (flat == null)
-                {
-                    return RedirectToAction("NotFound");
-                } 
-                var showFlat = AutoMapper.Mapper.Map<ShowFlat>(flat);
-                showAdvert.Flat = showFlat;
-            }
-            else if (adType == AdType.House)
-            {
-                var house = Enumerable.FirstOrDefault(_context.Houses.Where(x => x.Id == id));
-                if (house == null)
-                {
-                    return RedirectToAction("NotFound");
-                } 
-                var showHouse = AutoMapper.Mapper.Map<ShowHouse>(house);
-                showAdvert.House = showHouse;
-            }
-            else if (adType == AdType.Land)
-            {
-                var land = Enumerable.FirstOrDefault(_context.Lands.Where(x => x.Id == id));
-                if (land == null)
-                {
-                    return RedirectToAction("NotFound");
-                } 
-                var showLand = AutoMapper.Mapper.Map<ShowLand>(land);
-                showAdvert.Land = showLand;
+                _emailService.SendAndSaveOfferQuestion(contactEmail);
+                return View("ConfirmMail");
             }
 
-            return View(showAdvert);
+            var parsedSearch = _searchService.ParseKey(key);
+            if (parsedSearch.Id > 0)
+            {
+                var advert = _showAdvertService.GetAdvert(parsedSearch.AdType, parsedSearch.Id);
+                if (advert.Success)
+                {
+                    if (parsedSearch.AdType == AdType.Flat)
+                    {
+                        advert.Data.Flat.ContactEmail = contactEmail;
+                    }
+                    else if (parsedSearch.AdType == AdType.House)
+                    {
+                        advert.Data.House.ContactEmail = contactEmail;
+                    }
+                    else
+                    {
+                        advert.Data.Land.ContactEmail = contactEmail;
+                    }
+
+                    return View(advert.Data);
+                }
+                return RedirectToAction("NotFound");
+            }
+            return RedirectToAction("NotFound");
+        }
+
+        public ActionResult Show(string key)
+        {
+            var parsedSearch = _searchService.ParseKey(key);
+
+            if (parsedSearch.Id > 0)
+            {
+                var result = _showAdvertService.GetAdvert(parsedSearch.AdType, parsedSearch.Id);
+
+                if (result.Success)
+                {
+                    return View(result.Data);
+                }
+                return RedirectToAction("NotFound");
+            }
+
+            return RedirectToAction("NotFound");
         }
 
         public ActionResult CreateOffer()
@@ -164,9 +152,7 @@ namespace Developer.Controllers
         {
             if (ModelState.IsValid)
             {
-                var mail = AutoMapper.Mapper.Map<Mail>(contactEmail);
-                _context.Mails.Add(mail);
-                _context.SaveChanges();
+                _emailService.SendAndSaveContactQuestion(contactEmail);
                 return View("ConfirmMail");
             }
             return View(contactEmail);

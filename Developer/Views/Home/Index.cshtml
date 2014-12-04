@@ -8,10 +8,10 @@
     @Scripts.Render("~/bundles/app")
 
 <div class="row" style="margin-right: 15px" ng-app="searcher" ng-controller="SearcherController">
-<div class="col-md-12 custom-left-panel" style="margin-left: 15px">
+<div class="col-md-12 custom-center-panel" style="margin-left: 15px">
     <h4>Wyszukaj ofertę</h4>
     <div class="row">
-        <div class="col-md-6" style="border-right: 1px solid black">
+        <div class="col-md-6">
             <small>Rodzaj nieruchomości: </small>
             <select class="form-control input-sm" ng-model="myProperty" ng-options="property.name for property in properties" ng-change="loadResources(myProperty.value)">
                 <option style="display: none" value="">Wybierz rodzaj</option>
@@ -109,7 +109,7 @@
         <div class="col-md-4">
             <small>Cena:</small>
             <select class="form-control input-sm" ng-model="mylandPrice" ng-options="price.Price as price.Price for price in landList|filter:{City:mylandCity||undefined}|filter:{Area:mylandArea||undefined}|unique:'Price'">
-                <option value="">Każda cena</option>
+                <option style="display: none" value="">Każda cena</option>
             </select>
         </div>
         <div class="row">
@@ -136,26 +136,26 @@
     <div ng-show="myProperty.value =='flat'">
         <ul style="padding-left: 0px;">
             <li dir-paginate="flat in filteredflatList = (flatList|filter:{City:myflatCity||undefined}|filter:{ToLet:myoffertTypeFlat||undefined}|filter:{Rooms:myflatRoom||undefined}|filter:{Price:myflatPrice||undefined}|orderBy:mySort.value:mySort.reverse)|itemsPerPage: pageSize:'flat'" current-page="currentPage" pagination-id="flat">
-                <div class="col-md-12 custom-left-panel" style="margin-left: 15px; padding-left: 0px; border: 2px solid rgb(255, 227, 176); background-color: rgb(255, 245, 227)">
+                <div class="col-md-12 custom-advert-panel">
                     <div class="col-md-3">
-                        <img ng-show="flat.Picture != null" ng-src="/Content/Photos/{{flat.Picture.Link}}" style="width: 100%"/>
-                        <img ng-show="flat.Picture == null" ng-src="/Content/Photos/NoImageAvailable.jpg" style="width: 100%">
+                        <img ng-show="flat.Picture != null" ng-src="/Content/Photos/{{flat.Picture.Link}}" style="width: 100%; border:1px solid"/>
+                        <img ng-show="flat.Picture == null" ng-src="/Content/Photos/NoImageAvailable.jpg" style="width: 100%; border:1px solid">
                     </div>
                     <div class="col-md-9">
                         <div class="row">
-                            <div class="col-md-12" style="border-bottom: 2px solid rgb(255, 227, 176); padding-left: 0px; padding-right: 0px; margin-bottom: 5px">
-                                <div class="pull-left" style="font-weight: bold"><a href="/Home/Show?id={{flat.Id}}&adType=flat">{{flat.Title}}</a></div>
+                            <div class="col-md-12 custom-advert-topic" style="padding-left: 0px; padding-right:0px">
+                                <div class="pull-left" style="font-weight: bold"><a href="/Home/Show?key={{flat.Number}}">{{flat.Title}}</a> <small style="margin-left: 10px">nr. {{flat.Number}}</small></div>
                                 <div class="pull-right" style="font-weight: bolder; font-size: larger">{{flat.Price}}</div>
                             </div>
                         </div>
                         <div class="row">
-                            <div class="col-md-12">
+                            <div class="col-md-12 custom-advert-details">
                                 {{flat.City}}, <small>{{flat.Rooms}}</small>
                             </div>
                         </div>
                         <div class="row">
                             <div class="col-md-12">
-                                <p style="font-size: small; text-align: justify; height: 60px; overflow: hidden">{{flat.Description}}</p>
+                                <p class="custom-advert-description">{{flat.Description}}</p>
                             </div>
                         </div>
                     </div>
@@ -174,27 +174,27 @@
     @* LIST HOUSES*@
     <div ng-show="myProperty.value =='house'">
         <ul style="padding-left: 0px;">
-            <li dir-paginate="house in filteredhouseList = (houseList|filter:{City:myhouseCity||undefined}|filter:{ToLet:myoffertTypeHouse||undefined}|filter:{UsableArea:myhouseUsableArea||undefined}|filter:{Price:myhousePrice||undefined}|orderBy:mySortFunction:mySort.reverse)|itemsPerPage: pageSize:'house'" current-page="currentPage" pagination-id="house">
-                <div class="col-md-12 custom-left-panel" style="margin-left: 15px; padding-left: 0px; border: 2px solid rgb(255, 227, 176); background-color: rgb(255, 245, 227)">
+            <li dir-paginate="house in filteredhouseList = (houseList|filter:{City:myhouseCity||undefined}|filter:{ToLet:myoffertTypeHouse||undefined}|filter:{UsableArea:myhouseUsableArea||undefined}|filter:{Price:myhousePrice||undefined}|orderBy:mySort.value:mySort.reverse)|itemsPerPage: pageSize:'house'" current-page="currentPage" pagination-id="house">
+                <div class="col-md-12 custom-advert-panel">
                     <div class="col-md-3">
-                        <img ng-show="house.Picture != null" ng-src="/Content/Photos/{{house.Picture.Link}}" style="width: 100%"/>
-                        <img ng-show="house.Picture == null" ng-src="/Content/Photos/NoImageAvailable.jpg" style="width: 100%">
+                        <img ng-show="house.Picture != null" ng-src="/Content/Photos/{{house.Picture.Link}}" style="width: 100%; border:1px solid"/>
+                        <img ng-show="house.Picture == null" ng-src="/Content/Photos/NoImageAvailable.jpg" style="width: 100%; border:1px solid">
                     </div>
                     <div class="col-md-9">
                         <div class="row">
-                            <div class="col-md-12" style="border-bottom: 2px solid rgb(255, 227, 176); padding-left: 0px; padding-right: 0px; margin-bottom: 5px">
-                                <div class="pull-left" style="font-weight: bold"><a href="/Home/Show?id={{house.Id}}&adType=house">{{house.Title}}</a></div>
+                            <div class="col-md-12 custom-advert-topic" style="padding-left: 0px; padding-right:0px">
+                                <div class="pull-left" style="font-weight: bold"><a href="/Home/Show?key={{house.Number}}">{{house.Title}}</a> <small style="margin-left: 10px">nr. {{house.Number}}</small></div>
                                 <div class="pull-right" style="font-weight: bolder; font-size: larger">{{house.Price}}</div>
                             </div>
                         </div>
                         <div class="row">
-                            <div class="col-md-12">
+                            <div class="col-md-12 custom-advert-details">
                                 {{house.City}}, <small>{{house.UsableArea}}</small>
                             </div>
                         </div>
                         <div class="row">
                             <div class="col-md-12">
-                                <p style="font-size: small; text-align: justify; height: 60px; overflow: hidden">{{house.Description}}</p>
+                                <p class="custom-advert-description">{{house.Description}}</p>
                             </div>
                         </div>
                     </div>
@@ -214,26 +214,26 @@
     <div ng-show="myProperty.value =='land'">
         <ul style="padding-left: 0px;">
             <li dir-paginate="land in filteredlandList = (landList|filter:{City:mylandCity||undefined}|filter:{Area:mylandArea||undefined}|filter:{Price:mylandPrice||undefined}|orderBy:mySort.value:mySort.reverse)|itemsPerPage: pageSize:'land'" current-page="currentPage" pagination-id="land">
-                <div class="col-md-12 custom-left-panel" style="margin-left: 15px; padding-left: 0px; border: 2px solid rgb(255, 227, 176); background-color: rgb(255, 245, 227)">
+                <div class="col-md-12 custom-advert-panel">
                     <div class="col-md-3">
-                        <img ng-show="land.Picture != null" ng-src="/Content/Photos/{{land.Picture.Link}}" style="width: 100%"/>
-                        <img ng-show="land.Picture.Link == null" ng-src="/Content/Photos/NoImageAvailable.jpg" style="width: 100%">
+                        <img ng-show="land.Picture != null" ng-src="/Content/Photos/{{land.Picture.Link}}" style="width: 100%; border:1px solid"/>
+                        <img ng-show="land.Picture.Link == null" ng-src="/Content/Photos/NoImageAvailable.jpg" style="width: 100%; border: 1px solid">
                     </div>
                     <div class="col-md-9">
                         <div class="row">
-                            <div class="col-md-12" style="border-bottom: 2px solid rgb(255, 227, 176); padding-left: 0px; padding-right: 0px; margin-bottom: 5px">
-                                <div class="pull-left" style="font-weight: bold"><a href="/Home/Show?id={{land.Id}}&adType=land">{{land.Title}}</a></div>
+                            <div class="col-md-12 custom-advert-topic" style="padding-left: 0px; padding-right:0px">
+                                <div class="pull-left" style="font-weight: bold"><a href="/Home/Show?key={{land.Number}}">{{land.Title}}</a> <small style="margin-left: 10px">nr. {{land.Number}}</small></div>
                                 <div class="pull-right" style="font-weight: bolder; font-size: larger">{{land.Price}}</div>
                             </div>
                         </div>
                         <div class="row">
-                            <div class="col-md-12">
+                            <div class="col-md-12 custom-advert-details">
                                 {{land.City}}, <small>{{land.Area}}</small>
                             </div>
                         </div>
                         <div class="row">
                             <div class="col-md-12">
-                                <p style="font-size: small; text-align: justify; height: 60px; overflow: hidden">{{land.Description}}</p>
+                                <p class="custom-advert-description">{{land.Description}}</p>
                             </div>
                         </div>
                     </div>
@@ -251,49 +251,49 @@
     </div>
 </div>
 <div class="row" style="margin-right: 15px">
-    <div class="col-md-12 custom-left-panel" style="margin-left: 15px">
+    <div class="col-md-12 custom-center-panel" style="margin-left: 15px">
         <h4>Najnowsze oferty</h4>
         <div class="row">
             <div class="col-md-3">
                 <img src="~/Content/img/the-palace-of-culture.jpg" width="100%" />
-                <div class="col-md-12" style="background-color: #2c3e50; text-align: center">
-                    <div class="custom-city">
+                <div class="col-md-12" style="background-color: black; text-align: center">
+                    <div class="custom-city" style="color:white">
                         Wrocław
                     </div>
-                    <div class="custom-price">
+                    <div class="custom-price" style="color:white">
                         150 000zł
                     </div>
                 </div>
             </div>
             <div class="col-md-3">
                 <img src="~/Content/img/the-palace-of-culture.jpg" width="100%" />
-                <div class="col-md-12" style="background-color: #2c3e50; text-align: center">
-                    <div class="custom-city">
+                <div class="col-md-12" style="background-color: black; text-align: center">
+                    <div class="custom-city" style="color:white">
                         Wrocław
                     </div>
-                    <div class="custom-price">
+                    <div class="custom-price" style="color:white">
+                        150 000zł
+                    </div>
+                </div>
+            </div>
+            <div class="col-md-3">
+                <img src="~/Content/img/the-palace-of-culture.jpg" width="100%"/>
+                <div class="col-md-12" style="background-color: black; text-align: center">
+                    <div class="custom-city" style="color: white">
+                        Wrocław
+                    </div>
+                    <div class="custom-price" style="color: white">
                         150 000zł
                     </div>
                 </div>
             </div>
             <div class="col-md-3">
                 <img src="~/Content/img/the-palace-of-culture.jpg" width="100%" />
-                <div class="col-md-12" style="background-color: #2c3e50; text-align: center">
-                    <div class="custom-city">
+                <div class="col-md-12" style="background-color: black; text-align: center">
+                    <div class="custom-city" style="color:white">
                         Wrocław
                     </div>
-                    <div class="custom-price">
-                        150 000zł
-                    </div>
-                </div>
-            </div>
-            <div class="col-md-3">
-                <img src="~/Content/img/the-palace-of-culture.jpg" width="100%" />
-                <div class="col-md-12" style="background-color: #2c3e50; text-align: center">
-                    <div class="custom-city">
-                        Wrocław
-                    </div>
-                    <div class="custom-price">
+                    <div class="custom-price" style="color:white">
                         150 000zł
                     </div>
                 </div>

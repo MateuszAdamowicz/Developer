@@ -1,34 +1,33 @@
-﻿using System;
-using System.IO;
-using Developer.Models;
+﻿using Developer.Models;
 using Developer.Models.ApplicationModels;
-using Developer.Models.ViewModels;
-using RazorEngine.Templating;
 
 namespace Developer.Services.Home
 {
     public class EmailService : IEmailService
     {
-        private readonly ITemplateService _templateSercvie;
+        private readonly IEmailSenderService _emailSenderService;
+        private readonly IEmailStorageService _emailStorageService;
 
-        public EmailService(ITemplateService templateSercvie)
+        public EmailService(IEmailSenderService emailSenderService, IEmailStorageService emailStorageService)
         {
-            _templateSercvie = templateSercvie;
+            _emailSenderService = emailSenderService;
+            _emailStorageService = emailStorageService;
         }
 
-        public Result SendQuestion(ContactEmail contactEmail)
+        public Result SendAndSaveOfferQuestion(ContactEmail contactEmail)
         {
-            var body = _templateSercvie.Parse(GetTemplate(), contactEmail, null, null);
-            return new Result(true, null ,"");
+            _emailSenderService.SendOfferQuestion(contactEmail);
+            _emailStorageService.SaveEmail(contactEmail);
+            
+            return new Result(true, null , "");
         }
 
-        public string GetTemplate()
+        public Result SendAndSaveContactQuestion(ContactEmail contactEmail)
         {
-            string template = File.ReadAllText(
-                Path.Combine(AppDomain.CurrentDomain.BaseDirectory,
-                    "Services/Home/EmailService/Templates/QuestionEmailTemplate.cshtml"));
-
-            return template;
+            _emailSenderService.SendContactQuestion(contactEmail);
+            _emailStorageService.SaveEmail(contactEmail);
+            
+            return new Result(true, null, "");
         }
     }
 }

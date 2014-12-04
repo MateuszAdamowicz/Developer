@@ -15,5 +15,6 @@ namespace Developer.Models.ViewModels
         public string City { get; set; }
         public virtual ShowListPhoto Picture { get; set; }
         public DateTime CreatedAt { get; set; }
+        public string Number { get; set; }
     }
 }

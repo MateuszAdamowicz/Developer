@@ -24,6 +24,10 @@ namespace Developer
                         //"~/Scripts/app/flat.js",
                         //"~/Scripts/app/land.js"
                         ));
+
+            bundles.Add(new ScriptBundle("~/bundles/jqueryval").Include(
+                "~/Scripts/jquery.validate.unobtrusive.js",
+                "~/Scripts/jquery.validate.js"));
          }
     }
 }

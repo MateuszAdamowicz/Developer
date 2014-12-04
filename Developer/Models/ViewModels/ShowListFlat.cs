@@ -18,5 +18,6 @@ namespace Developer.Models.ViewModels
         public virtual ShowListPhoto Picture { get; set; }
         public bool ToLet { get; set; }
         public DateTime CreatedAt { get; set; }
+        public string Number { get; set; }
     }
 }

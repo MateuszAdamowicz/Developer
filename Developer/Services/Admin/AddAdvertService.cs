@@ -24,7 +24,7 @@ namespace Developer.Services.Admin
             _photoService = photoService;
         }
 
-        public Result<int> AddFlat(AdminFlat adminFlat)
+        public Result<string> AddFlat(AdminFlat adminFlat)
         {
             var flat = Mapper.Map<Flat>(adminFlat);
             var worker = Enumerable.First(_context.Workers.Where(x => x.Id == adminFlat.Worker));
@@ -41,10 +41,10 @@ namespace Developer.Services.Admin
 
             _context.SaveChanges();
 
-            return new Result<int>(true,null,"",flat.Id);
+            return new Result<string>(true,null,"",String.Format("{0}{1}", flat.Id*9999,"12"));
         }
 
-        public Result<int> AddLand(AdminLand adminLand)
+        public Result<string> AddLand(AdminLand adminLand)
         {
             var land = Mapper.Map<Land>(adminLand);
             var worker = Enumerable.First(_context.Workers.Where(x => x.Id == adminLand.Worker));
@@ -61,10 +61,10 @@ namespace Developer.Services.Admin
 
             _context.SaveChanges();
 
-            return new Result<int>(true, null, "", land.Id);
+            return new Result<string>(true, null, "", String.Format("{0}{1}", land.Id*9999,"18"));
         }
 
-        public Result<int> AddHouse(AdminHouse adminHouse)
+        public Result<string> AddHouse(AdminHouse adminHouse)
         {
             var house = Mapper.Map<House>(adminHouse);
             var worker = Enumerable.First(_context.Workers.Where(x => x.Id == adminHouse.Worker));
@@ -81,7 +81,7 @@ namespace Developer.Services.Admin
 
             _context.SaveChanges();
 
-            return new Result<int>(true, null, "", house.Id);
+            return new Result<string>(true, null, "", String.Format("{0}{1}",house.Id*9999,"14"));
         }
     }
 }

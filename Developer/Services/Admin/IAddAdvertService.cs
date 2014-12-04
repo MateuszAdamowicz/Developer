@@ -9,8 +9,8 @@ namespace Developer.Services.Admin
 {
     public interface IAddAdvertService
     {
-        Result<int> AddFlat(AdminFlat adminFlat);
-        Result<int> AddLand(AdminLand adminLand);
-        Result<int> AddHouse(AdminHouse adminHouse);
+        Result<string> AddFlat(AdminFlat adminFlat);
+        Result<string> AddLand(AdminLand adminLand);
+        Result<string> AddHouse(AdminHouse adminHouse);
     }
 }

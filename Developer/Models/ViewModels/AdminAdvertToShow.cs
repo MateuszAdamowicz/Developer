@@ -12,5 +12,6 @@ namespace Developer.Models.ViewModels
         public Worker Worker { get; set; }
         public AdType AdType { get; set; }
         public DateTime CreatedAt { get; set; }
+        public string Number { get; set; }
     }
 }

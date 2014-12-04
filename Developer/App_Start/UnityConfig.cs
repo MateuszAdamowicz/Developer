@@ -4,6 +4,7 @@ using Developer.Models.EntityModels;
 using Developer.Models.EntityModels.Interfaces;
 using Developer.Services.Admin;
 using Developer.Services.Home;
+using log4net;
 using RazorEngine.Configuration;
 using RazorEngine.Templating;
 using Unity.WebApi;
@@ -27,6 +28,7 @@ namespace Developer
             container.RegisterType<IEmailSenderService, EmailSenderService>();
             container.RegisterType<IEmailStorageService, EmailStorageService>();
             container.RegisterType<IShowAdvertService, ShowAdvertService>();
+            container.RegisterType<IAdminLoginService, AdminLoginService>();
 
         }
     }

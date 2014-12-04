@@ -16,9 +16,9 @@ namespace Developer.App_Start
     {
         public static void Register()
         {
-            Mapper.CreateMap<Flat, AdminAdvertToShow>().ForMember(dest => dest.AdType, opts => opts.UseValue(AdType.Flat));
-            Mapper.CreateMap<House, AdminAdvertToShow>().ForMember(dest => dest.AdType, opts => opts.UseValue(AdType.House));
-            Mapper.CreateMap<Land, AdminAdvertToShow>().ForMember(dest => dest.AdType, opts => opts.UseValue(AdType.Land));
+            Mapper.CreateMap<Flat, AdminAdvertToShow>().ForMember(dest => dest.AdType, opts => opts.UseValue(AdType.Flat)).ForMember(dest => dest.Number, opts => opts.MapFrom(src => String.Format("{0}{1}", src.Id * 9999, 12))); 
+            Mapper.CreateMap<House, AdminAdvertToShow>().ForMember(dest => dest.AdType, opts => opts.UseValue(AdType.House)).ForMember(dest => dest.Number, opts => opts.MapFrom(src => String.Format("{0}{1}", src.Id * 9999, 14))); 
+            Mapper.CreateMap<Land, AdminAdvertToShow>().ForMember(dest => dest.AdType, opts => opts.UseValue(AdType.Land)).ForMember(dest => dest.Number, opts => opts.MapFrom(src => String.Format("{0}{1}", src.Id * 9999, 18)));
             Mapper.CreateMap<AdminFlat, Flat>().ForMember(dest => dest.Worker, opts => opts.UseValue(null)).ForMember(dest => dest.Visible, opts => opts.UseValue(true));
             Mapper.CreateMap<AdminLand, Land>().ForMember(dest => dest.Worker, opts => opts.UseValue(null)).ForMember(dest => dest.Visible, opts => opts.UseValue(true));
             Mapper.CreateMap<AdminHouse, House>().ForMember(dest => dest.Worker, opts => opts.UseValue(null)).ForMember(dest => dest.Visible, opts => opts.UseValue(true));
@@ -41,6 +41,7 @@ namespace Developer.App_Start
             Mapper.CreateMap<Flat, EditFlat>().ForMember(dest => dest.Worker, opts => opts.MapFrom(src => src.Worker.Id));
             Mapper.CreateMap<House, EditHouse>()
                 .ForMember(dest => dest.Worker, opts => opts.MapFrom(src => src.Worker.Id));
+            Mapper.CreateMap<Land, EditLand>().ForMember(dest => dest.Worker, opts => opts.MapFrom(src => src.Worker.Id));
 
             Mapper.CreateMap<CreateOffer, Offer>().ForMember(dest => dest.Status, opts => opts.UseValue(OfferStatus.New));
 

@@ -88,7 +88,7 @@
                             <td>@ad.City</td>
                             <td>@ad.Worker.FullName</td>
                             <td style="text-align: center">
-                                @Html.ActionLink("Info", "Show", "Home", new {id = ad.Id, adType = ad.AdType}, new {@class = "btn btn-success btn-xs"})
+                                @Html.ActionLink("Info", "Show", "Home", new {key = ad.Number}, new {@class = "btn btn-success btn-xs"})
                                 @Html.ActionLink("Edytuj", "EditAd", "Admin", new {id = ad.Id, adType = ad.AdType}, new {@class = "btn btn-danger btn-xs"})
                             </td>
                             <td style="text-align: center">
@@ -112,7 +112,7 @@
                             <td>@ad.City</td>
                             <td>@ad.Worker.FullName</td>
                             <td style="text-align: center">
-                                @Html.ActionLink("Info", "Show", "Home", new {id = ad.Id, adType = ad.AdType}, new {@class = "btn btn-success btn-xs"})
+                                @Html.ActionLink("Info", "Show", "Home", new {key = ad.Number}, new {@class = "btn btn-success btn-xs"})
                                 @Html.ActionLink("Edytuj", "EditAd", "Admin", new {id = ad.Id, adType = ad.AdType}, new {@class = "btn btn-danger btn-xs"})
                             </td>
                             <td style="text-align: center">

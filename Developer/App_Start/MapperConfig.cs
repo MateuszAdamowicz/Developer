@@ -47,7 +47,8 @@ namespace Developer.App_Start
 
             Mapper.CreateMap<ContactEmail, Mail>().ForMember(dest => dest.OrderLink, opts => opts.MapFrom(src => src.OfferLink));
 
-
+            Mapper.CreateMap<Offer, ContactEmail>()
+                .ForMember(dest => dest.Body, opts => opts.MapFrom(src => src.Description));
         }
     }
 }

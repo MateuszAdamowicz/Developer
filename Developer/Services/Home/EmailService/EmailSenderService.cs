@@ -53,6 +53,51 @@ namespace Developer.Services.Home
             return new Result(true, null, "");
         }
 
+        public Result SendOfferResponse(OfferStatus offerStatus, string destination)
+        {
+            string template;
+
+            if (offerStatus == OfferStatus.Accepted)
+            {
+                template = GetOfferAcceptedTemplate();
+            }
+            else
+            {
+                template = GetOfferRejectedTemplate();
+            }
+
+            var body = _templateSercvie.Parse(template, null, null, null);
+
+            var emailMsg = new EmailMessage()
+            {
+                Body = body,
+                Destination = destination,
+                Topic = "Odpowiedź dotycząca oferty"
+            };
+
+            _smtpManager.SendEmail(emailMsg);
+
+            return new Result(true, null, "");
+        }
+
+
+        public string GetOfferRejectedTemplate()
+        {
+            string template =
+                File.ReadAllText(Path.Combine(AppDomain.CurrentDomain.BaseDirectory,
+                    "Services/Home/EmailService/Templates/OfferRejectedEmailTemplate.cshtml"));
+            return template;
+        }
+
+        public string GetOfferAcceptedTemplate()
+        {
+            string template =
+                File.ReadAllText(Path.Combine(AppDomain.CurrentDomain.BaseDirectory,
+                    "Services/Home/EmailService/Templates/OfferAcceptedEmailTemplate.cshtml"));
+
+            return template;
+        }
+
         public string GetOfferTemplate()
         {
             string template = File.ReadAllText(

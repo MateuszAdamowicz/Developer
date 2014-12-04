@@ -1,5 +1,6 @@
 using Developer.Models;
 using Developer.Models.ApplicationModels;
+using Developer.Models.ViewModels;
 
 namespace Developer.Services.Home
 {
@@ -9,5 +10,8 @@ namespace Developer.Services.Home
         Result SendContactQuestion(ContactEmail contactEmail);
         string GetOfferTemplate();
         string GetContactTemplate();
+        Result SendOfferResponse(OfferStatus offerStatus, string destination);
+        string GetOfferRejectedTemplate();
+        string GetOfferAcceptedTemplate();
     }
 }

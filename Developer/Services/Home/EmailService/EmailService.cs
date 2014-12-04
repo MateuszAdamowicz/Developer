@@ -1,5 +1,7 @@
 ﻿using Developer.Models;
 using Developer.Models.ApplicationModels;
+using Developer.Models.EntityModels;
+using Developer.Models.ViewModels;
 
 namespace Developer.Services.Home
 {
@@ -12,6 +14,15 @@ namespace Developer.Services.Home
         {
             _emailSenderService = emailSenderService;
             _emailStorageService = emailStorageService;
+        }
+
+        public Result SendAndSaveOfferResponse(OfferStatus offerStatus, Offer offer)
+        {
+            _emailSenderService.SendOfferResponse(offerStatus, offer.Email);
+            var contactEmail = AutoMapper.Mapper.Map<ContactEmail>(offer);
+            _emailStorageService.SaveEmail(contactEmail);
+
+            return new Result(true, null ,"");
         }
 
         public Result SendAndSaveOfferQuestion(ContactEmail contactEmail)

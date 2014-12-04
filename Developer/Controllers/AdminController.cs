@@ -8,6 +8,7 @@ using Developer.Models.EntityModels;
 using Developer.Models.EntityModels.Interfaces;
 using Developer.Models.ViewModels;
 using Developer.Services.Admin;
+using Developer.Services.Home;
 
 namespace Developer.Controllers
 {
@@ -19,15 +20,17 @@ namespace Developer.Controllers
         private readonly IWorkerService _workerService;
         private readonly IUpdateAdvertService _updateAdvertService;
         private readonly IAdminLoginService _adminLoginService;
+        private readonly IEmailService _emailService;
 
         // GET: Admin
-        public AdminController(IApplicationContext applicationContext, IAddAdvertService addAdvertService, IWorkerService workerService, IUpdateAdvertService updateAdvertService, IAdminLoginService adminLoginService)
+        public AdminController(IApplicationContext applicationContext, IAddAdvertService addAdvertService, IWorkerService workerService, IUpdateAdvertService updateAdvertService, IAdminLoginService adminLoginService, IEmailService emailService)
         {
             _applicationContext = applicationContext;
             _addAdvertService = addAdvertService;
             _workerService = workerService;
             _updateAdvertService = updateAdvertService;
             _adminLoginService = adminLoginService;
+            _emailService = emailService;
         }
         [AllowAnonymous]
         public ActionResult Login()
@@ -369,6 +372,7 @@ namespace Developer.Controllers
                 {
                     offer.Status = (OfferStatus)status;
                     _applicationContext.SaveChanges();
+                    _emailService.SendAndSaveOfferResponse(offer.Status, offer);
                     return RedirectToAction("Offers");
                 }
                 return View(offer);

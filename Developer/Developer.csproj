@@ -964,6 +964,10 @@
     <Compile Include="Migrations\201411280726465_init1.Designer.cs">
       <DependentUpon>201411280726465_init1.cs</DependentUpon>
     </Compile>
+    <Compile Include="Migrations\201412041115187_init2.cs" />
+    <Compile Include="Migrations\201412041115187_init2.Designer.cs">
+      <DependentUpon>201412041115187_init2.cs</DependentUpon>
+    </Compile>
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Migrations\DbInitializer.cs" />
     <Compile Include="Models\ApplicationModels\EmailMessage.cs">
@@ -1096,6 +1100,8 @@
     <Content Include="Views\Admin\AddWorker.cshtml" />
     <Content Include="Views\Admin\EditWorker.cshtml" />
     <None Include="Services\Home\EmailService\Templates\ContactEmailTemplate.cshtml" />
+    <None Include="Services\Home\EmailService\Templates\OfferAcceptedEmailTemplate.cshtml" />
+    <None Include="Services\Home\EmailService\Templates\OfferRejectedEmailTemplate.cshtml" />
     <None Include="Services\Home\EmailService\Templates\QuestionEmailTemplate.cshtml" />
     <Content Include="Views\Admin\AdList.cshtml" />
     <Content Include="Views\Admin\AdminMenu.cshtml" />
@@ -1130,9 +1136,11 @@
     <None Include="Views\Home\_ShowLand.cshtml" />
     <None Include="Web.Debug.config">
       <DependentUpon>Web.config</DependentUpon>
+      <SubType>Designer</SubType>
     </None>
     <None Include="Web.Release.config">
       <DependentUpon>Web.config</DependentUpon>
+      <SubType>Designer</SubType>
     </None>
   </ItemGroup>
   <ItemGroup>
@@ -1146,6 +1154,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Migrations\201411280726465_init1.resx">
       <DependentUpon>201411280726465_init1.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201412041115187_init2.resx">
+      <DependentUpon>201412041115187_init2.cs</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
   <PropertyGroup>

@@ -109,7 +109,7 @@
         <div class="col-md-4">
             <small>Cena:</small>
             <select class="form-control input-sm" ng-model="mylandPrice" ng-options="price.Price as price.Price for price in landList|filter:{City:mylandCity||undefined}|filter:{Area:mylandArea||undefined}|unique:'Price'">
-                <option style="display: none" value="">Każda cena</option>
+                <option value="">Każda cena</option>
             </select>
         </div>
         <div class="row">
@@ -174,7 +174,7 @@
     @* LIST HOUSES*@
     <div ng-show="myProperty.value =='house'">
         <ul style="padding-left: 0px;">
-            <li dir-paginate="house in filteredhouseList = (houseList|filter:{City:myhouseCity||undefined}|filter:{ToLet:myoffertTypeHouse||undefined}|filter:{UsableArea:myhouseUsableArea||undefined}|filter:{Price:myhousePrice||undefined}|orderBy:mySort.value:mySort.reverse)|itemsPerPage: pageSize:'house'" current-page="currentPage" pagination-id="house">
+            <li dir-paginate="house in filteredhouseList = (houseList|filter:{City:myhouseCity||undefined}|filter:{ToLet:myoffertTypeHouse||undefined}|filter:{UsableArea:myhouseUsableArea||undefined}|filter:{Price:myhousePrice||undefined}|orderBy:mySortFunction:mySort.reverse)|itemsPerPage: pageSize:'house'" current-page="currentPage" pagination-id="house">
                 <div class="col-md-12 custom-left-panel" style="margin-left: 15px; padding-left: 0px; border: 2px solid rgb(255, 227, 176); background-color: rgb(255, 245, 227)">
                     <div class="col-md-3">
                         <img ng-show="house.Picture != null" ng-src="/Content/Photos/{{house.Picture.Link}}" style="width: 100%"/>

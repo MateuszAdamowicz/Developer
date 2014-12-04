@@ -112,6 +112,15 @@ searcher.controller('SearcherController', function ($scope, $resource) {
     $scope.myflatRoom = null;
     $scope.myflatPrice = null;
 
+
+    $scope.mySortFunction = function (item) {
+            if (isNaN(item[$scope.mySort.value]))
+                return item[$scope.mySort.value];
+            return Number(item[$scope.mySort.value]);
+        }
+    //parseInt(item[$scope.mySort.value].split('z')[0].replace(' ', ''))
+    //Number(item[$scope.mySort.value].split('z')[0].replace(' ', ''))
+
     $scope.sorting = [
         { name: 'Po cenie-rosnąco', value: 'Price', reverse:false},
         { name: 'Po cenie-malejąco', value: 'Price',reverse:true},

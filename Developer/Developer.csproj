@@ -1139,9 +1139,6 @@
     <Folder Include="App_Data\" />
     <Folder Include="Content\Photos\Workers\" />
     <Folder Include="Log\" />
-    <Folder Include="Views\ShowListFlat\" />
-    <Folder Include="Views\ShowListHouse\" />
-    <Folder Include="Views\ShowListLand\" />
   </ItemGroup>
   <ItemGroup>
     <EmbeddedResource Include="Migrations\201411260711067_init.resx">

@@ -966,8 +966,12 @@
     </Compile>
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Migrations\DbInitializer.cs" />
-    <Compile Include="Models\ApplicationModels\EmailMessage.cs" />
-    <Compile Include="Models\ApplicationModels\ParsedSearch.cs" />
+    <Compile Include="Models\ApplicationModels\EmailMessage.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="Models\ApplicationModels\ParsedSearch.cs">
+      <SubType>Code</SubType>
+    </Compile>
     <Compile Include="Models\ApplicationModels\Result.cs" />
     <Compile Include="Models\ContactEmail.cs" />
     <Compile Include="Models\EntityModels\Mail.cs" />
@@ -1037,16 +1041,34 @@
     <Compile Include="Services\Admin\WorkerService.cs" />
     <Compile Include="Services\Home\EmailService\EmailSenderService.cs" />
     <Compile Include="Services\Home\EmailService\EmailService.cs" />
-    <Compile Include="Services\Home\EmailService\EmailStorageService.cs" />
-    <Compile Include="Services\Home\EmailService\IEmailSenderService.cs" />
+    <Compile Include="Services\Home\EmailService\EmailStorageService.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="Services\Home\EmailService\IEmailSenderService.cs">
+      <SubType>Code</SubType>
+    </Compile>
     <Compile Include="Services\Home\EmailService\IEmailService.cs" />
-    <Compile Include="Services\Home\EmailService\IEmailStorageService.cs" />
-    <Compile Include="Services\Home\EmailService\IShowAdvertService.cs" />
-    <Compile Include="Services\Home\EmailService\ISmtpManager.cs" />
-    <Compile Include="Services\Home\EmailService\ShowAdvertService.cs" />
-    <Compile Include="Services\Home\EmailService\SmtpManager.cs" />
-    <Compile Include="Services\Home\ISearchService.cs" />
-    <Compile Include="Services\Home\SearchService.cs" />
+    <Compile Include="Services\Home\EmailService\IEmailStorageService.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="Services\Home\EmailService\IShowAdvertService.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="Services\Home\EmailService\ISmtpManager.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="Services\Home\EmailService\ShowAdvertService.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="Services\Home\EmailService\SmtpManager.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="Services\Home\ISearchService.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="Services\Home\SearchService.cs">
+      <SubType>Code</SubType>
+    </Compile>
     <Compile Include="Services\SeedService.cs" />
   </ItemGroup>
   <ItemGroup>

@@ -27,6 +27,7 @@ searcher.config(function ($httpProvider) {
     };
 
     $httpProvider.defaults.transformRequest.push(spinnerFunction);
+    $httpProvider.defaults.timeout = 5000;
 });
 
 searcher.factory('myHttpInterceptor', function ($q, $window) {
@@ -34,8 +35,13 @@ searcher.factory('myHttpInterceptor', function ($q, $window) {
         'response':
             function(response) {
                 $("#spinner").hide();
-                return response;
-        }
+                return response || $q.when(response);
+            },
+        'responseError':
+            function (response) {
+                $("#spinner").hide();
+        return $q.reject(response);
+    }
     };
 });
 
@@ -171,8 +177,9 @@ searcher.controller('SearcherController', function ($scope, $resource) {
 
 
 searcher.controller("NewestController", function ($scope, $resource) {
-    $scope.NewestAdverts = [];
+
     var newestResource = $resource('/api/offertsapi/getnewest', {}, {});
+    $scope.NewestAdverts = [];
     newestResource.query(function(data) {
         $scope.NewestAdverts = data;
     });

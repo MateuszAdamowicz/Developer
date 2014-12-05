@@ -44,13 +44,20 @@ searcher.filter('unique', function () {
         if (typeof input !== "undefined") {
             var unique = {};
             var uniqueList = [];
+            var uniqueList2 = [];
             for (var i = 0; i < input.length; i++) {
                 if (typeof unique[input[i][key]] == "undefined") {
-                    unique[input[i][key]] = "";
-                    uniqueList.push(input[i]);
+                    unique[input[i][key]] = 1;
+                    uniqueList.push(input[i][key]);
                 }
-            }        
-            return uniqueList;
+                else{
+                    unique[input[i][key]] += 1;
+                }
+            }
+            for (var i = 0; i < uniqueList.length; i++) {
+                uniqueList2.push({ City: uniqueList[i], name: uniqueList[i] + " (" + unique[uniqueList[i]] + ")" });
+            }
+            return uniqueList2;
        }
     };
 });
@@ -114,12 +121,14 @@ searcher.controller('SearcherController', function ($scope, $resource) {
 
 
     $scope.mySortFunction = function (item) {
-            if (isNaN(item[$scope.mySort.value]))
+        if ($scope.mySort !== null) {
+            if ($scope.mySort.value === 'Price') {
+                return Number(item[$scope.mySort.value].split('z')[0].replace(/ /g, ''));
+            } else {
                 return item[$scope.mySort.value];
-            return Number(item[$scope.mySort.value]);
+            }
         }
-    //parseInt(item[$scope.mySort.value].split('z')[0].replace(' ', ''))
-    //Number(item[$scope.mySort.value].split('z')[0].replace(' ', ''))
+    }
 
     $scope.sorting = [
         { name: 'Po cenie-rosnąco', value: 'Price', reverse:false},

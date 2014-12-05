@@ -172,7 +172,7 @@ searcher.controller('SearcherController', function ($scope, $resource) {
 
 searcher.controller("NewestController", function ($scope, $resource) {
     $scope.NewestAdverts = [];
-    var newestResource = $resource('/api/offertsapi/getnewest', {}, {});
+    var newestResource = $resource('/api/offertsapi/getnewest', {}, {timeout: {params: 5000}});
     newestResource.query(function(data) {
         $scope.NewestAdverts = data;
     });

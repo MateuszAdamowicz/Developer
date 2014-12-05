@@ -66,8 +66,7 @@ namespace Developer.Controllers
 
         public ActionResult Index()
         {
-            var newest = _newestAdvertService.GetNewest();
-            return View(newest);        
+            return View();        
         }
         public ActionResult House()
         {

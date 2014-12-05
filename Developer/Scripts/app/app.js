@@ -167,6 +167,15 @@ searcher.controller('SearcherController', function ($scope, $resource) {
 
 });
 
+
+searcher.controller("NewestController", function ($scope, $resource) {
+    $scope.NewestAdverts = [];
+    var newestResource = $resource('/api/offertsapi/getnewest', {}, {});
+    newestResource.query(function(data) {
+        $scope.NewestAdverts = data;
+    });
+});
+
 //searcher.controller('MyController', function($scope) {
 
 //    $scope.currentPage = 1;

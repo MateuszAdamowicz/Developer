@@ -7,16 +7,25 @@ using System.Net.Http;
 using System.Web.Http;
 using Developer.Models.EntityModels;
 using Developer.Models.ViewModels;
+using Developer.Services.Home;
 
 namespace Developer.Controllers
 {
     public class OffertsApiController : ApiController
     {
         private readonly IApplicationContext _context;
+        private readonly INewestAdvertService _newestAdvertService;
 
-        public OffertsApiController(IApplicationContext context)
+        public OffertsApiController(IApplicationContext context, INewestAdvertService newestAdvertService)
         {
             _context = context;
+            _newestAdvertService = newestAdvertService;
+        }
+
+
+        public IEnumerable<NewestAdvert> GetNewest()
+        {
+            return _newestAdvertService.GetNewest();
         }
 
         public IEnumerable<ShowListHouse> GetHouses()

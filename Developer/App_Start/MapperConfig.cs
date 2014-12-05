@@ -49,6 +49,22 @@ namespace Developer.App_Start
 
             Mapper.CreateMap<Offer, ContactEmail>()
                 .ForMember(dest => dest.Body, opts => opts.MapFrom(src => src.Description));
+
+            Mapper.CreateMap<Flat, NewestAdvert>()
+                .ForMember(dest => dest.AdType, opts => opts.UseValue(AdType.Flat))
+                .ForMember(dest => dest.Number, opts => opts.MapFrom(src => String.Format("{0}{1}", src.Id*9999, 12)))
+                .ForMember(dest => dest.Picture,
+                    opts => opts.MapFrom(src => Mapper.Map<ShowListPhoto>(src.Pictures.FirstOrDefault())));
+            Mapper.CreateMap<House, NewestAdvert>()
+                .ForMember(dest => dest.AdType, opts => opts.UseValue(AdType.House))
+                .ForMember(dest => dest.Number, opts => opts.MapFrom(src => String.Format("{0}{1}", src.Id*9999, 14)))
+                .ForMember(dest => dest.Picture,
+                    opts => opts.MapFrom(src => Mapper.Map<ShowListPhoto>(src.Pictures.FirstOrDefault())));
+            Mapper.CreateMap<Land, NewestAdvert>()
+                .ForMember(dest => dest.AdType, opts => opts.UseValue(AdType.Land))
+                .ForMember(dest => dest.Number, opts => opts.MapFrom(src => String.Format("{0}{1}", src.Id*9999, 18)))
+                .ForMember(dest => dest.Picture,
+                    opts => opts.MapFrom(src => Mapper.Map<ShowListPhoto>(src.Pictures.FirstOrDefault())));
         }
     }
 }

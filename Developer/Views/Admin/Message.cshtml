@@ -3,7 +3,7 @@
 @model Developer.Models.EntityModels.Mail
 
 <div class="row" style="margin-right: 15px">
-    <div class="col-md-12 custom-left-panel" style="margin-left: 15px">
+    <div class="col-md-12 custom-center-panel" style="margin-left: 15px">
         @Html.Partial("AdminMenu")
         <h4>Wiadomość nr @Model.Id</h4>
         <div class="col-md-12">
@@ -11,61 +11,56 @@
             <div class="row">
                 <div class="col-md-12">
                     <div class="row">
-                        <div class="panel panel-warning">
-                            <div class="panel-heading">
-                                <h3 class="panel-title">
-                                    Dane klienta
-                                </h3>
-                            </div>
-                            <div class="panel-body">
-                                <div class="row" style="margin-bottom: 10px">
-                                    <div class="col-md-6">
-                                        <small>Imię i nazwisko:</small><br />
-                                        @String.Format("{0}", (Model.FullName.IsNullOrWhiteSpace()) ? "---" : Model.FullName)
-                                    </div>
-                                    <div class="col-md-6">
-                                        <small>Email:</small><br />
-                                        @String.Format("{0}", (Model.Email.IsNullOrWhiteSpace()) ? "---" : Model.Email)
-                                    </div>
+                        <div class="custom-advert-panel-title">
+                                Dane klienta
+                        </div>
+                        <div class="custom-advert-panel-body">
+                            <div class="row" style="margin-bottom: 10px">
+                                <div class="col-md-6">
+                                    <small>Imię i nazwisko:</small><br />
+                                    @String.Format("{0}", (Model.FullName.IsNullOrWhiteSpace()) ? "---" : Model.FullName)
                                 </div>
-                                <div class="row" style="margin-bottom: 10px">
-                                    <div class="col-md-6">
-                                        <small>Numer telefonu:</small><br />
-                                        @String.Format("{0}", (Model.PhoneNumber.IsNullOrWhiteSpace()) ? "---" : Model.PhoneNumber)
-                                    </div>
+                                <div class="col-md-6">
+                                    <small>Email:</small><br />
+                                    @String.Format("{0}", (Model.Email.IsNullOrWhiteSpace()) ? "---" : Model.Email)
+                                </div>
+                            </div>
+                            <div class="row" style="margin-bottom: 10px">
+                                <div class="col-md-6">
+                                    <small>Numer telefonu:</small><br />
+                                    @String.Format("{0}", (Model.PhoneNumber.IsNullOrWhiteSpace()) ? "---" : Model.PhoneNumber)
                                 </div>
                             </div>
                         </div>
                     </div>
                     <div class="row">
-                        <div class="panel panel-warning">
-                            <div class="panel-heading">
-                                <h3 class="panel-title">
-                                    Informacje podstawowe
-                                </h3>
-                            </div>
-                            <div class="panel-body">
-                                <div class="row" style="margin-bottom: 10px">
-                                    <div class="col-md-6">
+                        <div class="custom-advert-panel-title">
+                                Informacje podstawowe
+                        </div>
+                        <div class="custom-advert-panel-body">
+                            <div class="row" style="margin-bottom: 10px">
+                                <div class="col-md-6">
+                                    @if (Model.OrderLink.IsNullOrWhiteSpace())
+                                    {
                                         <small>Link:</small><br />
-                                        @String.Format("{0}", (Model.OrderLink.IsNullOrWhiteSpace()) ? "---" : Model.OrderLink)
-                                    </div>
+                                        <p>"----"</p>
+                                    }
+                                    else
+                                    {
+                                        <a href="@Model.OrderLink">Link</a>
+                                    }
                                 </div>
                             </div>
                         </div>
                     </div>
                     <div class="row">
-                        <div class="panel panel-warning">
-                            <div class="panel-heading">
-                                <h3 class="panel-title">
-                                    Treść wiadomości
-                                </h3>
-                            </div>
-                            <div class="panel-body">
-                                <div class="row" style="margin-bottom: 10px">
-                                    <div class="col-md-12">
-                                        @String.Format("{0}", (Model.Body.IsNullOrWhiteSpace()) ? "---" : Model.Body)
-                                    </div>
+                        <div class="custom-advert-panel-title">
+                            Treść wiadomości
+                        </div>
+                        <div class="custom-advert-panel-body">
+                            <div class="row" style="margin-bottom: 10px">
+                                <div class="col-md-12">
+                                    @String.Format("{0}", (Model.Body.IsNullOrWhiteSpace()) ? "---" : Model.Body)
                                 </div>
                             </div>
                         </div>

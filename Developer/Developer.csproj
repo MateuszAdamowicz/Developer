@@ -946,7 +946,6 @@
     <Compile Include="App_Start\UnityConfig.cs" />
     <Compile Include="App_Start\WebApiConfig.cs" />
     <Compile Include="Bootstrapper.cs" />
-    <Compile Include="Controllers\AdminApiController.cs" />
     <Compile Include="Controllers\AdminController.cs" />
     <Compile Include="Controllers\OffertsApiController.cs">
       <SubType>Code</SubType>
@@ -1011,6 +1010,9 @@
     <Compile Include="Models\ViewModels\LoginViewModel.cs">
       <SubType>Code</SubType>
     </Compile>
+    <Compile Include="Models\ViewModels\NewestAdvert.cs">
+      <SubType>Code</SubType>
+    </Compile>
     <Compile Include="Models\ViewModels\OfferStatus.cs" />
     <Compile Include="Models\ViewModels\ShowListPhoto.cs" />
     <Compile Include="Models\ViewModels\Response.cs">
@@ -1073,7 +1075,13 @@
     <Compile Include="Services\Home\ICounterService.cs">
       <SubType>Code</SubType>
     </Compile>
+    <Compile Include="Services\Home\INewestAdvertService.cs">
+      <SubType>Code</SubType>
+    </Compile>
     <Compile Include="Services\Home\ISearchService.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="Services\Home\NewestAdvertService.cs">
       <SubType>Code</SubType>
     </Compile>
     <Compile Include="Services\Home\SearchService.cs">

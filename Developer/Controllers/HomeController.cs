@@ -18,14 +18,16 @@ namespace Developer.Controllers
         private readonly ISearchService _searchService;
         private readonly IShowAdvertService _showAdvertService;
         private readonly ICounterService _counterService;
+        private readonly INewestAdvertService _newestAdvertService;
         // GET: Home
-        public HomeController(IApplicationContext context, IEmailService emailService, ISearchService searchService, IShowAdvertService showAdvertService, ICounterService counterService)
+        public HomeController(IApplicationContext context, IEmailService emailService, ISearchService searchService, IShowAdvertService showAdvertService, ICounterService counterService, INewestAdvertService newestAdvertService)
         {
             _context = context;
             _emailService = emailService;
             _searchService = searchService;
             _showAdvertService = showAdvertService;
             _counterService = counterService;
+            _newestAdvertService = newestAdvertService;
         }
 
         public ActionResult About()
@@ -64,7 +66,8 @@ namespace Developer.Controllers
 
         public ActionResult Index()
         {
-            return View();        
+            var newest = _newestAdvertService.GetNewest();
+            return View(newest);        
         }
         public ActionResult House()
         {

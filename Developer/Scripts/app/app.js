@@ -46,10 +46,15 @@ searcher.filter('unique', function () {
             var uniqueList = [];
             for (var i = 0; i < input.length; i++) {
                 if (typeof unique[input[i][key]] == "undefined") {
-                    unique[input[i][key]] = "";
+                    unique[input[i][key]] = 1;
                     uniqueList.push(input[i]);
-                }
-            }        
+                } else {
+                    unique[input[i][key]] += 1;
+                };
+            }
+            for (var i = 0; i < uniqueList.length; i++) {
+                uniqueList[i].counter = uniqueList[i][key] + " ("+unique[uniqueList[i][key]]+")";
+            }
             return uniqueList;
        }
     };

@@ -1,6 +1,15 @@
 ﻿@model Developer.Models.ViewModels.LoginViewModel
-
 <div class="col-md-12 custom-center-panel">
+    @{
+        if (!Model.Authorized && !String.IsNullOrEmpty(Model.Login) && !String.IsNullOrEmpty(Model.Password))
+        {
+            <div class="alert alert-danger">
+                <div class="alert-body">
+                    <strong>Błąd!</strong><br/> Nie udało się zalogować. Wpisz poprawne dane!
+                </div>
+            </div>
+        }
+    }
     <h4>Zaloguj się jako administrator</h4>
     <div class="col-md-12">
         <div class="form-group-sm">

@@ -963,10 +963,6 @@
     <Compile Include="Migrations\201411280726465_init1.Designer.cs">
       <DependentUpon>201411280726465_init1.cs</DependentUpon>
     </Compile>
-    <Compile Include="Migrations\201412041115187_init2.cs" />
-    <Compile Include="Migrations\201412041115187_init2.Designer.cs">
-      <DependentUpon>201412041115187_init2.cs</DependentUpon>
-    </Compile>
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Migrations\DbInitializer.cs" />
     <Compile Include="Models\ApplicationModels\EmailMessage.cs">
@@ -1168,9 +1164,6 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Migrations\201411280726465_init1.resx">
       <DependentUpon>201411280726465_init1.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="Migrations\201412041115187_init2.resx">
-      <DependentUpon>201412041115187_init2.cs</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
   <PropertyGroup>

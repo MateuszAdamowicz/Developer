@@ -51,10 +51,10 @@ searcher.filter('unique', function () {
                 } else {
                     unique[input[i][key]] += 1;
                 };
-            }
+                }
             for (var i = 0; i < uniqueList.length; i++) {
                 uniqueList[i].counter = uniqueList[i][key] + " ("+unique[uniqueList[i][key]]+")";
-            }
+            }        
             return uniqueList;
        }
     };
@@ -119,12 +119,14 @@ searcher.controller('SearcherController', function ($scope, $resource) {
 
 
     $scope.mySortFunction = function (item) {
-            if (isNaN(item[$scope.mySort.value]))
+        if ($scope.mySort !== null) {
+            if ($scope.mySort.value === 'Price') {
+                return Number(item[$scope.mySort.value].split('z')[0].replace(/ /g, ''));
+            } else {
                 return item[$scope.mySort.value];
-            return Number(item[$scope.mySort.value]);
+            }
         }
-    //parseInt(item[$scope.mySort.value].split('z')[0].replace(' ', ''))
-    //Number(item[$scope.mySort.value].split('z')[0].replace(' ', ''))
+        }
 
     $scope.sorting = [
         { name: 'Po cenie-rosnąco', value: 'Price', reverse:false},

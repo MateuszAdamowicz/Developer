@@ -28,5 +28,6 @@ namespace Developer.Models.ViewModels
         public DateTime CreatedAt { get; set; }
         public ContactEmail ContactEmail { get; set; }
         public string Number { get; set; }
+        public int Counter { get; set; }
     }
 }

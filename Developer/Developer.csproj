@@ -1043,6 +1043,9 @@
       <SubType>Code</SubType>
     </Compile>
     <Compile Include="Services\Admin\WorkerService.cs" />
+    <Compile Include="Services\Home\CounterService.cs">
+      <SubType>Code</SubType>
+    </Compile>
     <Compile Include="Services\Home\EmailService\EmailSenderService.cs" />
     <Compile Include="Services\Home\EmailService\EmailService.cs" />
     <Compile Include="Services\Home\EmailService\EmailStorageService.cs">
@@ -1065,6 +1068,9 @@
       <SubType>Code</SubType>
     </Compile>
     <Compile Include="Services\Home\EmailService\SmtpManager.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="Services\Home\ICounterService.cs">
       <SubType>Code</SubType>
     </Compile>
     <Compile Include="Services\Home\ISearchService.cs">

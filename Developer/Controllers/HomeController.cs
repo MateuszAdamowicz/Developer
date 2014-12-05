@@ -17,13 +17,15 @@ namespace Developer.Controllers
         private readonly IEmailService _emailService;
         private readonly ISearchService _searchService;
         private readonly IShowAdvertService _showAdvertService;
+        private readonly ICounterService _counterService;
         // GET: Home
-        public HomeController(IApplicationContext context, IEmailService emailService, ISearchService searchService, IShowAdvertService showAdvertService)
+        public HomeController(IApplicationContext context, IEmailService emailService, ISearchService searchService, IShowAdvertService showAdvertService, ICounterService counterService)
         {
             _context = context;
             _emailService = emailService;
             _searchService = searchService;
             _showAdvertService = showAdvertService;
+            _counterService = counterService;
         }
 
         public ActionResult About()
@@ -103,7 +105,6 @@ namespace Developer.Controllers
                     {
                         advert.Data.Land.ContactEmail = contactEmail;
                     }
-
                     return View(advert.Data);
                 }
                 return RedirectToAction("NotFound");
@@ -121,6 +122,12 @@ namespace Developer.Controllers
 
                 if (result.Success)
                 {
+                    if (((List<int>) Session["Visited"]).Find(x => x == Convert.ToInt32(key)) == 0)
+                    {
+                        ((List<int>)Session["Visited"]).Add(Convert.ToInt32(key));
+                        _counterService.AddHit(key);
+                    }
+
                     return View(result.Data);
                 }
                 return RedirectToAction("NotFound");

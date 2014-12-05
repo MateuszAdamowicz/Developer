@@ -34,5 +34,10 @@ namespace Developer
             MapperConfig.Register();
             BundleConfig.RegisterBundles(BundleTable.Bundles);
         }
+
+        protected void Session_Start(object sender, EventArgs e)
+        {
+            Session["Visited"] = new List<int>();
+        }
     }
 }

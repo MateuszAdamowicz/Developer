@@ -5,6 +5,11 @@ namespace Developer.Models.EntityModels.Interfaces
 {
     public class Ad : Base, IAd
     {
+        public Ad()
+        {
+            Counter = 0;
+        }
+
         public string Title { get; set; }
         public string Description { get; set; }
         public string Details { get; set; }
@@ -14,5 +19,6 @@ namespace Developer.Models.EntityModels.Interfaces
         public bool Visible { get; set; }
         public bool Deleted { get; set; }
         public virtual List<Photo> Pictures { get; set; }
+        public int Counter { get; set; }
     }
 }

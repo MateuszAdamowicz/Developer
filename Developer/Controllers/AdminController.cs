@@ -8,6 +8,7 @@ using Developer.Models.EntityModels;
 using Developer.Models.EntityModels.Interfaces;
 using Developer.Models.ViewModels;
 using Developer.Services.Admin;
+using Developer.Services.Home;
 
 namespace Developer.Controllers
 {
@@ -19,15 +20,17 @@ namespace Developer.Controllers
         private readonly IWorkerService _workerService;
         private readonly IUpdateAdvertService _updateAdvertService;
         private readonly IAdminLoginService _adminLoginService;
+        private readonly IEmailService _emailService;
 
         // GET: Admin
-        public AdminController(IApplicationContext applicationContext, IAddAdvertService addAdvertService, IWorkerService workerService, IUpdateAdvertService updateAdvertService, IAdminLoginService adminLoginService)
+        public AdminController(IApplicationContext applicationContext, IAddAdvertService addAdvertService, IWorkerService workerService, IUpdateAdvertService updateAdvertService, IAdminLoginService adminLoginService, IEmailService emailService)
         {
             _applicationContext = applicationContext;
             _addAdvertService = addAdvertService;
             _workerService = workerService;
             _updateAdvertService = updateAdvertService;
             _adminLoginService = adminLoginService;
+            _emailService = emailService;
         }
         [AllowAnonymous]
         public ActionResult Login()
@@ -86,7 +89,7 @@ namespace Developer.Controllers
         }
 
         [HttpPost]
-        [ValidateAntiForgeryToken]
+        //[ValidateAntiForgeryToken]
         public ActionResult AddFlat(AdminFlat adminFlat)
         {
             if (ModelState.IsValid)
@@ -107,7 +110,7 @@ namespace Developer.Controllers
         }
 
         [HttpPost]
-        [ValidateAntiForgeryToken]
+        //[ValidateAntiForgeryToken]
         public ActionResult AddHouse(AdminHouse adminHouse)
         {
             if (ModelState.IsValid)
@@ -127,7 +130,7 @@ namespace Developer.Controllers
             return RedirectToAction("AddAdvert");
         }
         [HttpPost]
-        [ValidateAntiForgeryToken]
+        //[ValidateAntiForgeryToken]
         public ActionResult AddLand(AdminLand adminLand)
         {
             if (ModelState.IsValid)
@@ -155,7 +158,7 @@ namespace Developer.Controllers
         }
 
         [HttpPost]
-        [ValidateAntiForgeryToken]
+        //[ValidateAntiForgeryToken]
         public ActionResult AddWorker(AdminWorker adminWorker)
         {
             if (ModelState.IsValid)
@@ -188,7 +191,7 @@ namespace Developer.Controllers
         }
 
         [HttpPost]
-        [ValidateAntiForgeryToken]
+        //[ValidateAntiForgeryToken]
         public ActionResult EditWorker(AdminWorker adminWorker, int id)
         {
             if (ModelState.IsValid)
@@ -241,7 +244,7 @@ namespace Developer.Controllers
         }
 
         [HttpPost]
-        [ValidateAntiForgeryToken]
+        //[ValidateAntiForgeryToken]
         public ActionResult EditFlat(EditFlat editFlat, int id)
         {
             editFlat.Pictures = new List<Photo>();
@@ -271,7 +274,7 @@ namespace Developer.Controllers
 
 
         [HttpPost]
-        [ValidateAntiForgeryToken]
+        //[ValidateAntiForgeryToken]
         public ActionResult EditHouse(EditHouse editHouse, int id)
         {
             editHouse.Pictures = new List<Photo>();
@@ -308,7 +311,7 @@ namespace Developer.Controllers
         }
 
         [HttpPost]
-        [ValidateAntiForgeryToken]
+        //[ValidateAntiForgeryToken]
         public ActionResult EditLand(EditLand editLand, int id)
         {
             editLand.Pictures = new List<Photo>();
@@ -369,6 +372,7 @@ namespace Developer.Controllers
                 {
                     offer.Status = (OfferStatus)status;
                     _applicationContext.SaveChanges();
+                    _emailService.SendAndSaveOfferResponse(offer.Status, offer);
                     return RedirectToAction("Offers");
                 }
                 return View(offer);

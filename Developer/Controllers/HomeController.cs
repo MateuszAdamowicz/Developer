@@ -17,13 +17,17 @@ namespace Developer.Controllers
         private readonly IEmailService _emailService;
         private readonly ISearchService _searchService;
         private readonly IShowAdvertService _showAdvertService;
+        private readonly ICounterService _counterService;
+        private readonly INewestAdvertService _newestAdvertService;
         // GET: Home
-        public HomeController(IApplicationContext context, IEmailService emailService, ISearchService searchService, IShowAdvertService showAdvertService)
+        public HomeController(IApplicationContext context, IEmailService emailService, ISearchService searchService, IShowAdvertService showAdvertService, ICounterService counterService, INewestAdvertService newestAdvertService)
         {
             _context = context;
             _emailService = emailService;
             _searchService = searchService;
             _showAdvertService = showAdvertService;
+            _counterService = counterService;
+            _newestAdvertService = newestAdvertService;
         }
 
         public ActionResult About()
@@ -62,7 +66,8 @@ namespace Developer.Controllers
 
         public ActionResult Index()
         {
-            return View();        
+            var newest = _newestAdvertService.GetNewest();
+            return View(newest);        
         }
         public ActionResult House()
         {
@@ -77,6 +82,7 @@ namespace Developer.Controllers
             return View();
         }
         [HttpPost]
+        [ValidateAntiForgeryToken]
         public ActionResult Show(ContactEmail contactEmail, string key)
         {
             if (ModelState.IsValid)
@@ -103,7 +109,6 @@ namespace Developer.Controllers
                     {
                         advert.Data.Land.ContactEmail = contactEmail;
                     }
-
                     return View(advert.Data);
                 }
                 return RedirectToAction("NotFound");
@@ -121,6 +126,12 @@ namespace Developer.Controllers
 
                 if (result.Success)
                 {
+                    if (((List<int>) Session["Visited"]).Find(x => x == Convert.ToInt32(key)) == 0)
+                    {
+                        ((List<int>)Session["Visited"]).Add(Convert.ToInt32(key));
+                        _counterService.AddHit(key);
+                    }
+
                     return View(result.Data);
                 }
                 return RedirectToAction("NotFound");
@@ -135,6 +146,7 @@ namespace Developer.Controllers
         }
 
         [HttpPost]
+        [ValidateAntiForgeryToken]
         public ActionResult CreateOffer(CreateOffer createOffer)
         {
             if (ModelState.IsValid)
@@ -148,6 +160,7 @@ namespace Developer.Controllers
         }
 
         [HttpPost]
+        [ValidateAntiForgeryToken]
         public ActionResult Contact(ContactEmail contactEmail)
         {
             if (ModelState.IsValid)

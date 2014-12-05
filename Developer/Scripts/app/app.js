@@ -44,20 +44,18 @@ searcher.filter('unique', function () {
         if (typeof input !== "undefined") {
             var unique = {};
             var uniqueList = [];
-            var uniqueList2 = [];
             for (var i = 0; i < input.length; i++) {
                 if (typeof unique[input[i][key]] == "undefined") {
                     unique[input[i][key]] = 1;
-                    uniqueList.push(input[i][key]);
-                }
-                else{
+                    uniqueList.push(input[i]);
+                } else {
                     unique[input[i][key]] += 1;
+                };
                 }
-            }
             for (var i = 0; i < uniqueList.length; i++) {
-                uniqueList2.push({ City: uniqueList[i], name: uniqueList[i] + " (" + unique[uniqueList[i]] + ")" });
-            }
-            return uniqueList2;
+                uniqueList[i].counter = uniqueList[i][key] + " ("+unique[uniqueList[i][key]]+")";
+            }        
+            return uniqueList;
        }
     };
 });
@@ -128,7 +126,7 @@ searcher.controller('SearcherController', function ($scope, $resource) {
                 return item[$scope.mySort.value];
             }
         }
-    }
+        }
 
     $scope.sorting = [
         { name: 'Po cenie-rosnąco', value: 'Price', reverse:false},

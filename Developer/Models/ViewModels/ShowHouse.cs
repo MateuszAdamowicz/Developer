@@ -6,6 +6,11 @@ namespace Developer.Models.ViewModels
 {
     public class ShowHouse
     {
+        public ShowHouse()
+        {
+            ContactEmail = new ContactEmail();
+        }
+
         public ShowWorker Worker { get; set; }
         public string Location { get; set; }
         public string LandArea { get; set; }
@@ -28,5 +33,6 @@ namespace Developer.Models.ViewModels
         public DateTime CreatedAt { get; set; }
         public ContactEmail ContactEmail { get; set; }
         public string Number { get; set; }
+        public int Counter { get; set; }
     }
 }

@@ -946,7 +946,6 @@
     <Compile Include="App_Start\UnityConfig.cs" />
     <Compile Include="App_Start\WebApiConfig.cs" />
     <Compile Include="Bootstrapper.cs" />
-    <Compile Include="Controllers\AdminApiController.cs" />
     <Compile Include="Controllers\AdminController.cs" />
     <Compile Include="Controllers\OffertsApiController.cs">
       <SubType>Code</SubType>
@@ -1007,6 +1006,9 @@
     <Compile Include="Models\ViewModels\LoginViewModel.cs">
       <SubType>Code</SubType>
     </Compile>
+    <Compile Include="Models\ViewModels\NewestAdvert.cs">
+      <SubType>Code</SubType>
+    </Compile>
     <Compile Include="Models\ViewModels\OfferStatus.cs" />
     <Compile Include="Models\ViewModels\ShowListPhoto.cs" />
     <Compile Include="Models\ViewModels\Response.cs">
@@ -1039,6 +1041,9 @@
       <SubType>Code</SubType>
     </Compile>
     <Compile Include="Services\Admin\WorkerService.cs" />
+    <Compile Include="Services\Home\CounterService.cs">
+      <SubType>Code</SubType>
+    </Compile>
     <Compile Include="Services\Home\EmailService\EmailSenderService.cs" />
     <Compile Include="Services\Home\EmailService\EmailService.cs" />
     <Compile Include="Services\Home\EmailService\EmailStorageService.cs">
@@ -1063,7 +1068,16 @@
     <Compile Include="Services\Home\EmailService\SmtpManager.cs">
       <SubType>Code</SubType>
     </Compile>
+    <Compile Include="Services\Home\ICounterService.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="Services\Home\INewestAdvertService.cs">
+      <SubType>Code</SubType>
+    </Compile>
     <Compile Include="Services\Home\ISearchService.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="Services\Home\NewestAdvertService.cs">
       <SubType>Code</SubType>
     </Compile>
     <Compile Include="Services\Home\SearchService.cs">
@@ -1096,6 +1110,8 @@
     <Content Include="Views\Admin\AddWorker.cshtml" />
     <Content Include="Views\Admin\EditWorker.cshtml" />
     <None Include="Services\Home\EmailService\Templates\ContactEmailTemplate.cshtml" />
+    <None Include="Services\Home\EmailService\Templates\OfferAcceptedEmailTemplate.cshtml" />
+    <None Include="Services\Home\EmailService\Templates\OfferRejectedEmailTemplate.cshtml" />
     <None Include="Services\Home\EmailService\Templates\QuestionEmailTemplate.cshtml" />
     <Content Include="Views\Admin\AdList.cshtml" />
     <Content Include="Views\Admin\AdminMenu.cshtml" />
@@ -1123,25 +1139,24 @@
     <None Include="Views\Home\Credits.cshtml" />
     <None Include="Views\Home\NotFound.cshtml" />
     <Content Include="Views\Home\CreateOffer.cshtml" />
-    <None Include="Views\Home\Where.cshtml" />
+    <Content Include="Views\Home\Where.cshtml" />
     <None Include="Views\Home\_ContactForm.cshtml" />
     <None Include="Views\Home\_ShowFlat.cshtml" />
     <None Include="Views\Home\_ShowHouse.cshtml" />
     <None Include="Views\Home\_ShowLand.cshtml" />
     <None Include="Web.Debug.config">
       <DependentUpon>Web.config</DependentUpon>
+      <SubType>Designer</SubType>
     </None>
     <None Include="Web.Release.config">
       <DependentUpon>Web.config</DependentUpon>
+      <SubType>Designer</SubType>
     </None>
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
     <Folder Include="Content\Photos\Workers\" />
     <Folder Include="Log\" />
-    <Folder Include="Views\ShowListFlat\" />
-    <Folder Include="Views\ShowListHouse\" />
-    <Folder Include="Views\ShowListLand\" />
   </ItemGroup>
   <ItemGroup>
     <EmbeddedResource Include="Migrations\201411260711067_init.resx">

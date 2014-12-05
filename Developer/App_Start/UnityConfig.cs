@@ -29,6 +29,8 @@ namespace Developer
             container.RegisterType<IEmailStorageService, EmailStorageService>();
             container.RegisterType<IShowAdvertService, ShowAdvertService>();
             container.RegisterType<IAdminLoginService, AdminLoginService>();
+            container.RegisterType<ICounterService, CounterService>();
+            container.RegisterType<INewestAdvertService, NewestAdvertService>();
 
         }
     }

@@ -41,7 +41,7 @@ searcher.factory('myHttpInterceptor', function ($q, $window) {
             function (response) {
                 $("#spinner").hide();
         return $q.reject(response);
-    }
+        }
     };
 });
 
@@ -177,9 +177,8 @@ searcher.controller('SearcherController', function ($scope, $resource) {
 
 
 searcher.controller("NewestController", function ($scope, $resource) {
-
-    var newestResource = $resource('/api/offertsapi/getnewest', {}, {});
     $scope.NewestAdverts = [];
+    var newestResource = $resource('/api/offertsapi/getnewest', {}, {timeout: {params: 5000}});
     newestResource.query(function(data) {
         $scope.NewestAdverts = data;
     });

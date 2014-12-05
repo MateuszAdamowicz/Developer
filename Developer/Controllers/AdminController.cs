@@ -89,7 +89,7 @@ namespace Developer.Controllers
         }
 
         [HttpPost]
-        [ValidateAntiForgeryToken]
+        //[ValidateAntiForgeryToken]
         public ActionResult AddFlat(AdminFlat adminFlat)
         {
             if (ModelState.IsValid)
@@ -110,7 +110,7 @@ namespace Developer.Controllers
         }
 
         [HttpPost]
-        [ValidateAntiForgeryToken]
+        //[ValidateAntiForgeryToken]
         public ActionResult AddHouse(AdminHouse adminHouse)
         {
             if (ModelState.IsValid)
@@ -130,7 +130,7 @@ namespace Developer.Controllers
             return RedirectToAction("AddAdvert");
         }
         [HttpPost]
-        [ValidateAntiForgeryToken]
+        //[ValidateAntiForgeryToken]
         public ActionResult AddLand(AdminLand adminLand)
         {
             if (ModelState.IsValid)
@@ -158,7 +158,7 @@ namespace Developer.Controllers
         }
 
         [HttpPost]
-        [ValidateAntiForgeryToken]
+        //[ValidateAntiForgeryToken]
         public ActionResult AddWorker(AdminWorker adminWorker)
         {
             if (ModelState.IsValid)
@@ -191,7 +191,7 @@ namespace Developer.Controllers
         }
 
         [HttpPost]
-        [ValidateAntiForgeryToken]
+        //[ValidateAntiForgeryToken]
         public ActionResult EditWorker(AdminWorker adminWorker, int id)
         {
             if (ModelState.IsValid)
@@ -244,7 +244,7 @@ namespace Developer.Controllers
         }
 
         [HttpPost]
-        [ValidateAntiForgeryToken]
+        //[ValidateAntiForgeryToken]
         public ActionResult EditFlat(EditFlat editFlat, int id)
         {
             editFlat.Pictures = new List<Photo>();
@@ -274,7 +274,7 @@ namespace Developer.Controllers
 
 
         [HttpPost]
-        [ValidateAntiForgeryToken]
+        //[ValidateAntiForgeryToken]
         public ActionResult EditHouse(EditHouse editHouse, int id)
         {
             editHouse.Pictures = new List<Photo>();
@@ -311,7 +311,7 @@ namespace Developer.Controllers
         }
 
         [HttpPost]
-        [ValidateAntiForgeryToken]
+        //[ValidateAntiForgeryToken]
         public ActionResult EditLand(EditLand editLand, int id)
         {
             editLand.Pictures = new List<Photo>();

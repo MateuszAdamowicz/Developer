@@ -1135,7 +1135,7 @@
     <None Include="Views\Home\Credits.cshtml" />
     <None Include="Views\Home\NotFound.cshtml" />
     <Content Include="Views\Home\CreateOffer.cshtml" />
-    <None Include="Views\Home\Where.cshtml" />
+    <Content Include="Views\Home\Where.cshtml" />
     <None Include="Views\Home\_ContactForm.cshtml" />
     <None Include="Views\Home\_ShowFlat.cshtml" />
     <None Include="Views\Home\_ShowHouse.cshtml" />

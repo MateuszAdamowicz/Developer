@@ -79,6 +79,7 @@ namespace Developer.Controllers
             return View();
         }
         [HttpPost]
+        [ValidateAntiForgeryToken]
         public ActionResult Show(ContactEmail contactEmail, string key)
         {
             if (ModelState.IsValid)
@@ -142,6 +143,7 @@ namespace Developer.Controllers
         }
 
         [HttpPost]
+        [ValidateAntiForgeryToken]
         public ActionResult CreateOffer(CreateOffer createOffer)
         {
             if (ModelState.IsValid)
@@ -155,6 +157,7 @@ namespace Developer.Controllers
         }
 
         [HttpPost]
+        [ValidateAntiForgeryToken]
         public ActionResult Contact(ContactEmail contactEmail)
         {
             if (ModelState.IsValid)

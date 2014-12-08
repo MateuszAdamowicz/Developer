@@ -15,10 +15,11 @@
 //        });
 //    }]);
 
-var searcher = angular.module('searcher', ['ngResource', 'angularUtils.directives.dirPagination']);
+var searcher = angular.module('searcher', ['ngResource','ngRoute', 'angularUtils.directives.dirPagination']);
 
 
-searcher.config(function ($httpProvider) {
+
+searcher.config(function($httpProvider) {
     $httpProvider.interceptors.push('myHttpInterceptor');
 
     var spinnerFunction = function spinnerFunction(data) {
@@ -28,6 +29,7 @@ searcher.config(function ($httpProvider) {
 
     $httpProvider.defaults.transformRequest.push(spinnerFunction);
     $httpProvider.defaults.timeout = 5000;
+
 });
 
 searcher.factory('myHttpInterceptor', function ($q, $window) {
@@ -66,20 +68,60 @@ searcher.filter('unique', function () {
     };
 });
 
-searcher.controller('SearcherController', function ($scope, $resource) {
+searcher.controller('SearcherController', function ($scope, $resource, $location) {
 
+    $scope.$location = $location;
     $scope.properties = [
     { name: 'Domy', value: 'house' },
     { name: 'Mieszkania', value: 'flat' },
     { name: 'Działki', value: 'land' }
     ];
-    $scope.myProperty = null;
 
-    $scope.myoffertTypeHouse = null;
-    $scope.myoffertTypeFlat = null;
+    //$scope.myProperty = null;
+    $scope.$watch('myProperty', function (property) {
+        if (property) {
+            $location.search('property', property);
+        } else {
+            $location.search('property', null);
+        }
+    });
+    $scope.$watch('$location.search().property', function (property) {
+            $scope.myProperty = property;
+    });
+
+    //$scope.myoffertTypeHouse = null;
+    $scope.$watch('myoffertTypeHouse', function (offert) {
+        if (offert) {
+            $location.search('offert', offert);
+        } else {
+            $location.search('offert', null);
+        }
+    });
+    $scope.$watch('$location.search().offert', function (offert) {
+        $scope.myoffertTypeHouse = offert;
+    });
+
+    //$scope.myoffertTypeFlat = null;
+    $scope.$watch('myoffertTypeFlat', function (offert) {
+        if (offert) {
+            $location.search('offert', offert);
+        } else {
+            $location.search('offert', null);
+        }
+    });
+    $scope.$watch('$location.search().offert', function (offert) {
+        $scope.myoffertTypeFlat = offert;
+    });
+
+    
     $scope.boolToStr = function (arg) { return arg ? 'Wynajem' : 'Sprzedaż' };
 
-    $scope.loadResources = function (myProperty) {
+    $scope.$watch('myProperty',function (myProperty) {
+        
+        $scope.clearFilters('flat');
+        $scope.clearFilters('house');
+        $scope.clearFilters('land');
+
         if (myProperty === 'flat') {
             
             $scope.mySort = null;
@@ -109,22 +151,117 @@ searcher.controller('SearcherController', function ($scope, $resource) {
                     $scope.houseList = data;
                 });
         }
-    };
+    });
 
-    $scope.myhouseCity = null;
-    $scope.myhouseUsableArea = null;
-    $scope.myhousePrice = null;
+    // $scope.myhouseCity = null;
+    $scope.$watch('myhouseCity', function (city) {
+        if (city) {
+            $location.search('city', city);
+        } else {
+            $location.search('city', null);
+        }
+    });
+    $scope.$watch('$location.search().city', function (city) {
+        $scope.myhouseCity = city;
+    });
+   
+    //$scope.myhouseUsableArea = null;
+    $scope.$watch('myhouseUsableArea', function (usablearea) {
+        if (usablearea) {
+            $location.search('usablearea', usablearea);
+        } else {
+            $location.search('usablearea', null);
+        }
+    });
+    $scope.$watch('$location.search().usablearea', function (usablearea) {
+        $scope.myhouseUsableArea = usablearea;
+    });
+    
+    //$scope.myhousePrice = null;
+    $scope.$watch('myhousePrice', function (price) {
+        if (price) {
+            $location.search('price', price);
+        } else {
+            $location.search('price', null);
+        }
+    });
+    $scope.$watch('$location.search().price', function (price) {
+        $scope.myhousePrice = price;
+    });
 
-    $scope.mylandCity = null;
-    $scope.mylandArea = null;
-    $scope.mylandPrice = null;
+    //$scope.mylandCity = null;
+    $scope.$watch('mylandCity', function (city) {
+        if (city) {
+            $location.search('city', city);
+        } else {
+            $location.search('city', null);
+        }
+    });
+    $scope.$watch('$location.search().city', function (city) {
+        $scope.mylandCity = city;
+    });   
 
-    $scope.myflatCity = null;
-    $scope.myflatRoom = null;
-    $scope.myflatPrice = null;
+    //$scope.mylandArea = null;
+    $scope.$watch('mylandArea', function (area) {
+        if (area) {
+            $location.search('area', area);
+        } else {
+            $location.search('area', null);
+        }
+    });
+    $scope.$watch('$location.search().area', function (area) {
+        $scope.mylandArea = area;
+    });
+    
+    //$scope.mylandPrice = null;
+    $scope.$watch('mylandPrice', function (price) {
+        if (price) {
+            $location.search('price', price);
+        } else {
+            $location.search('price', null);
+        }
+    });
+    $scope.$watch('$location.search().price', function (price) {
+        $scope.mylandPrice = price;
+    });
+    
+    //$scope.myflatCity = null;
+    $scope.$watch('myflatCity', function (city) {
+        if (city) {
+            $location.search('city', city);
+        } else {
+            $location.search('city', null);
+        }
+    });
+    $scope.$watch('$location.search().city', function (city) {
+        $scope.myflatCity = city;
+    });
+    
+    //$scope.myflatRoom = null;
+    $scope.$watch('myflatRoom', function (room) {
+        if (room) {
+            $location.search('room', room);
+        } else {
+            $location.search('room', null);
+        }
+    });
+    $scope.$watch('$location.search().room', function (room) {
+        $scope.myflatRoom = room;
+    });
+    
+    // $scope.myflatPrice = null;
+    $scope.$watch('myflatPrice', function (price) {
+        if (price) {
+            $location.search('price', price);
+        } else {
+            $location.search('price', null);
+        }
+    });
+    $scope.$watch('$location.search().price', function (price) {
+        $scope.myflatPrice = price;
+    });
 
-
-    $scope.mySortFunction = function (item) {
+    $scope.mySortFunction = function(item) {
         if ($scope.mySort !== null) {
             if ($scope.mySort.value === 'Price') {
                 return Number(item[$scope.mySort.value].split('z')[0].replace(/ /g, ''));
@@ -132,7 +269,7 @@ searcher.controller('SearcherController', function ($scope, $resource) {
                 return item[$scope.mySort.value];
             }
         }
-        }
+    };
 
     $scope.sorting = [
         { name: 'Po cenie-rosnąco', value: 'Price', reverse:false},
@@ -145,7 +282,6 @@ searcher.controller('SearcherController', function ($scope, $resource) {
 
     $scope.clearFilters = function (myProperty) {
         if (myProperty === 'flat') {
-            $scope.myoffertTypeHouse = null;
             $scope.myoffertTypeFlat = null;
             $scope.myflatCity = null;
             $scope.myflatRoom = null;
@@ -162,7 +298,6 @@ searcher.controller('SearcherController', function ($scope, $resource) {
         }
         else if (myProperty === 'house') {
             $scope.myoffertTypeHouse = null;
-            $scope.myoffertTypeFlat = null;
             $scope.myhouseCity = null;
             $scope.myhouseUsableArea = null;
             $scope.myhousePrice = null;
@@ -183,53 +318,3 @@ searcher.controller("NewestController", function ($scope, $resource) {
         $scope.NewestAdverts = data;
     });
 });
-
-//searcher.controller('MyController', function($scope) {
-
-//    $scope.currentPage = 1;
-//    $scope.pageSize = 10;
-//    $scope.meals = [];
-
-//    var dishes = [
-//        'noodles',
-//        'sausage',
-//        'beans on toast',
-//        'cheeseburger',
-//        'battered mars bar',
-//        'crisp butty',
-//        'yorkshire pudding',
-//        'wiener schnitzel',
-//        'sauerkraut mit ei',
-//        'salad',
-//        'onion soup',
-//        'bak choi',
-//        'avacado maki'
-//    ];
-//    var sides = [
-//        'with chips',
-//        'a la king',
-//        'drizzled with cheese sauce',
-//        'with a side salad',
-//        'on toast',
-//        'with ketchup',
-//        'on a bed of cabbage',
-//        'wrapped in streaky bacon',
-//        'on a stick with cheese',
-//        'in pitta bread'
-//    ];
-//    for (var i = 1; i <= 100; i++) {
-//        var dish = dishes[Math.floor(Math.random() * dishes.length)];
-//        var side = sides[Math.floor(Math.random() * sides.length)];
-//        $scope.meals.push('meal ' + i + ': ' + dish + ' ' + side);
-//    }
-
-//    $scope.pageChangeHandler = function(num) {
-//        console.log('meals page changed to ' + num);
-//    };
-//});
-
-//searcher.controller('OtherController', function($scope) {
-//    $scope.pageChangeHandler = function(num) {
-//        console.log('going to page ' + num);
-//    };
-//});

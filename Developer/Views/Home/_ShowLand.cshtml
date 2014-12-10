@@ -10,7 +10,7 @@
     <div class="col-md-12 custom-center-panel" style="margin-left: 15px">
         <div class="pull-right" style="font-size: 12px; font-weight:100">Numer oferty: @Model.Number<br /><div class="pull-right" style="font-size: 12px; font-weight:100">Odwiedzin: <span class="badge">@(Model.Counter + 1)</span></div></div>
         <h4>@Model.Title</h4>
-        <h5>Mieszkanie</h5>
+        <h5>Działka</h5>
         <div class="row" style="margin-bottom:20px">
             <div class="col-md-7">
                 <div class="row">
@@ -18,7 +18,8 @@
                         @{
                             if (Model.Pictures == null || Model.Pictures.Count == 0)
                             {
-                                <div style="text-align: center">Brak zdjęć</div>
+                                @*<div style="text-align: center">Brak zdjęć</div>*@
+                                <img class="custom-head-photo" src="\Content\Photos\NoImageAvailable.jpg" />
                             }
                             else
                             {

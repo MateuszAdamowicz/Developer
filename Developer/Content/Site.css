@@ -252,6 +252,7 @@ textarea {
     border: 2px solid #8b0808;
     border-radius: 10px;
     box-shadow: 2px 2px 10px rgb(157, 157, 157);
+    height: 400px;
 }
 
 .custom-left-panel {

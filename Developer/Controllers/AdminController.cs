@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Collections;
 using System.Collections.Generic;
 using System.ComponentModel;
 using System.Linq;
@@ -434,6 +435,11 @@ namespace Developer.Controllers
                 return View(msg);
             }
             return RedirectToAction("Messages");
+        }
+
+        public ActionResult Statistics()
+        {
+            return View(_applicationContext.Statisticses.ToList());
         }
     }
 }

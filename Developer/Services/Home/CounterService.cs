@@ -8,11 +8,13 @@ namespace Developer.Services.Home
     {
         private readonly ISearchService _searchService;
         private readonly IApplicationContext _applicationContext;
+        private readonly IStatisticesService _statisticesService;
 
-        public CounterService(ISearchService searchService, IApplicationContext applicationContext)
+        public CounterService(ISearchService searchService, IApplicationContext applicationContext, IStatisticesService statisticesService)
         {
             _searchService = searchService;
             _applicationContext = applicationContext;
+            _statisticesService = statisticesService;
         }
 
         public void AddHit(string key)
@@ -36,6 +38,8 @@ namespace Developer.Services.Home
                     var land = _applicationContext.Lands.Find(parsedSearch.Id);
                     land.Counter += 1;
                 }
+
+                _statisticesService.AddDailyView(key);
 
                 _applicationContext.SaveChanges();
             }

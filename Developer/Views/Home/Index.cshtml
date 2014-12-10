@@ -140,8 +140,11 @@
                 <li dir-paginate="flat in filteredflatList = (flatList|filter:{City:myflatCity||undefined}|filter:{ToLet:myoffertTypeFlat||undefined}|filter:{Rooms:myflatRoom||undefined}|filter:{Price:myflatPrice||undefined}|orderBy:mySortFunction:mySort.reverse)|itemsPerPage: pageSize:'flat'" current-page="currentPage" pagination-id="flat">
                     <div class="col-md-12 custom-advert-panel">
                         <div class="col-md-3">
-                            <img ng-show="flat.Picture != null" ng-src="/Content/Photos/{{flat.Picture.Link}}" style="width: 100%; border: 1px solid" />
-                            <img ng-show="flat.Picture == null" ng-src="/Content/Photos/NoImageAvailable.jpg" style="width: 100%; border: 1px solid">
+                            <a href="/Home/Show?key={{flat.Number}}">
+                                <img ng-show="flat.Picture != null" ng-src="/Content/Photos/{{flat.Picture.Link}}" style="width: 180px; height: 180px; border: 1px solid black" />
+                                <img ng-show="flat.Picture == null" ng-src="/Content/Photos/NoImageAvailable.jpg" style="width: 180px; height: 180px; border: 1px solid black">
+                                <div style="width: 180px; color: white; background-color: black; text-align: center">{{flat.Number}}</div>
+                            </a>
                         </div>
                         <div class="col-md-9">
                             <div class="row">
@@ -159,7 +162,7 @@
                             </div>
                             <div class="row">
                                 <div class="col-md-12">
-                                    <p class="custom-advert-description">{{flat.Description}}</p>
+                                    <p class="custom-advert-description" style="height: 100px; overflow-y:scroll">{{flat.Description}}</p>
                                 </div>
                             </div>
                         </div>
@@ -176,8 +179,11 @@
                 <li dir-paginate="house in filteredhouseList = (houseList|filter:{City:myhouseCity||undefined}|filter:{ToLet:myoffertTypeHouse||undefined}|filter:{UsableArea:myhouseUsableArea||undefined}|filter:{Price:myhousePrice||undefined}|orderBy:mySortFunction:mySort.reverse)|itemsPerPage: pageSize:'house'" current-page="currentPage" pagination-id="house">
                     <div class="col-md-12 custom-advert-panel">
                         <div class="col-md-3">
-                            <img ng-show="house.Picture != null" ng-src="/Content/Photos/{{house.Picture.Link}}" style="width: 100%; border: 1px solid" />
-                            <img ng-show="house.Picture == null" ng-src="/Content/Photos/NoImageAvailable.jpg" style="width: 100%; border: 1px solid">
+                            <a href="/Home/Show?key={{house.Number}}">
+                                <img ng-show="house.Picture != null" ng-src="/Content/Photos/{{house.Picture.Link}}" style="width: 180px; height: 180px; border: 1px solid black" />
+                                <img ng-show="house.Picture == null" ng-src="/Content/Photos/NoImageAvailable.jpg" style="width: 180px; height: 180px; border: 1px solid black">
+                                <div style="width: 180px; color: white; background-color: black; text-align: center">{{house.Number}}</div>
+                            </a>
                         </div>
                         <div class="col-md-9">
                             <div class="row">
@@ -195,7 +201,7 @@
                             </div>
                             <div class="row">
                                 <div class="col-md-12">
-                                    <p class="custom-advert-description">{{house.Description}}</p>
+                                    <p class="custom-advert-description" style="height: 100px; overflow-y:scroll">{{house.Description}}</p>
                                 </div>
                             </div>
                         </div>
@@ -212,8 +218,11 @@
                 <li dir-paginate="land in filteredlandList = (landList|filter:{City:mylandCity||undefined}|filter:{Area:mylandArea||undefined}|filter:{Price:mylandPrice||undefined}|orderBy:mySortFunction:mySort.reverse)|itemsPerPage: pageSize:'land'" current-page="currentPage" pagination-id="land">
                     <div class="col-md-12 custom-advert-panel">
                         <div class="col-md-3">
-                            <img ng-show="land.Picture != null" ng-src="/Content/Photos/{{land.Picture.Link}}" style="width: 100%; border: 1px solid" />
-                            <img ng-show="land.Picture.Link == null" ng-src="/Content/Photos/NoImageAvailable.jpg" style="width: 100%; border: 1px solid">
+                            <a href="/Home/Show?key={{land.Number}}">
+                                <img ng-show="land.Picture != null" ng-src="/Content/Photos/{{land.Picture.Link}}" style="width: 180px; height: 180px; border: 1px solid black"/>
+                                <img ng-show="land.Picture.Link == null" ng-src="/Content/Photos/NoImageAvailable.jpg" style="width: 180px; height: 180px; border: 1px solid black">
+                                <div style="width: 180px; color: white; background-color: black; text-align: center">{{land.Number}}</div>
+                            </a>
                         </div>
                         <div class="col-md-9">
                             <div class="row">
@@ -231,7 +240,7 @@
                             </div>
                             <div class="row">
                                 <div class="col-md-12">
-                                    <p class="custom-advert-description">{{land.Description}}</p>
+                                    <p class="custom-advert-description" style="height: 100px; overflow-y:scroll">{{land.Description}}</p>
                                 </div>
                             </div>
                         </div>
@@ -251,8 +260,8 @@
                 <div class="col-md-12">
                     <a href="/Home/Show?key={{advert.Number}}" ng-repeat="advert in NewestAdverts">
                         <div class="col-md-3">
-                            <img ng-show="advert.Picture != null" src="/Content/Photos/{{advert.Picture.Link}}" width="100%" />
-                            <img src="/Content/Photos/NoImageAvailable.jpg" height="153px" ng-show="advert.Picture == null" />
+                            <img ng-show="advert.Picture != null" src="/Content/Photos/{{advert.Picture.Link}}" width="100%" height="150px" />
+                            <img src="/Content/Photos/NoImageAvailable.jpg" width="100%" height="150px" ng-show="advert.Picture == null" />
 
                             <div class="col-md-12" style="background-color: black; text-align: center">
                                 <div class="custom-city" style="color: white">

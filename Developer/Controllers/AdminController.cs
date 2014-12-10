@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.ComponentModel;
 using System.Linq;
 using System.Web;
 using System.Web.Mvc;
@@ -32,6 +33,7 @@ namespace Developer.Controllers
             _adminLoginService = adminLoginService;
             _emailService = emailService;
         }
+
         [AllowAnonymous]
         public ActionResult Login()
         {
@@ -45,6 +47,29 @@ namespace Developer.Controllers
             Session.Clear();
             Session.Abandon();
             return RedirectToAction("Index","Home");
+        }
+
+        public ActionResult DeleteAd(int id, AdType adType)
+        {
+            if (adType == AdType.Flat)
+            {
+                var flat = _applicationContext.Flats.Find(id);
+                flat.Deleted = true;
+            }
+            else if (adType == AdType.House)
+            {
+                var house = _applicationContext.Houses.Find(id);
+                house.Deleted = true;
+            }
+            else
+            {
+                var land = _applicationContext.Lands.Find(id);
+                land.Deleted = true;
+            }
+
+            _applicationContext.SaveChanges();
+
+            return RedirectToAction("AdList");
         }
 
         [HttpPost]
@@ -61,8 +86,10 @@ namespace Developer.Controllers
                     _adminLoginService.SetLoginCookies(loginViewModel.Login);
                     return RedirectToAction("Index");
                 }
+                ViewBag.LoginError = true;
                 return View(loginViewModel);
             }
+            ViewBag.LoginError = true;
             return View(loginViewModel);
         }
 
@@ -150,6 +177,19 @@ namespace Developer.Controllers
             return View(workersVm);
         }
 
+        public ActionResult Worker(int id)
+        {
+            var worker = _applicationContext.Workers.Find(id);
+            var model = AutoMapper.Mapper.Map<WorkerAdverts>(worker);
+
+            var flats = AutoMapper.Mapper.Map<IEnumerable<NewestAdvert>>(_applicationContext.Flats.Where(x => x.Worker.Id == id).ToList());
+            var houses = AutoMapper.Mapper.Map<IEnumerable<NewestAdvert>>(_applicationContext.Houses.Where(x => x.Worker.Id == id).ToList());
+            var lands = AutoMapper.Mapper.Map<IEnumerable<NewestAdvert>>(_applicationContext.Lands.Where(x => x.Worker.Id == id).ToList());
+
+            model.Adverts = (flats.Concat(houses).Concat(lands)).OrderByDescending(x => x.CreatedAt);
+
+            return View(model);
+        }
 
 
         public ActionResult AddWorker()

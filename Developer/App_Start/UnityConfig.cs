@@ -31,7 +31,7 @@ namespace Developer
             container.RegisterType<IAdminLoginService, AdminLoginService>();
             container.RegisterType<ICounterService, CounterService>();
             container.RegisterType<INewestAdvertService, NewestAdvertService>();
-
+            container.RegisterType<IStatisticesService, StatisticesService>();
         }
     }
 }

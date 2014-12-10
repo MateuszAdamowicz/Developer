@@ -4,8 +4,8 @@
 }
 <script src="~/Scripts/jquery-1.10.2.js"></script>
 <script src="~/Scripts/bootstrap.js"></script>
-    @Scripts.Render("~/bundles/angular")
-    @Scripts.Render("~/bundles/app")
+@Scripts.Render("~/bundles/angular")
+@Scripts.Render("~/bundles/app")
 
 
 <div ng-app="searcher">
@@ -111,7 +111,7 @@
                 <div class="col-md-4">
                     <small>Cena:</small>
                     <select class="form-control input-sm" ng-model="mylandPrice" ng-options="price.Price as price.counter for price in landList|filter:{City:mylandCity||undefined}|filter:{Area:mylandArea||undefined}|filter:{Price:'!!'}|unique:'Price'">
-                        <option  value="">Każda cena</option>
+                        <option value="">Każda cena</option>
                     </select>
                 </div>
                 <div class="row">
@@ -127,7 +127,7 @@
             </div>
         </div>
 
-        <div id="spinner" class="col-md-12" style="margin-left: 15px; padding-left: 0px;">
+        <div id="spinner" class="col-md-12" style="margin-left: 15px; padding-left: 0;">
             <div class="spinner">
                 <div class="dot1"></div>
                 <div class="dot2"></div>
@@ -136,7 +136,7 @@
 
         @* LIST FLATS*@
         <div ng-show="myProperty =='flat'">
-            <ul style="padding-left: 0px;">
+            <ul style="padding-left: 0;">
                 <li dir-paginate="flat in filteredflatList = (flatList|filter:{City:myflatCity||undefined}|filter:{ToLet:myoffertTypeFlat||undefined}|filter:{Rooms:myflatRoom||undefined}|filter:{Price:myflatPrice||undefined}|orderBy:mySortFunction:mySort.reverse)|itemsPerPage: pageSize:'flat'" current-page="currentPage" pagination-id="flat">
                     <div class="col-md-12 custom-advert-panel">
                         <div class="col-md-3">
@@ -145,7 +145,7 @@
                         </div>
                         <div class="col-md-9">
                             <div class="row">
-                                <div class="col-md-12 custom-advert-topic" style="padding-left: 0px; padding-right: 0px">
+                                <div class="col-md-12 custom-advert-topic" style="padding-left: 0; padding-right: 0">
                                     <div class="pull-left" style="font-weight: bold">
                                         <a href="/Home/Show?key={{flat.Number}}">{{flat.Title}}</a> <small style="margin-left: 10px">nr. {{flat.Number}}</small>
                                     </div>
@@ -165,11 +165,6 @@
                         </div>
                     </div>
                 </li>
-                @*            <li ng-show="!filteredflatList.length">
-                        <div class="col-md-12 custom-left-panel" style="margin-left: 15px; border: 2px solid rgb(255, 227, 176); background-color: rgb(255, 245, 227)">
-                            <p style="font-weight: bold">Brak wyników</p>
-                        </div>
-                    </li>*@
             </ul>
             <div class="text-center">
                 <dir-pagination-controls pagination-id="flat" boundary-links="true" on-page-change="pageChangeHandler(newPageNumber)" template-url="/Scripts/app/dirPagination.tpl.html"></dir-pagination-controls>
@@ -177,7 +172,7 @@
         </div>
         @* LIST HOUSES*@
         <div ng-show="myProperty =='house'">
-            <ul style="padding-left: 0px;">
+            <ul style="padding-left: 0;">
                 <li dir-paginate="house in filteredhouseList = (houseList|filter:{City:myhouseCity||undefined}|filter:{ToLet:myoffertTypeHouse||undefined}|filter:{UsableArea:myhouseUsableArea||undefined}|filter:{Price:myhousePrice||undefined}|orderBy:mySortFunction:mySort.reverse)|itemsPerPage: pageSize:'house'" current-page="currentPage" pagination-id="house">
                     <div class="col-md-12 custom-advert-panel">
                         <div class="col-md-3">
@@ -186,7 +181,7 @@
                         </div>
                         <div class="col-md-9">
                             <div class="row">
-                                <div class="col-md-12 custom-advert-topic" style="padding-left: 0px; padding-right: 0px">
+                                <div class="col-md-12 custom-advert-topic" style="padding-left: 0; padding-right: 0">
                                     <div class="pull-left" style="font-weight: bold">
                                         <a href="/Home/Show?key={{house.Number}}">{{house.Title}}</a> <small style="margin-left: 10px">nr. {{house.Number}}</small>
                                     </div>
@@ -206,11 +201,6 @@
                         </div>
                     </div>
                 </li>
-                @*            <li ng-show="!filteredhouseList.length">
-                        <div class="col-md-12 custom-left-panel" style="margin-left: 15px; border: 2px solid rgb(255, 227, 176); background-color: rgb(255, 245, 227)">
-                            <p style="font-weight: bold">Brak wyników</p>
-                        </div>
-                    </li>*@
             </ul>
             <div class="text-center">
                 <dir-pagination-controls pagination-id="house" boundary-links="true" on-page-change="pageChangeHandler(newPageNumber)" template-url="/Scripts/app/dirPagination.tpl.html"></dir-pagination-controls>
@@ -218,7 +208,7 @@
         </div>
         @* LIST LAND*@
         <div ng-show="myProperty =='land'">
-            <ul style="padding-left: 0px;">
+            <ul style="padding-left: 0;">
                 <li dir-paginate="land in filteredlandList = (landList|filter:{City:mylandCity||undefined}|filter:{Area:mylandArea||undefined}|filter:{Price:mylandPrice||undefined}|orderBy:mySortFunction:mySort.reverse)|itemsPerPage: pageSize:'land'" current-page="currentPage" pagination-id="land">
                     <div class="col-md-12 custom-advert-panel">
                         <div class="col-md-3">
@@ -227,7 +217,7 @@
                         </div>
                         <div class="col-md-9">
                             <div class="row">
-                                <div class="col-md-12 custom-advert-topic" style="padding-left: 0px; padding-right: 0px">
+                                <div class="col-md-12 custom-advert-topic" style="padding-left: 0; padding-right: 0">
                                     <div class="pull-left" style="font-weight: bold">
                                         <a href="/Home/Show?key={{land.Number}}">{{land.Title}}</a> <small style="margin-left: 10px">nr. {{land.Number}}</small>
                                     </div>
@@ -247,11 +237,6 @@
                         </div>
                     </div>
                 </li>
-                @*            <li ng-show="!filteredlandList.length">
-                        <div class="col-md-12 custom-left-panel" style="margin-left: 15px; border: 2px solid rgb(255, 227, 176); background-color: rgb(255, 245, 227)">
-                            <p style="font-weight: bold">Brak wyników</p>
-                        </div>
-                    </li>*@
             </ul>
             <div class="text-center">
                 <dir-pagination-controls pagination-id="land" boundary-links="true" on-page-change="pageChangeHandler(newPageNumber)" template-url="/Scripts/app/dirPagination.tpl.html"></dir-pagination-controls>
@@ -259,15 +244,14 @@
         </div>
     </div>
 
-    @* Todo: Wziąć najnowsze z angulara *@
     <div class="row" style="margin-right: 15px" ng-controller="NewestController">
         <div class="col-md-12 custom-center-panel" style="margin-left: 15px">
             <h4>Najnowsze oferty</h4>
-            <div class="row" >
+            <div class="row">
                 <div class="col-md-12">
                     <a href="/Home/Show?key={{advert.Number}}" ng-repeat="advert in NewestAdverts">
                         <div class="col-md-3">
-                            <img src="/Content/Photos/{{advert.Picture.Link}}" width="100%" ng-show="advert.Picture != null" />
+                            <img ng-show="advert.Picture != null" src="/Content/Photos/{{advert.Picture.Link}}" width="100%" />
                             <img src="/Content/Photos/NoImageAvailable.jpg" height="153px" ng-show="advert.Picture == null" />
 
                             <div class="col-md-12" style="background-color: black; text-align: center">
@@ -284,5 +268,4 @@
             </div>
         </div>
     </div>
-
 </div>

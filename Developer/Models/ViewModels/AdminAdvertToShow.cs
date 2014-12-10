@@ -13,5 +13,6 @@ namespace Developer.Models.ViewModels
         public AdType AdType { get; set; }
         public DateTime CreatedAt { get; set; }
         public string Number { get; set; }
+        public bool  Deleted { get; set; }
     }
 }

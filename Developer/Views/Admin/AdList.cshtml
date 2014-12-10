@@ -17,6 +17,11 @@
     .Ad:hover {
         background-color:rgb(73, 147, 99)
     }
+
+    .deletedAd {
+        background-color: red;
+        display: none;
+    }
 </style>
 
 
@@ -79,7 +84,7 @@
                     </tr>
                     </thead>
                     <tbody>
-                    @foreach (var ad in Model.Where(x => x.Visible))
+                    @foreach (var ad in Model.Where(x => x.Visible && !x.Deleted))
                     {
                         <tr class="Ad">
                             <td>@ad.CreatedAt.ToShortDateString()</td>
@@ -90,6 +95,7 @@
                             <td style="text-align: center">
                                 @Html.ActionLink("Info", "Show", "Home", new {key = ad.Number}, new {@class = "btn btn-success btn-xs"})
                                 @Html.ActionLink("Edytuj", "EditAd", "Admin", new {id = ad.Id, adType = ad.AdType}, new {@class = "btn btn-danger btn-xs"})
+                                @Html.ActionLink("Usuń", "DeleteAd", "Admin", new { id = ad.Id, adType = ad.AdType }, new { @class = "btn btn-primary btn-xs", @onclick = "return confirm('Napewno usunąć to ogłoszenie?');" })
                             </td>
                             <td style="text-align: center">
                                 @if (ad.Visible)
@@ -103,7 +109,7 @@
                             </td>
                         </tr>
                     }
-                    @foreach (var ad in Model.Where(x => !x.Visible))
+                    @foreach (var ad in Model.Where(x => !x.Visible && !x.Deleted))
                     {
                         <tr class="hiddenAd">
                             <td>@ad.CreatedAt.ToShortDateString()</td>
@@ -114,6 +120,7 @@
                             <td style="text-align: center">
                                 @Html.ActionLink("Info", "Show", "Home", new {key = ad.Number}, new {@class = "btn btn-success btn-xs"})
                                 @Html.ActionLink("Edytuj", "EditAd", "Admin", new {id = ad.Id, adType = ad.AdType}, new {@class = "btn btn-danger btn-xs"})
+                                @Html.ActionLink("Usuń", "DeleteAd", "Admin", new { id = ad.Id, adType = ad.AdType }, new { @class = "btn btn-primary btn-xs", @onclick = "return confirm('Napewno usunąć to ogłoszenie?');" })
                             </td>
                             <td style="text-align: center">
                                 @if (ad.Visible)
@@ -124,6 +131,22 @@
                                 {
                                     @Html.ActionLink("Pokaż", "Hide", "Admin", new {id = ad.Id, adType = ad.AdType}, new {@class = "btn btn-info btn-xs"})
                                 }
+                            </td>
+                        </tr>
+                    }
+
+                    @foreach (var ad in Model.Where(x => x.Deleted))
+                    {
+                        <tr class="deletedAd">
+                            <td>@ad.CreatedAt.ToShortDateString()</td>
+                            <td>@ad.AdType</td>
+                            <td>@ad.Title</td>
+                            <td>@ad.City</td>
+                            <td>@ad.Worker.FullName</td>
+                            <td style="text-align: center">
+                                @Html.ActionLink("Info", "Show", "Home", new { key = ad.Number }, new { @class = "btn btn-success btn-xs" })
+                            <td style="text-align: center">
+                                --
                             </td>
                         </tr>
                     }
@@ -142,10 +165,16 @@
 
         if (val === "hidden") {
             $(".Ad").hide();
+            $(".deletedAd").hide();
             $(".hiddenAd").show();
         } else if (val === "active") {
             $(".hiddenAd").hide();
+            $(".deletedAd").hide();
             $(".Ad").show();
+        } else if (val == "deleted") {
+            $(".hiddenAd").hide();
+            $(".Ad").hide();
+            $(".deletedAd").show();
         }
 
     })

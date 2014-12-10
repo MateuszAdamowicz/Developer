@@ -5,6 +5,6 @@ namespace Developer.Services.Home
 {
     public interface INewestAdvertService
     {
-        IEnumerable<NewestAdvert> GetNewest();
+        IEnumerable<NewestAdvert> GetNewest(int count);
     }
 }

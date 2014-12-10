@@ -963,6 +963,10 @@
     <Compile Include="Migrations\201411280726465_init1.Designer.cs">
       <DependentUpon>201411280726465_init1.cs</DependentUpon>
     </Compile>
+    <Compile Include="Migrations\201412090910492_init2.cs" />
+    <Compile Include="Migrations\201412090910492_init2.Designer.cs">
+      <DependentUpon>201412090910492_init2.cs</DependentUpon>
+    </Compile>
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Migrations\DbInitializer.cs" />
     <Compile Include="Models\ApplicationModels\EmailMessage.cs">
@@ -973,6 +977,7 @@
     </Compile>
     <Compile Include="Models\ApplicationModels\Result.cs" />
     <Compile Include="Models\ContactEmail.cs" />
+    <Compile Include="Models\EntityModels\Statistics.cs" />
     <Compile Include="Models\EntityModels\Mail.cs" />
     <Compile Include="Models\EntityModels\Offer.cs" />
     <Compile Include="Models\EntityModels\Photo.cs" />
@@ -1022,16 +1027,19 @@
     <Compile Include="Models\ViewModels\ShowListHouse.cs" />
     <Compile Include="Models\ViewModels\ShowListLand.cs" />
     <Compile Include="Models\ViewModels\ShowWorker.cs" />
+    <Compile Include="Models\ViewModels\WorkerAdverts.cs" />
     <Compile Include="Models\ViewModels\WorkersViewModel.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Services\Admin\AddAdvertService.cs" />
     <Compile Include="Services\Admin\AdminLoginService.cs">
       <SubType>Code</SubType>
     </Compile>
+    <Compile Include="Services\Admin\EnumNameService.cs" />
     <Compile Include="Services\Admin\IAddAdvertService.cs" />
     <Compile Include="Services\Admin\IAdminLoginService.cs">
       <SubType>Code</SubType>
     </Compile>
+    <Compile Include="Services\Admin\IEnumNameService.cs" />
     <Compile Include="Services\Admin\IPhotoService.cs" />
     <Compile Include="Services\Admin\IUpdateAdvertService.cs" />
     <Compile Include="Services\Admin\IWorkerService.cs" />
@@ -1077,12 +1085,14 @@
     <Compile Include="Services\Home\ISearchService.cs">
       <SubType>Code</SubType>
     </Compile>
+    <Compile Include="Services\Home\IStatisticesService.cs" />
     <Compile Include="Services\Home\NewestAdvertService.cs">
       <SubType>Code</SubType>
     </Compile>
     <Compile Include="Services\Home\SearchService.cs">
       <SubType>Code</SubType>
     </Compile>
+    <Compile Include="Services\Home\StatisticesService.cs" />
     <Compile Include="Services\SeedService.cs" />
   </ItemGroup>
   <ItemGroup>
@@ -1128,6 +1138,7 @@
     </Content>
     <None Include="Views\Admin\Offer.cshtml" />
     <None Include="Views\Admin\Offers.cshtml" />
+    <None Include="Views\Admin\Worker.cshtml" />
     <None Include="Views\Admin\_AddFlat.cshtml" />
     <None Include="Views\Admin\_AddHouse.cshtml" />
     <None Include="Views\Admin\_AddLand.cshtml" />
@@ -1164,6 +1175,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Migrations\201411280726465_init1.resx">
       <DependentUpon>201411280726465_init1.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201412090910492_init2.resx">
+      <DependentUpon>201412090910492_init2.cs</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
   <PropertyGroup>

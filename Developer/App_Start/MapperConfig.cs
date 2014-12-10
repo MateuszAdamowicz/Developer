@@ -65,6 +65,8 @@ namespace Developer.App_Start
                 .ForMember(dest => dest.Number, opts => opts.MapFrom(src => String.Format("{0}{1}", src.Id*9999, 18)))
                 .ForMember(dest => dest.Picture,
                     opts => opts.MapFrom(src => Mapper.Map<ShowListPhoto>(src.Pictures.FirstOrDefault())));
+
+            Mapper.CreateMap<Worker, WorkerAdverts>();
         }
     }
 }

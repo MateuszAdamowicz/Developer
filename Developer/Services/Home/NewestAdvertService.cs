@@ -16,11 +16,11 @@ namespace Developer.Services.Home
             _applicationContext = applicationContext;
         }
 
-        public IEnumerable<NewestAdvert> GetNewest()
+        public IEnumerable<NewestAdvert> GetNewest(int count)
         {
-            var flats = _applicationContext.Flats.OrderByDescending(x => x.CreatedAt).Take(4).ToList();
-            var houses = _applicationContext.Houses.OrderByDescending(x => x.CreatedAt).Take(4).ToList();
-            var lands = _applicationContext.Lands.OrderByDescending(x => x.CreatedAt).Take(4).ToList();
+            var flats = _applicationContext.Flats.OrderByDescending(x => x.CreatedAt).Take(count).ToList();
+            var houses = _applicationContext.Houses.OrderByDescending(x => x.CreatedAt).Take(count).ToList();
+            var lands = _applicationContext.Lands.OrderByDescending(x => x.CreatedAt).Take(count).ToList();
 
             var flatsvm = Mapper.Map <IEnumerable<NewestAdvert>>(flats);
             var housesvm = Mapper.Map <IEnumerable<NewestAdvert>>(houses);
@@ -28,7 +28,7 @@ namespace Developer.Services.Home
 
             var all = (flatsvm.Concat(housesvm).Concat(landsvm)).OrderByDescending(x => x.CreatedAt);
 
-            var result = all.Take(4);
+            var result = all.Take(count);
 
             return result;
         }

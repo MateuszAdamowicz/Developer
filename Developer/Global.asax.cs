@@ -11,6 +11,7 @@ using System.Web.Optimization;
 using Developer.App_Start;
 using Developer.Migrations;
 using Developer.Models.EntityModels;
+using Developer.Services.Home;
 using log4net;
 using log4net.Config;
 
@@ -38,6 +39,10 @@ namespace Developer
         protected void Session_Start(object sender, EventArgs e)
         {
             Session["Visited"] = new List<int>();
+
+            var statisticesService = DependencyResolver.Current.GetService<IStatisticesService>();
+
+            statisticesService.AddDailyUser(Session.SessionID);
         }
     }
 }

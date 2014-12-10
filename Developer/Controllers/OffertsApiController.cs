@@ -25,33 +25,32 @@ namespace Developer.Controllers
 
         public IEnumerable<NewestAdvert> GetNewest()
         {
-            return _newestAdvertService.GetNewest();
+            return _newestAdvertService.GetNewest(4);
         }
 
         public IEnumerable<ShowListHouse> GetHouses()
         {
-            List<House> houseData = _context.Houses.Where(x => x.Visible).ToList();//To change for true when implemented
+            List<House> houseData = _context.Houses.Where(x => x.Visible && !x.Deleted).ToList();//To change for true when implemented
             List<ShowListHouse> listHouse = AutoMapper.Mapper.Map<List<ShowListHouse>>(houseData);
             return listHouse;
         }
 
         public IEnumerable<ShowListFlat> GetFlats()
         {
-            List<Flat> flatData = _context.Flats.Where(x => x.Visible).ToList(); //To change for true whe implemented
+            List<Flat> flatData = _context.Flats.Where(x => x.Visible && !x.Deleted).ToList(); //To change for true whe implemented
             List<ShowListFlat> listFlat= AutoMapper.Mapper.Map<List<ShowListFlat>>(flatData);
             return listFlat;
         }
 
         public IEnumerable<ShowListLand> GetLands()
         {
-            List<Land> landData = _context.Lands.Where(x => x.Visible).ToList();//To change for true when implemented
+            List<Land> landData = _context.Lands.Where(x => x.Visible && !x.Deleted).ToList();//To change for true when implemented
             List<ShowListLand> listLand = AutoMapper.Mapper.Map<List<ShowListLand>>(landData);
             return listLand;
         }
 
         public House Put(House user)
         {
-            //Update the user
             return user;
         }
 

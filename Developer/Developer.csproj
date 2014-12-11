@@ -958,6 +958,10 @@
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
     <Compile Include="Helpers\OwnHelpers.cs" />
+    <Compile Include="Migrations\201412111105126_init.cs" />
+    <Compile Include="Migrations\201412111105126_init.Designer.cs">
+      <DependentUpon>201412111105126_init.cs</DependentUpon>
+    </Compile>
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Migrations\DbInitializer.cs" />
     <Compile Include="Models\ApplicationModels\EmailMessage.cs">
@@ -1178,6 +1182,11 @@
     <Folder Include="App_Data\" />
     <Folder Include="Content\Photos\Workers\" />
     <Folder Include="Log\" />
+  </ItemGroup>
+  <ItemGroup>
+    <EmbeddedResource Include="Migrations\201412111105126_init.resx">
+      <DependentUpon>201412111105126_init.cs</DependentUpon>
+    </EmbeddedResource>
   </ItemGroup>
   <PropertyGroup>
     <VisualStudioVersion Condition="'$(VisualStudioVersion)' == ''">10.0</VisualStudioVersion>

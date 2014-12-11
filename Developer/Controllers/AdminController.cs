@@ -255,12 +255,6 @@ namespace Developer.Controllers
         }
 
         [HttpGet]
-        public ActionResult Photos()
-        {
-            return View(_applicationContext.Photos.ToList());
-        }
-
-        [HttpGet]
         public ActionResult AdList(bool? changed, bool? hide)
         {
             var flats = AutoMapper.Mapper.Map<List<AdminAdvertToShow>>(_applicationContext.Flats);

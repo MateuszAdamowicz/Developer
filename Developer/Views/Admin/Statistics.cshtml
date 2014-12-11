@@ -23,6 +23,5 @@
         <h4>Statystyki</h4>
         <b>Liczba odwiedzin:</b> @Model.Sum(x => x.Visits.Sum(y => y.Count)) <br />
         <b>Liczba użytkowników:</b> @Model.Sum(x => x.Sessions.Sum(y => 1))
-
     </div>
 </div>

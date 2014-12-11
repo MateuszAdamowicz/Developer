@@ -67,6 +67,8 @@ namespace Developer.App_Start
                     opts => opts.MapFrom(src => Mapper.Map<ShowListPhoto>(src.Pictures.FirstOrDefault())));
 
             Mapper.CreateMap<Worker, WorkerAdverts>();
+
+            //Mapper.CreateMap<Worker,Flat>().ForMember(dest => src.)
         }
     }
 }
